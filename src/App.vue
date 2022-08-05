@@ -97,7 +97,7 @@
   </nav>
   <section class="header-site" id="header-site">
     <div id="logo">
-      <img :src="image" alt="logo" height="65px" />
+      <v-img src="./img/sugarbay-logo.png" height="80px" width="40px"></v-img>
       <router-view></router-view>
     </div>
   </section>
