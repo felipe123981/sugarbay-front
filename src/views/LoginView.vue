@@ -17,10 +17,14 @@
   <br />
   <br />
   <router-link to="/forgot" class="forgot"> Esqueceu sua senha?</router-link>
+  <br />
+  <router-link to="/forgot" class="forgot">
+    <b-button variant="success">Button</b-button>
+  </router-link>
 </template>
 <script>
 import axios from "axios";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 export default {
   name: "LoginView",
@@ -45,7 +49,6 @@ export default {
           password: this.password,
         })
         .then(function (response) {
-
           console.log(response.status);
 
           const cookie = [
@@ -65,13 +68,12 @@ export default {
       this.email = "";
       this.password = "";
       this.writeCookie(cookie);
-      
     },
 
     writeCookie(cookie) {
       Cookies.set("email", cookie.email);
       Cookies.set("token", cookie.token);
-      
+
       console.log(`${document.cookie}`);
     },
     readCookie() {
