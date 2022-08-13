@@ -141,7 +141,6 @@ export default {
   },
 };
 </script>
-
 <style>
 /* Google Font Import - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
@@ -215,7 +214,7 @@ body.dark {
   height: 50px;
   list-style: none;
   display: flex;
-  align-items: center;
+  align-items: left;
   margin-top: 10px;
 }
 
