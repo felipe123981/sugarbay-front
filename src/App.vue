@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="sidebar close">
+    <nav class="sidebar close" style="opacity:1">
         <header>
             <div class="image-text">
                 <span class="image">
@@ -105,7 +105,7 @@
 
     <section class="home">
         <div class="text">Dashboard Sidebar</div>
-        <router-view></router-view>
+        <router-view class="router"></router-view>
     </section>
   </div>
 </template>
@@ -151,6 +151,23 @@ export default {
 /* Google Font Import - Poppins */
 /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.close:hover {
+    color: #000;
+    text-decoration: none;
+}
+.router {
+    padding-left: 60px;
+}
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: none;
+}
+
 ol, ul {
     padding-left: 0;
 }
@@ -165,7 +182,7 @@ ol, ul {
     /* ===== Colors ===== */
     --body-color: #E4E9F7;
     --sidebar-color: #FFF;
-    --primary-color: #695CFE;
+    --primary-color: #f37a17;
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
     --text-color: #707070;
@@ -211,8 +228,12 @@ body.dark{
 }
 .sidebar.close{
     width: 88px;
+    opacity: 100%;
+    background: var(--sidebar-color);
 }
-
+.sidebar:focus {
+    opacity: 100%;
+}
 /* ===== Reusable code - Here ===== */
 .sidebar li{
     height: 50px;
@@ -454,9 +475,9 @@ body.dark .switch::before{
 }
 
 .sidebar.close ~ .home{
-    left: 78px;
+    left: 88px;
     height: 100vh;
-    width: calc(100% - 78px);
+    width: calc(100% - 88px);
 }
 body.dark .home .text{
     color: var(--text-color);
