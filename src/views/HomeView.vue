@@ -1,25 +1,105 @@
 <template>
   <div>
-    <b-button @click="makeToast()" class="mb-2">Default</b-button>
-    <b-button variant="primary" @click="makeToast('primary')" class="mb-2">Primary</b-button>
-    <b-button variant="secondary" @click="makeToast('secondary')" class="mb-2">Secondary</b-button>
-    <b-button variant="danger" @click="makeToast('danger')" class="mb-2">Danger</b-button>
-    <b-button variant="warning" @click="makeToast('warning')" class="mb-2">Warning</b-button>
-    <b-button variant="success" @click="makeToast('success')" class="mb-2">Success</b-button>
-    <b-button variant="info" @click="makeToast('info')" class="mb-2">Info</b-button>
+    <slot> List of products:</slot>
+    <ProductDisplay></ProductDisplay>
+    <br>
+    <ProductDisplay></ProductDisplay>
+    <br>
+    <ProductDisplay></ProductDisplay>
+    <br>
+    <div class="overflow-auto">
+    <p class="mt-3">Current Page: {{ currentPage }}</p>
+
+    <b-table
+      id="my-table"
+      :items="items"
+      :per-page="perPage"
+      :current-page="currentPage"
+      small
+    ></b-table>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+    ></b-pagination>
+  </div>
   </div>
 </template>
 
 <script>
-  export default {
-    methods: {
-      makeToast(variant = null) {
-        this.$bvToast.toast('Toast body content', {
-          title: `Variant ${variant || 'default'}`,
-          variant: variant,
-          solid: true
-        })
+import ProductDisplay from '@/components/ProductDisplay.vue';
+
+export default {
+  data() {
+    return {
+        perPage: 3,
+        currentPage: 1,
+        items: [
+          { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
+          { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
+          { id: 3, first_name: 'Barney', last_name: 'Rubble' },
+          { id: 4, first_name: 'Betty', last_name: 'Rubble' },
+          { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
+          { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
+          { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
+          { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
+          { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' }
+        ]
       }
-    }
-  }
+  },
+  computed: {
+      rows() {
+        return this.items.length
+      }
+    },
+  components: {
+    ProductDisplay
+},
+  methods: {
+    makeToast(variant = null) {
+      this.$bvToast.toast("Toast body content", {
+        title: `Variant ${variant || "default"}`,
+        variant: variant,
+        solid: true,
+      });
+    },
+  },
+};
 </script>
+<style scoped>
+body {
+  background: #eee;
+}
+.ratings i {
+  font-size: 16px;
+  color: red;
+}
+.strike-text {
+  color: red;
+  text-decoration: line-through;
+}
+.product-image {
+  width: 100%;
+}
+.dot {
+  height: 7px;
+  width: 7px;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-top: 3px;
+  background-color: blue;
+  border-radius: 50%;
+  display: inline-block;
+}
+.spec-1 {
+  color: #938787;
+  font-size: 15px;
+}
+h5 {
+  font-weight: 400;
+}
+.para {
+  font-size: 16px;
+}
+</style>

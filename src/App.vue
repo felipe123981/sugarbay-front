@@ -104,7 +104,9 @@
     </nav>
 
     <section class="home">
-        <div class="text">Dashboard Sidebar</div>
+        <div class="logo">
+            <img alt="Vue logo" src="./assets/logo.png" height="70vh" />
+        </div>
         <router-view class="router"></router-view>
     </section>
   </div>
@@ -151,13 +153,16 @@ export default {
 /* Google Font Import - Poppins */
 /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+.logo {
+    padding-left: 30px;
+    padding-top: 20px;
+}
 .close:hover {
     color: #000;
     text-decoration: none;
 }
 .router {
-    padding-left: 60px;
+    padding-left: 25px;
 }
 .close {
     float: right;
@@ -475,9 +480,9 @@ body.dark .switch::before{
 }
 
 .sidebar.close ~ .home{
-    left: 88px;
+    left: 72px;
     height: 100vh;
-    width: calc(100% - 88px);
+    width: calc(100% - 72px);
 }
 body.dark .home .text{
     color: var(--text-color);
