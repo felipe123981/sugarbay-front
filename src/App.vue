@@ -4,12 +4,12 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <!--<img src="logo.png" alt="">-->
+                     <b-avatar></b-avatar>
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">Codinglab</span>
-                    <span class="profession">Web developer</span>
+                    <span class="name">Username</span>
+                    <span class="profession"><i class='bx bx-station'></i> Active</span>
                 </div>
             </div>
 

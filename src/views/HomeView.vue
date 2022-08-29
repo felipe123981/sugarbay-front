@@ -1,11 +1,12 @@
 <template>
   <div>
     <slot> List of products:</slot>
-    <ProductDisplay></ProductDisplay>
     <br>
-    <ProductDisplay></ProductDisplay>
+    <ProductDisplay style="width: 70vw" ></ProductDisplay>
     <br>
-    <ProductDisplay></ProductDisplay>
+    <ProductDisplay style="width: 70vw"></ProductDisplay>
+    <br>
+    <ProductDisplay style="width: 70vw"></ProductDisplay>
     <br>
     <div class="overflow-auto">
     <p class="mt-3">Current Page: {{ currentPage }}</p>
@@ -33,6 +34,7 @@ import ProductDisplay from '@/components/ProductDisplay.vue';
 export default {
   data() {
     return {
+        value: ['all'],
         perPage: 3,
         currentPage: 1,
         items: [
@@ -71,6 +73,10 @@ export default {
 body {
   background: #eee;
 }
+.product_block {
+  width: 70vw;
+  min-width: 250px;
+} 
 .ratings i {
   font-size: 16px;
   color: red;
