@@ -1,63 +1,64 @@
 <template>
   <div>
     <slot> List of products:</slot>
-    <br>
-    <ProductDisplay style="width: 70vw" ></ProductDisplay>
-    <br>
+    <br />
     <ProductDisplay style="width: 70vw"></ProductDisplay>
-    <br>
+    <br />
     <ProductDisplay style="width: 70vw"></ProductDisplay>
-    <br>
-    <div class="overflow-auto">
-    <p class="mt-3">Current Page: {{ currentPage }}</p>
-
-    <b-table
-      id="my-table"
-      :items="items"
-      :per-page="perPage"
-      :current-page="currentPage"
-      small
-    ></b-table>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="my-table"
-    ></b-pagination>
-  </div>
+    <br />
+    <ProductDisplay style="width: 70vw"></ProductDisplay>
+    <br />
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item ">
+          <span class="page-link">
+            2
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
-import ProductDisplay from '@/components/ProductDisplay.vue';
+import ProductDisplay from "@/components/ProductDisplay.vue";
 
 export default {
   data() {
     return {
-        value: ['all'],
-        perPage: 3,
-        currentPage: 1,
-        items: [
-          { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
-          { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
-          { id: 3, first_name: 'Barney', last_name: 'Rubble' },
-          { id: 4, first_name: 'Betty', last_name: 'Rubble' },
-          { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
-          { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
-          { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
-          { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
-          { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' }
-        ]
-      }
+      value: ["all"],
+      perPage: 3,
+      currentPage: 1,
+      items: [
+        { id: 1, first_name: "Fred", last_name: "Flintstone" },
+        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
+        { id: 3, first_name: "Barney", last_name: "Rubble" },
+        { id: 4, first_name: "Betty", last_name: "Rubble" },
+        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
+        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
+        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
+        { id: 8, first_name: "Rockhead", last_name: "Slate" },
+        { id: 9, first_name: "Pearl", last_name: "Slaghoople" },
+      ],
+    };
   },
   computed: {
-      rows() {
-        return this.items.length
-      }
+    rows() {
+      return this.items.length;
     },
+  },
   components: {
-    ProductDisplay
-},
+    ProductDisplay,
+  },
   methods: {
     makeToast(variant = null) {
       this.$bvToast.toast("Toast body content", {
@@ -76,7 +77,7 @@ body {
 .product_block {
   width: 70vw;
   min-width: 250px;
-} 
+}
 .ratings i {
   font-size: 16px;
   color: red;
