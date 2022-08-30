@@ -13,11 +13,12 @@
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
     "js-cookie": "^3.0.1",
+    "mdb-vue-ui-kit": "^2.0.0",
     "register-service-worker": "^1.7.2",
     "vue": "^2.7.10",
+    "vue-advanced-chat": "2.0.0",
     "vue-router": "3",
-    "vuex": "^3.6.2",
-    "vue-advanced-chat": "2.0.0"
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

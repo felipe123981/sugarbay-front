@@ -53,5 +53,5 @@ export default [
         path: '/forgot',
         name: 'forgot',
         component: ForgotPassword,
-    }
+    },
 ];
