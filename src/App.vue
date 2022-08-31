@@ -46,13 +46,14 @@
                             <span class="text nav-text">Talk to us</span>
                         </router-link>
                     </li>
-
+                    <!-- Analytics will be implemented after alpha version
                     <li class="">
                         <router-link to="/analytics">
                             <i class='bx bx-pie-chart-alt-2 icon' ></i>
                             <span class="text nav-text">Analytics</span>
                         </router-link>
                     </li>
+                    -->
 
                     <li class="">
                         <router-link to="/order">

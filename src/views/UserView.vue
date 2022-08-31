@@ -54,7 +54,42 @@
               <hr />
 
               <p>User information:</p>
-
+              <b-row>
+                <b-col>
+                  <b-form-group
+                    id="input-group-1"
+                    label="CPF:"
+                    label-for="input-1"
+                    description=""
+                  >
+                    <b-form-input
+                      class="form-sb"
+                      id="input-1"
+                      v-model="form.id"
+                      type="cpf"
+                      placeholder="888.888.888-88"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col>
+                  <b-form-group
+                    id="input-group-1"
+                    label="Phone number:"
+                    label-for="input-1"
+                    description=""
+                  >
+                    <b-form-input
+                      class="form-sb"
+                      id="input-1"
+                      v-model="form.phome"
+                      type="phone"
+                      placeholder="(555) 555-1234"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+              </b-row>
               <b-row>
                 <b-col>
                   <b-form-group
@@ -201,58 +236,115 @@
           <b-tab title="My products"
             ><b-card-text>
               <h3>Tell us the type of product you want to register:</h3>
-              <b-container>
-                <b-row>
-                  <b-col>
-                    <div class="container">
-                      <div class="row-alt">
-                        <div class="col-md-3 col-6 my-1">
-                          <div class="card h-100">
-                            <img
-                              src="@/assets/img/product.png"
-                              width="150px"
-                              class="card-img-top"
-                            />
-                            <div class="card-body">
-                              <div>
-                                <b-button variant="primary">Product</b-button>
+              <br />
+              <b-col cols="4">
+              <div class="card-alt h-100">
+                <img
+                  src="@/assets/img/product.png"
+                  width="150px"
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <div>
+                    <b-button
+                      v-b-modal.modal-1
+                      class="add_new"
+                      variant="primary"        
+                      ><i class='bx bxs-plus-circle'></i> Add new</b-button
+                    >
+                    <b-modal id="modal-1" title="Type of your product">
+                      <p class="my-4">
+                        <b-container>
+                          <b-row>
+                            <b-col cols="4" style="padding-left: 1px;">
+                              <div class="card-alt h-100">
+                                <img
+                                  src="@/assets/img/product.png"
+                                  width="150px"
+                                  class="card-img-top"
+                                />
+                                <div class="card-body">
+                                  <div>
+                                    <b-button
+                                      class="add_new"
+                                      variant="primary"
+                                      size="sm"
+                                      >Product</b-button
+                                    >
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- <TypeSelector></TypeSelector> -->
-
-                    <b-container>
-                      <b-row>
-                        <b-col>col</b-col>
-                        <b-col>col</b-col>
-                        <b-col>col</b-col>
-                        <b-col>col</b-col>
-                      </b-row>
-                      <!--
-                      <div class="row-alt">
-                        <div class="col-md-3 col-6 my-1">
-                          <div class="card h-100">
-                            <img
-                              src="@/assets/img/vehicle.png"
-                              width="150px"
-                              class="card-img-top"
-                            />
-                            <div class="card-body">
-                              <div>
-                                <b-button variant="primary">Vehicle</b-button>
+                            </b-col>
+                            <b-col cols="4" style="padding-left: 10vh;">
+                              <div class="card-alt h-100">
+                                <img
+                                  src="@/assets/img/vehicle.png"
+                                  width="150px"
+                                  class="card-img-top"
+                                />
+                                <div class="card-body">
+                                  <div>
+                                    <b-button
+                                      class="add_new"
+                                      variant="primary"
+                                      size="sm"
+                                      >Vehicle</b-button
+                                    >
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      -->
-                    </b-container>
-                  </b-col>
-                </b-row>
-              </b-container>
+                            </b-col>
+                          </b-row>
+                        </b-container>
+                        <b-container>
+                          <b-row>
+                            <b-col cols="4" style="padding-left: 1px;">
+                              <div class="card-alt h-100">
+                                <img
+                                  src="@/assets/img/house.png"
+                                  width="150px"
+                                  class="card-img-top"
+                                />
+                                <div class="card-body">
+                                  <div>
+                                    <b-button
+                                      class="add_new"
+                                      variant="primary"
+                                      size="sm"
+                                      >House</b-button
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </b-col>
+                            <b-col cols="4" style="padding-left: 10vh;">
+                              <div class="card-alt h-100">
+                                <img
+                                  src="@/assets/img/customer-service.png"
+                                  width="150px"
+                                  class="card-img-top"
+                                />
+                                <div class="card-body">
+                                  <div>
+                                    <b-button
+                                      class="add_new"
+                                      variant="primary"
+                                      size="sm"
+                                      >Service</b-button
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </b-col>
+                          </b-row>
+                        </b-container>
+                      </p>
+                    </b-modal>
+                  </div>
+                </div>
+              </div>
+            </b-col>
+              <!-- <TypeSelector></TypeSelector> -->
             </b-card-text></b-tab
           >
           <b-tab title="Preferences"
@@ -277,6 +369,8 @@ export default {
   data() {
     return {
       form: {
+        phone: "",
+        id: "",
         city: "",
         country: "",
         zipcode: "",
@@ -311,6 +405,8 @@ export default {
     onReset(event) {
       event.preventDefault();
       // Reset our form values
+      this.form.phone = "";
+      this.form.id = "";
       this.form.city = "";
       this.form.country = "";
       this.form.zipcode = "";
@@ -338,13 +434,46 @@ export default {
 }
 .form-sb-2 {
   width: 20vw;
-  min-width: 230px;
+  min-width: 236px;
 }
 .row-alt {
-  width: 70vw;
+  width: 50vw;
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+.add_new {
+  width: 50%;
+  min-width: 120px;
+}
+.card-alt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.add_new-modal {
+  width: 100%;
+  min-width: 147px;
+}
+.card-modal {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 195px;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
 }
 </style>
