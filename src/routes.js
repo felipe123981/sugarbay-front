@@ -8,6 +8,7 @@ import SavedView from './views/SavedView.vue';
 import ConfigView from './views/ConfigView.vue';
 import LoginView from './views/LoginView.vue';
 import ForgotPassword from './views/ForgotPassword.vue';
+import ProductRegister from '@/views/ProductRegister.vue';
 export default [
     {
         path: '/',
@@ -53,5 +54,10 @@ export default [
         path: '/forgot',
         name: 'forgot',
         component: ForgotPassword,
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: ProductRegister,
     },
 ];

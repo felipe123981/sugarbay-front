@@ -150,13 +150,6 @@ strong {
           token: "",
         },
       ],
-        form: {
-          password: '',
-          email: '',
-          name: '',
-          token: []
-        },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
         show: true
       }
     },
@@ -213,10 +206,10 @@ strong {
       onReset(event) {
         event.preventDefault()
         // Reset our form values
-        this.form.password = '';
-        this.form.email = ''
-        this.form.name = ''
-        this.form.token = []
+        this.password = '';
+        this.email = ''
+        this.name = ''
+        this.token = []
         // Trick to reset/clear native browser form validation state
         this.show = false
         this.$nextTick(() => {

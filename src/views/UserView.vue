@@ -235,7 +235,7 @@
           ></b-tab>
           <b-tab title="My products"
             ><b-card-text>
-              <h3>Tell us the type of product you want to register:</h3>
+              <h3>Your product list:</h3>
               <br />
               <b-col cols="4">
               <div class="card-alt h-100">
@@ -265,12 +265,15 @@
                                 />
                                 <div class="card-body">
                                   <div>
+                                    <router-link to="/register">
                                     <b-button
                                       class="add_new"
                                       variant="primary"
                                       size="sm"
-                                      >Product</b-button
+                                      >Product
+                                      </b-button
                                     >
+                                  </router-link>
                                   </div>
                                 </div>
                               </div>
