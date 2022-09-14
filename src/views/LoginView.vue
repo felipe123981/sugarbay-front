@@ -98,18 +98,17 @@ strong {
 </style>
 -->
 
-
 <template>
   <div>
     <h2>Login Panel:</h2>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form v-if="show">
       <b-form-group
         id="input-group-1"
         label="Email address:"
         label-for="input-1"
         description="We'll never share your email with anyone else."
       >
-        <b-form-input 
+        <b-form-input
           class="form"
           id="input-1"
           v-model="email"
@@ -129,98 +128,73 @@ strong {
           required
         ></b-form-input>
       </b-form-group>
-      <b-button type="submit" @click="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" @click="submit" variant="primary"
+        >Submit</b-button
+      >
     </b-form>
   </div>
 </template>
 
 <script>
-  import Cookies from 'js-cookie';
-  import axios from 'axios';
-  export default {
-    name: 'LoginView',
-    data() {
-      return {
+import  { writeCookie }  from "@/modules/cookie";
+import axios from 'axios';
+//import {  mapActions } from "vuex";
+
+export default {
+  name: 'LoginView',
+  data() {
+    return {
+      email: "",
+    password: "",
+    cookie: [
+      {
+        name: "",
         email: "",
-      password: "",
-      cookie: [
-        {
-          name: "",
-          email: "",
-          token: "",
-        },
-      ],
-        show: true
-      }
-    },
-    methods: {
-      async submit() {
-      const cookie = await axios
-        .post("http://localhost:3333/sessions/", {
-          email: this.email,
-          password: this.password,
-        })
-        .then(function (response) {
-          console.log(response.status);
-
-          const cookie = [
-            {
-              name: response.data.user.name,
-              email: response.data.user.email,
-              token: response.data.token,
-            },
-          ];
-
-          return cookie[0];
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      this.email = "";
-      this.password = "";
-      this.writeCookie(cookie);
-    },
-
-    writeCookie(cookie) {
-      Cookies.set("email", cookie.email);
-      Cookies.set("token", cookie.token);
-
-      console.log(`${document.cookie}`);
-    },
-    readCookie() {
-      var searchName = "email=";
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var c = cookies[i];
-        while (c.charAt(0) == ` `) c = c.substring(1, c.length);
-        if (c.indexOf(searchName) == 0)
-          return c.substring(searchName.length, c.length);
-      }
-      return null;
-    },
-      onSubmit(event) {
-        event.preventDefault()
-        //alert(JSON.stringify(this.form))
+        token: "",
       },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.password = '';
-        this.email = ''
-        this.name = ''
-        this.token = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+    ],
+      show: true
+    }
+  },
+  methods: {
+    async submit() {
+    const request = await axios
+      .post("http://localhost:3333/sessions/", {
+        email: this.email,
+        password: this.password,
+      })
+      .then(function (response) {
+
+        const cookie = [
+          {
+            id: response.data.user.id,
+            name: response.data.user.name,
+            email: response.data.user.email,
+            token: response.data.token,
+          },
+        ];
+        return cookie[0];
+      })
+
+      .catch(function (error) {
+        console.log(error);
+      });
+    this.email = "";
+    this.password = "";
+    writeCookie(request);
+  },
+    makeToast(variant = null) {
+      this.$bvToast.toast('Toast body content', {
+        title: `Variant ${variant || 'default'}`,
+        variant: variant,
+        solid: true
+      })
     }
   }
+}
 </script>
 <style scoped>
-  .form {
-    width: 60vw;
-  }
+.form {
+  width: 60vw;
+}
 </style>

@@ -233,7 +233,7 @@
                 </b-col>
               </b-row> </b-card-text
           ></b-tab>
-          <b-tab title="My products"
+          <b-tab title="My products" v-once
             ><b-card-text>
               <h3>Your product list:</h3>
               <br />
