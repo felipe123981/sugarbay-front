@@ -5,7 +5,7 @@
         <div class="image-text">
           <span class="image">
             <b-avatar
-              :src=" this.$store.state.user[0].avatar_url "
+            :src="this.$store.state.user[0].avatar_url"
             ></b-avatar>
           </span>
 

@@ -252,7 +252,7 @@
                       variant="primary"        
                       ><i class='bx bxs-plus-circle'></i> Add new</b-button
                     >
-                    <b-modal id="modal-1" title="Type of your product">
+                    <b-modal id="modal-1" title="Type of your product" v-once>
                       <p class="my-4">
                         <b-container>
                           <b-row>

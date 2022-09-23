@@ -113,6 +113,7 @@ strong {
           id="input-1"
           v-model="email"
           type="email"
+          autocomplete="current-email"
           placeholder="Enter email"
           required
         ></b-form-input>
@@ -123,12 +124,13 @@ strong {
           id="input-2"
           class="form"
           type="password"
+          autocomplete="current-password"
           v-model="password"
           placeholder="Enter password"
           required
         ></b-form-input>
       </b-form-group>
-      <b-button type="submit" @click="submit" variant="primary"
+      <b-button type="submit" @click.prevent="submit" variant="primary"
         >Submit</b-button
       >
     </b-form>
@@ -179,9 +181,14 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+    this.$store.commit("saveUser", {
+      email: this.email,
+      password: this.password,
+    });
     this.email = "";
     this.password = "";
     writeCookie(request);
+    
   },
     makeToast(variant = null) {
       this.$bvToast.toast('Toast body content', {
