@@ -12,7 +12,7 @@
             ></b-img>
           </template>
 
-          <h5 class="mt-0">Product Title - {{ currency }} {{ total }}</h5>
+          <h5 class="mt-0">{{ product.name }} - {{ currency }} {{ product.price }}</h5>
           <div class="star-rating">
             <b-form-rating
               v-model="rate"
@@ -41,13 +41,27 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
   name: "ProductDisplay",
+  props: ['pid'],
+  async mounted() {
+    this.product = await axios.get(`http://localhost:3333/products/${this.pid}`)
+    .then(resp => {
+      return resp.data;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    console.log(this.product)
+  },
   data() {
     return {
+        product: [],
         total: 50.99,
         rate: 4.5,
-        currency: 'U$'
+        currency: 'U$',
     }
   }
 };

@@ -4,8 +4,6 @@ export function writeCookie(cookie) {
     Cookies.set("name", cookie.name);
     Cookies.set("email", cookie.email);
     Cookies.set("token", cookie.token);
-
-    console.log(`${document.cookie}`);
   }
 
 export function readCookie() {

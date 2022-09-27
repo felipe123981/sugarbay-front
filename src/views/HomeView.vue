@@ -2,11 +2,10 @@
   <div>
     <slot> List of products:</slot>
     <br />
-    <ProductDisplay style="width: 70vw"></ProductDisplay>
-    <br />
-    <ProductDisplay style="width: 70vw"></ProductDisplay>
-    <br />
-    <ProductDisplay style="width: 70vw"></ProductDisplay>
+    <div v-for="product in products" :key="product.id">
+      <ProductDisplay :pid="product.id" style="width: 70vw"></ProductDisplay>
+      <br>
+    </div>
     <br />
     <nav aria-label="...">
       <ul class="pagination">
@@ -31,10 +30,22 @@
 
 <script>
 import ProductDisplay from "@/components/ProductDisplay.vue";
+import axios from "axios";
 
 export default {
+  async mounted() {
+    this.products = await axios.get("http://localhost:3333/products/")
+    .then(resp => {
+      return resp.data;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    console.log(this.products);
+    },
   data() {
     return {
+      products: [],
       value: ["all"],
       perPage: 3,
       currentPage: 1,
@@ -51,14 +62,9 @@ export default {
       ],
     };
   },
-  computed: {
-    rows() {
-      return this.items.length;
-    },
-  },
   components: {
     ProductDisplay,
-  },
+},
   methods: {
     makeToast(variant = null) {
       this.$bvToast.toast("Toast body content", {

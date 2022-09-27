@@ -138,67 +138,98 @@ strong {
 </template>
 
 <script>
-import  { writeCookie }  from "@/modules/cookie";
-import axios from 'axios';
+import { writeCookie } from "@/modules/cookie";
+import axios from "axios";
 //import {  mapActions } from "vuex";
 
 export default {
-  name: 'LoginView',
+  emits: {
+    makeToast(variant = null) {
+      this.$bvToast.toast("Toast body content", {
+        title: `Variant ${variant || "default"}`,
+        variant: variant,
+        solid: true,
+      });
+    },
+  },
+  name: "LoginView",
   data() {
     return {
       email: "",
-    password: "",
-    cookie: [
-      {
-        name: "",
-        email: "",
-        token: "",
-      },
-    ],
-      show: true
-    }
+      password: "",
+      cookie: [
+        {
+          name: "",
+          email: "",
+          token: "",
+        },
+      ],
+      show: true,
+    };
   },
   methods: {
     async submit() {
-    const request = await axios
-      .post("http://localhost:3333/sessions/", {
-        email: this.email,
-        password: this.password,
-      })
-      .then(function (response) {
+      const status = await axios
+        .post("http://localhost:3333/sessions/", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(function (response) {
+          return response.status;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      const request = await axios
+        .post("http://localhost:3333/sessions/", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(function (response) {
+          const cookie = [
+            {
+              id: response.data.user.id,
+              name: response.data.user.name,
+              email: response.data.user.email,
+              token: response.data.token,
+            },
+          ];
+          return cookie[0];
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
-        const cookie = [
+      if (status == 200) {
+        this.$store.commit("login", {
+          email: this.email,
+          password: this.password,
+        });
+        
+        this.$bvToast.toast(
+          ` Welcome  ${this.$store.state.user[0].username}!`,
           {
-            id: response.data.user.id,
-            name: response.data.user.name,
-            email: response.data.user.email,
-            token: response.data.token,
-          },
-        ];
-        return cookie[0];
-      })
-
-      .catch(function (error) {
-        console.log(error);
-      });
-    this.$store.commit("saveUser", {
-      email: this.email,
-      password: this.password,
-    });
-    this.email = "";
-    this.password = "";
-    writeCookie(request);
-    
+            title: ` Login success. `,
+            variant: "success",
+            solid: true,
+          }
+        );
+      } else {
+        this.$bvToast.toast(
+          "Incorrect email or password combination!",
+          {
+            title: ` Login failed. `,
+            variant: "danger",
+            solid: true,
+          }
+        );
+      }
+      this.email = "";
+      this.password = "";
+      writeCookie(request);
+    },
   },
-    makeToast(variant = null) {
-      this.$bvToast.toast('Toast body content', {
-        title: `Variant ${variant || 'default'}`,
-        variant: variant,
-        solid: true
-      })
-    }
-  }
-}
+};
 </script>
 <style scoped>
 .form {

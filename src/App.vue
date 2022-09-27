@@ -80,10 +80,14 @@
 
         <div class="bottom-content">
           <li class="">
-            <router-link to="/login">
+            <router-link v-if="!this.$store.state.loged" to="/login">
               <i class="bx bx-log-in icon"></i>
               <span class="text nav-text">Login</span>
             </router-link>
+            <a v-else @click="logout">
+              <i class="bx bx-log-out icon"></i>
+              <span class="text nav-text">Logout</span>
+            </a>
           </li>
 
           <li class="mode">
@@ -145,7 +149,9 @@ export default {
     };
   },
   methods: {
-    
+    logout() {
+      this.$store.commit("logout")
+    }
   }
 };
 </script>
