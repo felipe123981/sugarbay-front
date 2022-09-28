@@ -23,6 +23,17 @@ const getters = {};
 const actions = {};
 
 const mutations = {
+  addProduct(state, payload) {
+    const existProduct = state.cart.find(o => o.id == payload.id);
+
+    if(existProduct){
+      existProduct.quantity += 1;
+    }
+    else {
+      payload.quantity = 1;
+      state.cart.push(payload)
+    }
+  },
   async login(state, payload) {
     state.user = await axios
       .post("http://localhost:3333/sessions/", payload)

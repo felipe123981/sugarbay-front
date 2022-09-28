@@ -21,7 +21,8 @@
     "vue": "^2.7.10",
     "vue-advanced-chat": "2.0.0",
     "vue-router": "^3.5.2",
-    "vuex": "3.6.2"
+    "vuex": "3.6.2",
+    "vux-uploader-component": "^1.0.25"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

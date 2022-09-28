@@ -4,9 +4,7 @@
       <header>
         <div class="image-text">
           <span class="image">
-            <b-avatar
-            :src="this.$store.state.user[0].avatar_url"
-            ></b-avatar>
+            <b-avatar :src="this.$store.state.user[0].avatar_url"></b-avatar>
           </span>
 
           <div class="text logo-text">
@@ -114,6 +112,8 @@
   </div>
 </template>
 <script>
+  import { isValidToken } from './modules/auth';
+  import { readCookie } from './modules/cookie';
 export default {
   name: "App",
   components: {},
@@ -142,17 +142,19 @@ export default {
         modeText.innerText = "Dark mode";
       }
     });
+
+    const token = readCookie(document.cookie);
+    isValidToken(token);
   },
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     logout() {
-      this.$store.commit("logout")
-    }
-  }
+      //eraseCookie(this.$store.state.user.username);
+      this.$store.commit("logout");
+    },
+  },
 };
 </script>
 <style>

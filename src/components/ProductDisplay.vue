@@ -30,7 +30,7 @@
               ></b-col
             >
             <b-col lg="4" class="pb-2"
-              ><b-button size="sm" pill
+              ><b-button size="sm" pill @click="addToCart(product)"
                 ><i class="bx bx-cart-alt"></i> Add t cart</b-button
               ></b-col
             >
@@ -62,6 +62,11 @@ export default {
         total: 50.99,
         rate: 4.5,
         currency: 'U$',
+    }
+  },
+  methods: {
+    addToCart(product) {
+      this.$store.commit("addProduct", product);
     }
   }
 };

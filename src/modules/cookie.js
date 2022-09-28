@@ -7,7 +7,7 @@ export function writeCookie(cookie) {
   }
 
 export function readCookie() {
-    var searchName = "email=";
+    var searchName = "token=";
     var cookies = document.cookie.split(";");
     for (var i = 0; i < cookies.length; i++) {
       var c = cookies[i];
@@ -16,4 +16,8 @@ export function readCookie() {
         return c.substring(searchName.length, c.length);
     }
     return null;
+}
+
+export function eraseCookie(name) {
+  Cookies.remove(name)
 }
