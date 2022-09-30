@@ -38,6 +38,7 @@ import ProductDisplay from "@/components/ProductDisplay.vue";
 import axios from "axios";
 
 export default {
+  name: "HomeView",
   async mounted() {
     this.products = await axios.get("http://localhost:3333/products/")
     .then(resp => {

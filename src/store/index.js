@@ -2,12 +2,14 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
+import { eraseCookie } from "@/modules/cookie";
 
 Vue.use(Vuex);
 
 const state = {
   loged: false,
   token: "",
+  favorites: [],
   cart: [],
   user: [
     {
@@ -24,15 +26,33 @@ const actions = {};
 
 const mutations = {
   addProduct(state, payload) {
-    const existProduct = state.cart.find(o => o.id == payload.id);
+    const existProduct = state.cart.find((o) => o.id == payload.id);
 
-    if(existProduct){
+    if (existProduct) {
       existProduct.quantity += 1;
-    }
-    else {
+    } else {
       payload.quantity = 1;
-      state.cart.push(payload)
+      state.cart.push(payload);
     }
+  },
+  restoreSession(state, token) {
+    axios
+      .get("http://localhost:3333/profile/", {
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        state.loged = true;
+        state.user = [
+          {
+            username: resp.data.name,
+            email: resp.data.email,
+            avatar_url: resp.data.avatar_url,
+          },
+        ];
+      });
   },
   async login(state, payload) {
     state.user = await axios
@@ -62,6 +82,15 @@ const mutations = {
           avatar_url: "",
         },
       ]);
+    eraseCookie();
+  },
+  addToFavorites(state, payload) {
+    const existProduct = state.favorites.find((o) => o.id == payload.id);
+
+    if (existProduct) {
+      payload = existProduct.filter((o) => o.id != payload.id);
+      state.favorites.push(payload);
+    } 
   },
 };
 

@@ -143,15 +143,6 @@ import axios from "axios";
 //import {  mapActions } from "vuex";
 
 export default {
-  emits: {
-    makeToast(variant = null) {
-      this.$bvToast.toast("Toast body content", {
-        title: `Variant ${variant || "default"}`,
-        variant: variant,
-        solid: true,
-      });
-    },
-  },
   name: "LoginView",
   data() {
     return {

@@ -4,11 +4,11 @@
       <header>
         <div class="image-text">
           <span class="image">
-            <b-avatar :src="this.$store.state.user[0].avatar_url"></b-avatar>
+            <b-avatar  :src="$store.state.user[0].avatar_url"></b-avatar>
           </span>
 
           <div class="text logo-text">
-            <span class="name"> {{ this.$store.state.user[0].username }} </span>
+            <span class="name"> {{ $store.state.user[0].username }} </span>
             <span class="profession"><i class="bx bx-station"></i> Active</span>
           </div>
         </div>
@@ -118,6 +118,11 @@ export default {
   name: "App",
   components: {},
   mounted() {
+    const token = readCookie(document.cookie);
+    if(isValidToken(token)) {
+      this.$store.commit("restoreSession", token);
+    }
+
     const body = document.querySelector("body"),
       sidebar = body.querySelector("nav"),
       toggle = body.querySelector(".toggle"),
@@ -141,10 +146,7 @@ export default {
       } else {
         modeText.innerText = "Dark mode";
       }
-    });
-
-    const token = readCookie(document.cookie);
-    isValidToken(token);
+    });    
   },
   data() {
     return {};

@@ -4,8 +4,8 @@ import axios from "axios";
 //import { readCookie } from "./cookie";
 const url = "http://localhost:3333/profile/";
 
-export function isValidToken(token) {
-  axios
+export async function isValidToken(token) {
+   await axios
     .get(url, {
       headers: {
         'Authorization': `token ${token}`,

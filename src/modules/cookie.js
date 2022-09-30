@@ -1,23 +1,25 @@
 import Cookies from "js-cookie";
 
 export function writeCookie(cookie) {
-    Cookies.set("name", cookie.name);
-    Cookies.set("email", cookie.email);
-    Cookies.set("token", cookie.token);
-  }
-
-export function readCookie() {
-    var searchName = "token=";
-    var cookies = document.cookie.split(";");
-    for (var i = 0; i < cookies.length; i++) {
-      var c = cookies[i];
-      while (c.charAt(0) == ` `) c = c.substring(1, c.length);
-      if (c.indexOf(searchName) == 0)
-        return c.substring(searchName.length, c.length);
-    }
-    return null;
+  Cookies.set("name", cookie.name);
+  Cookies.set("email", cookie.email);
+  Cookies.set("token", cookie.token);
 }
 
-export function eraseCookie(name) {
-  Cookies.remove(name)
+export function readCookie() {
+  var searchName = "token=";
+  var cookies = document.cookie.split(";");
+  for (var i = 0; i < cookies.length; i++) {
+    var c = cookies[i];
+    while (c.charAt(0) == ` `) c = c.substring(1, c.length);
+    if (c.indexOf(searchName) == 0)
+      return c.substring(searchName.length, c.length);
+  }
+  return null;
+}
+
+export function eraseCookie() {
+  Cookies.remove("name");
+  Cookies.remove("email");
+  Cookies.remove("token");
 }
