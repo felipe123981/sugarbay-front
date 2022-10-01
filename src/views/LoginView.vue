@@ -134,7 +134,17 @@ strong {
         >Submit</b-button
       >
     </b-form>
+    <br>
+    <strong>
+      Don't have an account? <a href="#">Sign-up</a>.
+    </strong>
+    <br>
+    <br>
+    <p>
+      Forgot my <a href="#">password</a>.
+    </p>
   </div>
+  
 </template>
 
 <script>

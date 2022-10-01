@@ -4,15 +4,39 @@
       <b-card>
         <b-media>
           <template #aside>
+            <!--
+
             <b-img
               blank
               blank-color="#ccc"
               width="50"
               alt="placeholder"
             ></b-img>
+
+            -->
+
+            
+
+              <div class="img-wrapper">
+                <button  class="btn btn-sm outline-primary btn-like">
+                  <i  class='bx bxs-heart'></i>
+                </button>
+                <b-img class="img-responsive"
+                blank
+              blank-color="#ccc"
+              width="70"
+              alt="placeholder"
+                >
+                <div class="img-overlay">
+                </div></b-img>
+              </div>
+
+            
           </template>
 
-          <h5 class="mt-0">{{ product.name }} - {{ currency }} {{ product.price }}</h5>
+          <h5 class="mt-0">
+            {{ product.name }} - {{ currency }} {{ product.price }}
+          </h5>
           <div class="star-rating">
             <b-form-rating
               v-model="rate"
@@ -41,52 +65,84 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "ProductDisplay",
-  props: ['pid'],
+  props: ["pid"],
   async mounted() {
-    this.product = await axios.get(`http://localhost:3333/products/${this.pid}`)
-    .then(resp => {
-      return resp.data;
-    })
-    .catch(error => {
-      console.log(error);
-    })
-    console.log(this.product)
+    this.product = await axios
+      .get(`http://localhost:3333/products/${this.pid}`)
+      .then((resp) => {
+        return resp.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(this.product);
   },
   data() {
     return {
-        product: [],
-        total: 50.99,
-        rate: 4.5,
-        currency: 'U$',
-    }
+      product: [],
+      total: 50.99,
+      rate: 4.5,
+      currency: "U$",
+    };
   },
   methods: {
     addToCart(product) {
       this.$store.commit("addProduct", product);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+  .btn-like {
+    position: absolute;
+    padding-left: 8vh;
+  }
+  .btn-like:hover {
+    color: rgb(216, 25, 25);
+  }
+
+.img-wrapper {
+  position: relative;
+}
+
+.img-responsive {
+  height: auto;
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.img-overlay:before {
+  content: ' ';
+  display: block; 
+  height: 0;
+}
+
 #form-control {
-    display: block;
-    min-width: 150px;
-    width: 26%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  display: block;
+  min-width: 150px;
+  width: 26%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 </style>
