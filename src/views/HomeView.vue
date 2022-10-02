@@ -8,7 +8,7 @@
       </h3>
     </div>
     <div v-for="product in products" :key="product.id">
-      <ProductDisplay :pid="product.id" style="width: 70vw"></ProductDisplay>
+      <ProductDisplay v-once :pid="product.id" style="width: 70vw"></ProductDisplay>
       <br>
     </div>
     <br />

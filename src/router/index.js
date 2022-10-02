@@ -9,6 +9,7 @@ import ConfigView from '../views/ConfigView.vue';
 import LoginView from '../views/LoginView.vue';
 import ForgotPassword from '../views/ForgotPassword.vue';
 import ProductRegister from '@/views/ProductRegister.vue';
+import SignIn from '@/views/SignIn.vue'
 import Router from 'vue-router';
 import Vue from "vue";
 
@@ -67,6 +68,11 @@ export default new Router({
             path: '/register',
             name: 'register',
             component: ProductRegister,
+        },
+        {
+            path: '/sign-in',
+            name: 'sign-in',
+            component: SignIn,
         },
     ]
 })

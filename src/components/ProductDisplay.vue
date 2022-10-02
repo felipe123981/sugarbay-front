@@ -15,11 +15,9 @@
 
             -->
 
-            
-
               <div class="img-wrapper">
-                <button  class="btn btn-sm outline-primary btn-like">
-                  <i  class='bx bxs-heart'></i>
+                <button @click="addFavorite(product)" class="btn btn-sm outline-primary btn-like">
+                  <i class='bx bxs-heart'></i>
                 </button>
                 <b-img class="img-responsive"
                 blank
@@ -90,6 +88,9 @@ export default {
     };
   },
   methods: {
+    addFavorite(product) {
+      this.$store.commit("addToFavorites", product);
+    },
     addToCart(product) {
       this.$store.commit("addProduct", product);
     },
@@ -100,7 +101,7 @@ export default {
 <style scoped>
   .btn-like {
     position: absolute;
-    padding-left: 8vh;
+    padding-left: 3.05rem;
   }
   .btn-like:hover {
     color: rgb(216, 25, 25);

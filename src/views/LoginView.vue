@@ -136,12 +136,12 @@ strong {
     </b-form>
     <br>
     <strong>
-      Don't have an account? <a href="#">Sign-up</a>.
+      Don't have an account? <router-link to="/sign-in">Sign-in</router-link>.
     </strong>
     <br>
     <br>
     <p>
-      Forgot my <a href="#">password</a>.
+      Forgot my <router-link to="/forgot">password</router-link>.
     </p>
   </div>
   

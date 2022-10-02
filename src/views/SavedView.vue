@@ -1,5 +1,11 @@
 <template>
-  <h1>SavedView</h1>
+  <div>
+    <h1>SavedView</h1>
+    <pre>
+    {{ $store.state.favorites }}
+  </pre
+    >
+  </div>
 </template>
 <script>
 export default {

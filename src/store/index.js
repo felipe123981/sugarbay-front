@@ -85,13 +85,15 @@ const mutations = {
     eraseCookie();
   },
   addToFavorites(state, payload) {
-    const existProduct = state.favorites.find((o) => o.id == payload.id);
-
-    if (existProduct) {
-      payload = existProduct.filter((o) => o.id != payload.id);
+    const existProduct = state.favorites.find(o => o.id == payload.id);
+    if(existProduct) {
+      state.favorites = state.favorites.filter(o => o.id !== payload.id);
+    }
+    else {
       state.favorites.push(payload);
-    } 
-  },
+    }
+  }
+
 };
 
 export default new Vuex.Store({
