@@ -63,21 +63,20 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axiosConfig from "@/modules/axiosConfig";
 
 export default {
   name: "ProductDisplay",
   props: ["pid"],
   async mounted() {
-    this.product = await axios
-      .get(`http://localhost:3333/products/${this.pid}`)
+    this.product = await axiosConfig
+      .get(`/products/${this.pid}`)
       .then((resp) => {
         return resp.data;
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(this.product);
   },
   data() {
     return {

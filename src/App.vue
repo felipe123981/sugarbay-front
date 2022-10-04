@@ -4,7 +4,9 @@
       <header>
         <div class="image-text">
           <span class="image">
-            <b-avatar  :src="$store.state.user[0].avatar_url"></b-avatar>
+            <b-avatar v-if="$store.state.user[0].avatar_url == ''"
+              src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"></b-avatar>
+            <b-avatar v-else :src="$store.state.user[0].avatar_url"></b-avatar>
           </span>
 
           <div class="text logo-text">

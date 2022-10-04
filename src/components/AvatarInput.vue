@@ -1,0 +1,99 @@
+<template>
+  <div>
+    <div class="wrapper-1" v-if="this.$store.state.user[0].avatar_url === ''">
+      <b-form-file
+        class="my_file"
+        v-model="file"
+        :state="Boolean(file)"
+        plain
+      ></b-form-file>
+    </div>
+    <div 
+      v-else
+      class="wrapper-2"
+      :style="{
+        'background': 'url(' + this.$store.state.user[0].avatar_url + ')',
+        'background-size': 'contain'
+      }"
+    >
+      <b-form-file
+        class="my_file"
+        v-model="file"
+        :state="Boolean(file)"
+        plain
+      ></b-form-file>
+    </div>
+  </div>
+</template>
+<script>
+//import userIcon  from "@/assets/img/userIcon.png"
+export default {
+  name: "AvatarInput",
+  data() {
+    return {
+      file: ""
+    };
+  }
+};
+</script>
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+.wrapper-1 {
+  background: url("https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png");
+  background-size: contain;
+  height: 150px;
+  width: 150px;
+  position: relative;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  background-size: contain;
+  margin: 10px left;
+  overflow: hidden;
+}
+.wrapper-2 {
+  height: 150px;
+  width: 150px;
+  position: relative;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  background-size: contain;
+  margin: 10px left;
+  overflow: hidden;
+}
+.my_file {
+  position: absolute;
+  bottom: 0;
+  outline: none;
+  color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5vh 3.5rem;
+  cursor: pointer;
+  transition: 0.5s;
+  background: rgba(0, 0, 0, 0.5);
+}
+.my_file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.my_file::before {
+  content: "\1F4F7";
+  font-size: 4vh;
+  color: #fff;
+  display: inline-block;
+  -webkit-user-select: none;
+}
+.my_file::after {
+  content: "Update";
+  font-family: "arial";
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  top: 70px;
+  font-size: 14px;
+  position: absolute;
+}
+</style>

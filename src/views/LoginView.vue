@@ -140,16 +140,19 @@ strong {
     </strong>
     <br>
     <br>
-    <p>
-      Forgot my <router-link to="/forgot">password</router-link>.
+    <p v-b-modal.modal-1 class="password">
+      Forgot my password.
     </p>
+    <b-modal id="modal-1" title="BootstrapVue">
+    <p class="my-4">Hello from modal!</p>
+  </b-modal>
   </div>
   
 </template>
 
 <script>
 import { writeCookie } from "@/modules/cookie";
-import axios from "axios";
+import axiosConfig from "@/modules/axiosConfig";
 //import {  mapActions } from "vuex";
 
 export default {
@@ -170,8 +173,8 @@ export default {
   },
   methods: {
     async submit() {
-      const status = await axios
-        .post("http://localhost:3333/sessions/", {
+      const status = await axiosConfig
+        .post("/sessions", {
           email: this.email,
           password: this.password,
         })
@@ -181,8 +184,8 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      const request = await axios
-        .post("http://localhost:3333/sessions/", {
+      const request = await axiosConfig
+        .post("/sessions", {
           email: this.email,
           password: this.password,
         })
@@ -235,5 +238,8 @@ export default {
 <style scoped>
 .form {
   width: 60vw;
+}
+.password {
+  color:blue
 }
 </style>

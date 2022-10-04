@@ -1,5 +1,5 @@
-//import axios from "axios";
-import axios from "axios";
+import replaceTo from "@/modules/replaceToHost";
+import axiosConfig from "@/modules/axiosConfig";
 import Vue from "vue";
 import Vuex from "vuex";
 import { eraseCookie } from "@/modules/cookie";
@@ -36,27 +36,29 @@ const mutations = {
     }
   },
   restoreSession(state, token) {
-    axios
-      .get("http://localhost:3333/profile/", {
+    setTimeout(() => {
+      axiosConfig
+      .get("/profile", {
         headers: {
-          Authorization: `token ${token}`,
+          'Authorization': `token ${token}`,
         },
       })
       .then((resp) => {
-        console.log(resp.data);
         state.loged = true;
         state.user = [
           {
             username: resp.data.name,
             email: resp.data.email,
-            avatar_url: resp.data.avatar_url,
+            avatar_url: replaceTo(resp.data.avatar_url),
           },
         ];
       });
+    }, 
+    1000)
   },
   async login(state, payload) {
-    state.user = await axios
-      .post("http://localhost:3333/sessions/", payload)
+    state.user = await axiosConfig
+      .post("/sessions", payload)
       .then((response) => {
         state.token = response.data.token;
         state.loged = true;
@@ -64,7 +66,7 @@ const mutations = {
           {
             username: response.data.user.name,
             email: response.data.user.email,
-            avatar_url: response.data.user.avatar_url,
+            avatar_url: replaceTo(response.data.user.avatar_url),
           },
         ];
       })

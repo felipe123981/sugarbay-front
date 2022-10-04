@@ -11,8 +11,7 @@ export async function isValidToken(token) {
         'Authorization': `token ${token}`,
       },
     })
-    .then((resp) => {
-      console.log(resp.data);
+    .then(() => {
       return true;
     })
     .catch((error) => {

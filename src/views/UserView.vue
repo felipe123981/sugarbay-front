@@ -55,6 +55,9 @@
 
               <p>User information:</p>
               <b-row>
+                <AvatarInput></AvatarInput>
+              </b-row>
+              <b-row>
                 <b-col>
                   <b-form-group
                     id="input-group-1"
@@ -362,12 +365,13 @@
   </div>
 </template>
 <script>
+  import AvatarInput from '@/components/AvatarInput.vue';
 //import TypeSelector from "@/components/TypeSelector.vue";
 export default {
   name: "UserView",
   components: {
-    //TypeSelector,
-  },
+    AvatarInput,
+},
 
   data() {
     return {

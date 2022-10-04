@@ -80,7 +80,7 @@
   </div>
 </template>
 <script>
-  import axios from "axios";
+  import axiosConfig from "@/modules/axiosConfig";
   import Uploader from "vux-uploader-component";
 
 export default {
@@ -119,7 +119,7 @@ export default {
       });
     },
     async registerProduct() {
-      await axios.post("http://localhost:3333/products", {
+      await axiosConfig.post("/products", {
         name: this.form.name,
         price: this.form.price,
         quantity: this.form.quantity,
@@ -153,7 +153,7 @@ export default {
   width: 70vw;
 }
 .box2 {
-  background-color: darkslategray;
+  background-color: var(--secondary);
 }
 .uploader-title {
   color: white;

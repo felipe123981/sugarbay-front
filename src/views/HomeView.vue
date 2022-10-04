@@ -3,13 +3,15 @@
     <slot> List of products:</slot>
     <br />
     <div v-if="products.lenght == 0">
-      <h3>
-        Oops! there are no products...
-      </h3>
+      <h3>Oops! there are no products...</h3>
     </div>
     <div v-for="product in products" :key="product.id">
-      <ProductDisplay v-once :pid="product.id" style="width: 70vw"></ProductDisplay>
-      <br>
+      <ProductDisplay
+        v-once
+        :pid="product.id"
+        style="width: 70vw"
+      ></ProductDisplay>
+      <br />
     </div>
     <br />
     <nav aria-label="...">
@@ -18,7 +20,7 @@
           <span class="page-link">Previous</span>
         </li>
         <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item ">
+        <li class="page-item">
           <span class="page-link">
             2
             <span class="sr-only">(current)</span>
@@ -35,20 +37,20 @@
 
 <script>
 import ProductDisplay from "@/components/ProductDisplay.vue";
-import axios from "axios";
+import axiosConfig from "@/modules/axiosConfig";
 
 export default {
   name: "HomeView",
   async mounted() {
-    this.products = await axios.get("http://localhost:3333/products/")
-    .then(resp => {
-      return resp.data;
-    })
-    .catch(error => {
-      console.log(error);
-    })
-    console.log(this.products);
-    },
+    this.products = await axiosConfig
+      .get("/products")
+      .then((resp) => {
+        return resp.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   data() {
     return {
       products: [],
@@ -64,22 +66,22 @@ export default {
         { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
         { id: 7, first_name: "The Great", last_name: "Gazzoo" },
         { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" },
-      ],
+        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
+      ]
     };
   },
   components: {
-    ProductDisplay,
-},
+    ProductDisplay
+  },
   methods: {
     makeToast(variant = null) {
       this.$bvToast.toast("Toast body content", {
         title: `Variant ${variant || "default"}`,
         variant: variant,
-        solid: true,
+        solid: true
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
