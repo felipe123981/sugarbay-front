@@ -10,6 +10,7 @@ import LoginView from '../views/LoginView.vue';
 import ForgotPassword from '../views/ForgotPassword.vue';
 import ProductRegister from '@/views/ProductRegister.vue';
 import SignIn from '@/views/SignIn.vue'
+import ShopView from "@/views/ShopView.vue"
 import Router from 'vue-router';
 import Vue from "vue";
 
@@ -74,5 +75,11 @@ export default new Router({
             name: 'sign-in',
             component: SignIn,
         },
+        //lembre-se de adiocionar o param referente ao id do produto 
+        {
+            path: '/shop',
+            name: 'shop',
+            component: ShopView,
+        }
     ]
 })

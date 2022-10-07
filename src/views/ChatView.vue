@@ -15,7 +15,7 @@
 
 <script>
 import { register } from "vue-advanced-chat";
-// import { register } from '../../vue-advanced-chat/dist/vue-advanced-chat.es.js'
+//import { register } from '../../vue-advanced-chat/dist/vue-advanced-chat.es.js'
 register();
 
 export default {
@@ -31,12 +31,12 @@ export default {
             "https://w7.pngwing.com/pngs/869/765/png-transparent-technical-support-hotel-grand-filippo-computer-icons-information-technology-bellhop-service-computer-silhouette.png",
           users: [
             { _id: "1234", username: "John Doe" },
-            { _id: "4321", username: "John Snow" },
-          ],
-        },
+            { _id: "4321", username: "John Snow" }
+          ]
+        }
       ],
       messages: [],
-      messagesLoaded: false,
+      messagesLoaded: false
     };
   },
 
@@ -63,8 +63,8 @@ export default {
             content: `${reset ? "" : "paginated"} Olá!`,
             senderId: "4321",
             username: "John Doe",
-            date: "13 November",
-            timestamp: "10:20",
+            timestamp: new Date().toString().substring(16, 21),
+            date: new Date().toDateString()
           });
         }
         if (i == 1) {
@@ -73,8 +73,8 @@ export default {
             content: `${reset ? "" : "paginated"} Posso ajudar?`,
             senderId: "4321",
             username: "John Doe",
-            date: "13 November",
-            timestamp: "10:20",
+            timestamp: new Date().toString().substring(16, 21),
+            date: new Date().toDateString()
           });
         }
       }
@@ -90,8 +90,8 @@ export default {
           content: message.content,
           senderId: this.currentUserId,
           timestamp: new Date().toString().substring(16, 21),
-          date: new Date().toDateString(),
-        },
+          date: new Date().toDateString()
+        }
       ];
     },
 
@@ -104,12 +104,12 @@ export default {
             content: "NEW MESSAGE",
             senderId: "1234",
             timestamp: new Date().toString().substring(16, 21),
-            date: new Date().toDateString(),
-          },
+            date: new Date().toDateString()
+          }
         ];
       }, 2000);
-    },
-  },
+    }
+  }
 };
 </script>
 

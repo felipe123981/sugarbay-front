@@ -1194,6 +1194,147 @@
     magic-string "^0.25.0"
     string.prototype.matchall "^4.0.6"
 
+"@syncfusion/ej2-base@^20.3.47", "@syncfusion/ej2-base@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-base/-/ej2-base-20.3.47.tgz#5e7d4f570402decf66834009988df27e6ee4fd78"
+  integrity sha512-KxNtnDihagW+RzAEUi2cW9LzIeOYowGnOPa8OIXvWWhPg9YcbkAZwP53oM21/Ob3zQR7V/f37/zfjRXdBSwRTg==
+  dependencies:
+    "@syncfusion/ej2-icons" "~20.3.47"
+
+"@syncfusion/ej2-buttons@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-buttons/-/ej2-buttons-20.3.47.tgz#5f032069430ce322832c796008ae486d145fb1cc"
+  integrity sha512-UvDGYww4b5s9AjWVSylK6O41jDfVGseeM6ZP7XYV2J4SxBsWBzhqwt6s3CCw8L1sQy0mpL3e6TVtyAx2lYkSoQ==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+
+"@syncfusion/ej2-calendars@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-calendars/-/ej2-calendars-20.3.47.tgz#1f911bbf3200a27984b2de85cd17403575febe31"
+  integrity sha512-MZQiEG8K2AB6Y++aVHyhP+uk1VyIkdTTjl18l6Krd6VSySGwKhCG96U0MlykRPiXg6iJSQk4VtiNCyaZoQL2lw==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-buttons" "~20.3.47"
+    "@syncfusion/ej2-inputs" "~20.3.47"
+    "@syncfusion/ej2-lists" "~20.3.47"
+    "@syncfusion/ej2-popups" "~20.3.47"
+
+"@syncfusion/ej2-charts@20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-charts/-/ej2-charts-20.3.47.tgz#bbd0a4e339ee9460f4d6324609eff09f00fc4331"
+  integrity sha512-XEJ2d4c8ERppT15xCHxZR/rbpGAMG1Tda3H0OlPrQhKHq6HkGZiDXqeBNlhOO29awFVKE7fK9lRy44D3QFQKGA==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-calendars" "~20.3.47"
+    "@syncfusion/ej2-compression" "~20.3.47"
+    "@syncfusion/ej2-data" "~20.3.47"
+    "@syncfusion/ej2-file-utils" "~20.3.47"
+    "@syncfusion/ej2-navigations" "~20.3.47"
+    "@syncfusion/ej2-pdf-export" "~20.3.47"
+    "@syncfusion/ej2-svg-base" "~20.3.47"
+
+"@syncfusion/ej2-compression@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-compression/-/ej2-compression-20.3.47.tgz#46c3112d34b0b0fcdfd11cea7dfec3d25c0be22a"
+  integrity sha512-IsVWdDwkEHMJmXug5PtlQXANbj9ZrGFmlPpH+LysulW2RrJWvyATl0CJpynjtD2MPqOuaD+LSTh3vu3WrIP7wg==
+  dependencies:
+    "@syncfusion/ej2-file-utils" "~20.3.47"
+
+"@syncfusion/ej2-data@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-data/-/ej2-data-20.3.47.tgz#f396b83828f06b6efd54a4e10102f7ca35b0fe4b"
+  integrity sha512-Rd8v7LWCFHNKVd7+sra2pvoclKfCdmSS3OTHzO18H9uipXo9E1TNLOPzfhtp0eR6MCYd2jzfatTtNfyVVKu/6w==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+
+"@syncfusion/ej2-file-utils@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-file-utils/-/ej2-file-utils-20.3.47.tgz#5a7c331f304f7d93f7fe302e4a258f46738bdb11"
+  integrity sha512-OKoQIXMuzyeGVTAAwnkTQMAhfJdtzpqmJLjCUV+dyvQBO1wldftgnr5iXGvL3Faa8fEkQPmOZeI7FGS6rPc/UA==
+
+"@syncfusion/ej2-icons@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-icons/-/ej2-icons-20.3.47.tgz#9223238cccfbeacdb914176e311a132660392e86"
+  integrity sha512-5uQEkkyene5mm/o1G7GMSJqmSrFOWFyuJdEIqzZYBzr+7hwlq6P919A/XR3eDBJSIz1wTN65bTQ9SCl4j/us1g==
+
+"@syncfusion/ej2-inputs@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-inputs/-/ej2-inputs-20.3.47.tgz#6979065eae346fb0ec532695d4287f1e7d1c2a75"
+  integrity sha512-eW//KpJDB4PY7vTCcjl5OlQgpIgEt9R6i92CDfjUdrBJS5oD7TtWrdWHzbmYQHiUJap88GFR29/TbZwxyvaOZw==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-buttons" "~20.3.47"
+    "@syncfusion/ej2-popups" "~20.3.47"
+    "@syncfusion/ej2-splitbuttons" "~20.3.47"
+
+"@syncfusion/ej2-lists@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-lists/-/ej2-lists-20.3.47.tgz#af5197b075080876549e336d9478a64a1ad3bb24"
+  integrity sha512-8TnBaltCBioqKef4g0/LVSuPOHGK0fnNcTYj3LrR6s2mV0NScZtbMCbDSWQu1T4mHAzxYAsm5jCa6Y6lx2h66g==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-buttons" "~20.3.47"
+    "@syncfusion/ej2-data" "~20.3.47"
+
+"@syncfusion/ej2-navigations@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-navigations/-/ej2-navigations-20.3.47.tgz#3cb3fa791d791c448d058cc1217f518e03959253"
+  integrity sha512-vVuYygNaU47aln9o1nGgDE9HmnRr/vhbXmCWNozKm8KB1jKDSLVEKxV9+q/I8q8VLwziW4bkha0893ezNpN2Ag==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-buttons" "~20.3.47"
+    "@syncfusion/ej2-data" "~20.3.47"
+    "@syncfusion/ej2-inputs" "~20.3.47"
+    "@syncfusion/ej2-lists" "~20.3.47"
+    "@syncfusion/ej2-popups" "~20.3.47"
+
+"@syncfusion/ej2-pdf-export@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-pdf-export/-/ej2-pdf-export-20.3.47.tgz#cedae583a7bc5bbc789ae61b3e1205962c44c4ff"
+  integrity sha512-P1UBNRXTn23muxEUO/7LvrLvuhYWpvw1xHaa3rtLENYlQ6ycyqLgcL1nkZ9FOO/+AARagCV/IHiWdVDFE2pF3g==
+  dependencies:
+    "@syncfusion/ej2-compression" "~20.3.47"
+
+"@syncfusion/ej2-popups@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-popups/-/ej2-popups-20.3.47.tgz#882f9762a255b53dc939612a18e16900754546e7"
+  integrity sha512-5MMkdB4hk0/thA8oxeSA93z83ci/D1nQV7leo03wUacutU7KE4Wq2eT5fmkYikmbjw8JcKA6Xlxc/NfwWEDFqQ==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-buttons" "~20.3.47"
+
+"@syncfusion/ej2-splitbuttons@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-splitbuttons/-/ej2-splitbuttons-20.3.47.tgz#29ebad2b81fc2555a7db28d3f5fd1e1661901342"
+  integrity sha512-0yPicWMdBzXgUTz3R7kOftBF8T5PXWcirES9KqMeR2Nn1ERt7r7VCSaGlVVtevWmxdPMaRMbyql6taXqiP78Ug==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-popups" "~20.3.47"
+
+"@syncfusion/ej2-svg-base@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-svg-base/-/ej2-svg-base-20.3.47.tgz#065414ba02717deb83d909d9cfbd58045174e335"
+  integrity sha512-FAu/GCZth+qnH20XJVq9qqrrl1Y98TOK/2b6EBASCXhZg1MWjk+Qy8clRZQFIGZmSHR/IdKZqmbQOpjVzlXWOA==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+
+"@syncfusion/ej2-vue-base@~20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-vue-base/-/ej2-vue-base-20.3.47.tgz#e89c57fd953f6afb1b0b31e46534dbf2af94bf33"
+  integrity sha512-lrrCZIzlqsp1xxzH2i45fuGIJ5v91WSRSDsM7F09LhgUbI9u3DOfAqys4DktbsJgd7+coz6dNUJaj6Nn6g5lPQ==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    glob "^7.0.5"
+
+"@syncfusion/ej2-vue-charts@^20.3.47":
+  version "20.3.47"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-vue-charts/-/ej2-vue-charts-20.3.47.tgz#ac9e7b9bc49bc7986431bd232b84afe64463dfbb"
+  integrity sha512-wl5QsySkAxcAz07Lf7DXd3yC33D9v6v/KltniKyh+XCL7SPNwS74/PF7rGxpRsnfnIR2lTudVWfDpK31hDn0ig==
+  dependencies:
+    "@syncfusion/ej2-base" "~20.3.47"
+    "@syncfusion/ej2-charts" "20.3.47"
+    "@syncfusion/ej2-vue-base" "~20.3.47"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.npmjs.org/@trysound/sax/-/sax-0.2.0.tgz"
@@ -3040,6 +3181,11 @@ enhanced-resolve@^5.10.0:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
 
+enquire.js@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
+  integrity sha512-/KujNpO+PT63F7Hlpu4h3pE3TokKRHN26JYmQpPyjkRD/N57R7bPDNojMXdi7uveAKjYB7yQnartCxZnFWr0Xw==
+
 enquirer@^2.3.5:
   version "2.3.6"
   resolved "https://registry.npmjs.org/enquirer/-/enquirer-2.3.6.tgz"
@@ -3678,7 +3824,7 @@ glob-to-regexp@^0.4.1:
   resolved "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz"
   integrity sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==
 
-glob@^7.1.3, glob@^7.1.6:
+glob@^7.0.5, glob@^7.1.3, glob@^7.1.6:
   version "7.2.3"
   resolved "https://registry.npmjs.org/glob/-/glob-7.2.3.tgz"
   integrity sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==
@@ -4352,6 +4498,13 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.npmjs.org/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
+json2mq@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/json2mq/-/json2mq-0.2.0.tgz#b637bd3ba9eabe122c83e9720483aeb10d2c904a"
+  integrity sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==
+  dependencies:
+    string-convert "^0.2.0"
+
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/json5/-/json5-1.0.1.tgz"
@@ -4461,6 +4614,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.assign@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
+  integrity sha512-hFuH8TY+Yji7Eja3mGiuAxBqLagejScbG8GbG0j6o9vzn0YL14My+ktnqtZgFTosKymC9/44wP6s7xyuLfnClw==
+
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
@@ -4470,6 +4628,11 @@ lodash.defaultsdeep@^4.6.1:
   version "4.6.1"
   resolved "https://registry.npmjs.org/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.1.tgz"
   integrity sha512-3j8wdDzYuWO3lM3Reg03MuQR957t287Rpcxp1njpEa8oDrikb+FwGdW3n+FELh/A6qib6yPit0j/pv9G/yeAqA==
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
 
 lodash.kebabcase@^4.1.1:
   version "4.1.1"
@@ -4490,6 +4653,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.pick@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+  integrity sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -5691,6 +5859,11 @@ requires-port@^1.0.0:
   resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
+resize-observer-polyfill@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
+
 resolve-cwd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/resolve-cwd/-/resolve-cwd-3.0.0.tgz"
@@ -6157,6 +6330,11 @@ statuses@2.0.1:
   version "1.5.0"
   resolved "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
+
+string-convert@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string-convert/-/string-convert-0.2.1.tgz#6982cc3049fbb4cd85f8b24568b9d9bf39eeff97"
+  integrity sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==
 
 string-width@^2.1.1:
   version "2.1.1"
@@ -6669,6 +6847,20 @@ vue-router@^3.5.2:
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.6.5.tgz"
   integrity sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==
 
+vue-slick-carousel@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/vue-slick-carousel/-/vue-slick-carousel-1.0.6.tgz#8fbfe59a233b0fb7777e4934b60bbdf0a6a24f96"
+  integrity sha512-1CN/hpWC8m1U/eO7Kuc71jntJqdg6Z/ieLji21OPfQUhs8ZYnnGhQSu1covpa3IyuovM9T5puPCVgexs3DDF5A==
+  dependencies:
+    enquire.js "2.1.6"
+    json2mq "0.2.0"
+    lodash.assign "^4.2.0"
+    lodash.debounce "^4.0.8"
+    lodash.get "^4.4.2"
+    lodash.pick "^4.4.0"
+    resize-observer-polyfill "1.5.1"
+    vue "^2.6.10"
+
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.3:
   version "4.1.3"
   resolved "https://registry.npmjs.org/vue-style-loader/-/vue-style-loader-4.1.3.tgz"
@@ -6690,7 +6882,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.7.10:
+vue@^2.6.10, vue@^2.7.10:
   version "2.7.10"
   resolved "https://registry.npmjs.org/vue/-/vue-2.7.10.tgz"
   integrity sha512-HmFC70qarSHPXcKtW8U8fgIkF6JGvjEmDiVInTkKZP0gIlEPhlVlcJJLkdGIDiNkIeA2zJPQTWJUI4iWe+AVfg==

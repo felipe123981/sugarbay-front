@@ -5,7 +5,6 @@ import Vuex from "vuex";
 import { eraseCookie } from "@/modules/cookie";
 
 Vue.use(Vuex);
-
 const state = {
   loged: false,
   token: "",
@@ -18,6 +17,9 @@ const state = {
       avatar_url: "",
     },
   ],
+  message_count: 0,
+  cart_itens_count: 0,
+  saved_itens_count: 0,
 };
 
 const getters = {};
@@ -96,11 +98,63 @@ const mutations = {
     }
   }
 
-};
+}
+  const modules = {
+    namespaced: true,
+    users: {
+      state: () => ({
+        user: [
+          {
+            username: "Username",
+            email: "",
+            avatar_url: "",
+          },
+        ],
+      }),
+      
+      actions: {},
+      mutations: {},
+      getters: {
+        getUsername(state) {
+          return state.user.username;
+        }
+      }
+    }
+  }
 
 export default new Vuex.Store({
   state,
   getters,
   actions,
   mutations,
+  modules
 });
+
+/*
+const user = {
+  state: () => ({ 
+    user: [
+      {
+        username: "Username",
+        email: "",
+        avatar_url: "",
+      },
+    ],
+  }),
+  mutations: {},
+  actions: {},
+  getters: {
+    getUsername(state) {
+      return state.user.username
+    }
+  }
+}
+
+const store = new Vuex.Store({
+  modules: {
+    user
+  }
+})
+
+export default store;
+*/

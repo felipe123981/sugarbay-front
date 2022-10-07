@@ -4,8 +4,10 @@
       <header>
         <div class="image-text">
           <span class="image">
-            <b-avatar v-if="$store.state.user[0].avatar_url == ''"
-              src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"></b-avatar>
+            <b-avatar
+              v-if="$store.state.user[0].avatar_url == ''"
+              src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"
+            ></b-avatar>
             <b-avatar v-else :src="$store.state.user[0].avatar_url"></b-avatar>
           </span>
 
@@ -46,19 +48,18 @@
                 <span class="text nav-text">Talk to us</span>
               </router-link>
             </li>
-            <!-- Analytics will be implemented after alpha version
-                    <li class="">
-                        <router-link to="/analytics">
-                            <i class='bx bx-pie-chart-alt-2 icon' ></i>
-                            <span class="text nav-text">Analytics</span>
-                        </router-link>
-                    </li>
-                    -->
+
+            <li class="">
+              <router-link to="/analytics">
+                <i class="bx bx-pie-chart-alt-2 icon"></i>
+                <span class="text nav-text">Analytics</span>
+              </router-link>
+            </li>
 
             <li class="">
               <router-link to="/order">
                 <i class="bx bx-cart-alt icon"></i>
-                <span class="text nav-text">Orders</span>
+                <span class="text nav-text">My cart</span>
               </router-link>
             </li>
 
@@ -114,14 +115,14 @@
   </div>
 </template>
 <script>
-  import { isValidToken } from './modules/auth';
-  import { readCookie } from './modules/cookie';
+import { isValidToken } from "./modules/auth";
+import { readCookie } from "./modules/cookie";
 export default {
   name: "App",
   components: {},
   mounted() {
     const token = readCookie(document.cookie);
-    if(isValidToken(token)) {
+    if (isValidToken(token)) {
       this.$store.commit("restoreSession", token);
     }
 
@@ -148,7 +149,7 @@ export default {
       } else {
         modeText.innerText = "Dark mode";
       }
-    });    
+    });
   },
   data() {
     return {};
@@ -157,8 +158,8 @@ export default {
     logout() {
       //eraseCookie(this.$store.state.user.username);
       this.$store.commit("logout");
-    },
-  },
+    }
+  }
 };
 </script>
 <style>

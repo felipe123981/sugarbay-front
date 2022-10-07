@@ -46,10 +46,13 @@
 
           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
           <b-row>
-            <b-col lg="4" class="pb-2"
-              ><b-button size="sm" pill
+            <b-col lg="4" class="pb-2">
+              <router-link to="/shop">
+                <b-button size="sm" pill
                 ><i class="bx bx-shopping-bag"></i> Shop</b-button
-              ></b-col
+              >
+              </router-link>
+              </b-col
             >
             <b-col lg="4" class="pb-2"
               ><b-button size="sm" pill @click="addToCart(product)"
@@ -82,7 +85,7 @@ export default {
     return {
       product: [],
       total: 50.99,
-      rate: 4.5,
+      rate: 5,
       currency: "U$",
     };
   },

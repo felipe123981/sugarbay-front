@@ -41,10 +41,12 @@ import axiosConfig from "@/modules/axiosConfig";
 
 export default {
   name: "HomeView",
-  async mounted() {
+  computed: {},
+  async created() {
     this.products = await axiosConfig
       .get("/products")
       .then((resp) => {
+        console.log("pull the pin");
         return resp.data;
       })
       .catch((error) => {
