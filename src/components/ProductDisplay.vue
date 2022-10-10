@@ -94,7 +94,7 @@ export default {
       this.$store.commit("addToFavorites", product);
     },
     addToCart(product) {
-      this.$store.commit("addProduct", product);
+      this.$store.commit("addToCart", product);
     },
   },
 };

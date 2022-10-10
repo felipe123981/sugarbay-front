@@ -151,6 +151,7 @@ strong {
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import { writeCookie } from "@/modules/cookie";
 import axiosConfig from "@/modules/axiosConfig";
 //import {  mapActions } from "vuex";
@@ -172,6 +173,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['login']),
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
@@ -205,13 +207,16 @@ export default {
         });
 
       if (status == 200) {
+
+        //here is this
+
         this.$store.commit("login", {
           email: this.email,
           password: this.password,
         });
         
         this.$bvToast.toast(
-          ` Welcome  ${this.$store.state.user[0].username}!`,
+          ` Welcome  ${this.$store.getters.getUsername}!`,
           {
             title: ` Login success. `,
             variant: "success",

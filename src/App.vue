@@ -5,14 +5,14 @@
         <div class="image-text">
           <span class="image">
             <b-avatar
-              v-if="$store.state.user[0].avatar_url == ''"
+              v-if="getAvatar == ''"
               src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"
             ></b-avatar>
-            <b-avatar v-else :src="$store.state.user[0].avatar_url"></b-avatar>
+            <b-avatar v-else :src="getAvatar"></b-avatar>
           </span>
 
           <div class="text logo-text">
-            <span class="name"> {{ $store.state.user[0].username }} </span>
+            <span class="name"> {{ getUsername }} </span>
             <span class="profession"><i class="bx bx-station"></i> Active</span>
           </div>
         </div>
@@ -81,7 +81,7 @@
 
         <div class="bottom-content">
           <li class="">
-            <router-link v-if="!this.$store.state.loged" to="/login">
+            <router-link v-if="!loged" to="/login">
               <i class="bx bx-log-in icon"></i>
               <span class="text nav-text">Login</span>
             </router-link>
@@ -109,17 +109,29 @@
     <section class="home">
       <div class="logo">
         <img alt="Vue logo" src="./assets/logo.png" height="70vh" />
+        <router-view class="router"></router-view>
       </div>
-      <router-view class="router"></router-view>
     </section>
   </div>
 </template>
 <script>
+import { mapState, mapGetters } from "vuex"
 import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";
 export default {
   name: "App",
   components: {},
+  computed: {
+    ...mapState({
+      user: state => state.users.user,
+      token: state => state.users.token,
+      loged: state => state.users.loged,
+    }),
+    ...mapGetters({
+        getAvatar: 'getAvatar',
+        getUsername: 'getUsername',
+    }),
+  },
   mounted() {
     const token = readCookie(document.cookie);
     if (isValidToken(token)) {
