@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrapper-1" v-if="this.$store.state.user[0].avatar_url === ''">
+    <div class="wrapper-1" v-if="getAvatar === ''">
       <b-form-file
         class="my_file"
         v-model="file"
@@ -12,7 +12,7 @@
       v-else
       class="wrapper-2"
       :style="{
-        'background': 'url(' + this.$store.state.user[0].avatar_url + ')',
+        'background': 'url(' + getAvatar + ')',
         'background-size': 'contain'
       }"
     >
@@ -26,9 +26,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex"; 
 //import userIcon  from "@/assets/img/userIcon.png"
 export default {
   name: "AvatarInput",
+  computed: {
+    ...mapGetters({ 
+      getAvatar: 'getAvatar'
+     })
+  },
   data() {
     return {
       file: ""

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <slot> List of products:</slot>
     <br />
+    <div>
+      <h3>Product List:</h3>
+    </div>
     <div v-if="products.lenght == 0">
       <h3>Oops! there are no products...</h3>
     </div>

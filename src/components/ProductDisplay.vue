@@ -56,7 +56,7 @@
             >
             <b-col lg="4" class="pb-2"
               ><b-button size="sm" pill @click="addToCart(product)"
-                ><i class="bx bx-cart-alt"></i> Add t cart</b-button
+                ><i class="bx bx-cart-alt"></i> Add to cart</b-button
               ></b-col
             >
           </b-row>

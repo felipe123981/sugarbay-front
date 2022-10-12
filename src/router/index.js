@@ -7,7 +7,6 @@ import OrderView from   '../views/OrderView.vue';
 import SavedView from '../views/SavedView.vue';
 import ConfigView from '../views/ConfigView.vue';
 import LoginView from '../views/LoginView.vue';
-import ForgotPassword from '../views/ForgotPassword.vue';
 import ProductRegister from '@/views/ProductRegister.vue';
 import SignIn from '@/views/SignIn.vue'
 import ShopView from "@/views/ShopView.vue"
@@ -59,11 +58,6 @@ export default new Router({
             path: '/login',
             name: 'login',
             component: LoginView
-        },
-        {
-            path: '/forgot',
-            name: 'forgot',
-            component: ForgotPassword,
         },
         {
             path: '/register',

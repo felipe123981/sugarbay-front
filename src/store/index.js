@@ -117,6 +117,11 @@ const modules = {
           state.cart.push(payload);
         }
       },
+       removeFromCart(state, payload) {
+        const idx = state.cart.findIndex(o => o.id === payload.id);
+        state.cart.splice(idx, 1)
+        
+      }
     },
     getters: {
       getCart(state) {

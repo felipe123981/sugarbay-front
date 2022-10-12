@@ -59,7 +59,7 @@
             <li class="">
               <router-link to="/order">
                 <i class="bx bx-cart-alt icon"></i>
-                <span class="text nav-text">My cart</span>
+                <span class="text nav-text">Orders</span>
               </router-link>
             </li>
 

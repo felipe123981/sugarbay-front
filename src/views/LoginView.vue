@@ -151,13 +151,18 @@ strong {
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import { writeCookie } from "@/modules/cookie";
 import axiosConfig from "@/modules/axiosConfig";
 //import {  mapActions } from "vuex";
 
 export default {
   name: "LoginView",
+  computed: {
+    ...mapGetters({
+        getUsername: 'getUsername',
+    }),
+  },
   data() {
     return {
       email: "",
@@ -173,7 +178,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapMutations({login: 'login'}),
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
@@ -207,8 +212,6 @@ export default {
         });
 
       if (status == 200) {
-
-        //here is this
 
         this.$store.commit("login", {
           email: this.email,
