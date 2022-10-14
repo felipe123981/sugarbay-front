@@ -13,7 +13,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: "SavedView",
   computed: {
-    ...mapGetters({
+    ...mapGetters("favorites",{
       getFavorites: 'getFavorites'
     })
   }

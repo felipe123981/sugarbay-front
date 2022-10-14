@@ -16,7 +16,7 @@
             -->
 
               <div class="img-wrapper">
-                <button @click="addFavorite(product)" class="btn btn-sm outline-primary btn-like">
+                <button @click="addToFavorites(product)" class="btn btn-sm outline-primary btn-like">
                   <i class='bx bxs-heart'></i>
                 </button>
                 <b-img class="img-responsive"
@@ -99,9 +99,9 @@ export default {
     ...mapMutations('cart', {
       addToCart: 'addToCart'
     }),
-    addFavorite(product) {
-      this.$store.commit("addToFavorites", product);
-    },
+    ...mapMutations('favorites', {
+      addToFavorites: 'addToFavorites'
+    }),
   },
 };
 </script>

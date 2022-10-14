@@ -1,10 +1,9 @@
-import replaceTo from "@/modules/replaceToHost";
-import axiosConfig from "@/modules/axiosConfig";
 import Vue from "vue";
 import Vuex from "vuex";
-import { eraseCookie } from "@/modules/cookie";
 import products from "./modules/products";
 import cart from "./modules/cart";
+import session from "./modules/session";
+import favorites from "./modules/favorites"
 
 Vue.use(Vuex);
 const state = {
@@ -22,107 +21,8 @@ const mutations = {};
 const modules = {
   products,
   cart,
-  users: {
-    state: () => ({
-      loged: false,
-      token: "",
-      user: [
-        {
-          username: "Username",
-          email: "",
-          avatar_url: ""
-        }
-      ]
-    }),
-
-    actions: {
-      login(commit, payload) {
-        commit("login", payload);
-      }
-    },
-    mutations: {
-      restoreSession(state, token) {
-        setTimeout(() => {
-          axiosConfig
-            .get("/profile", {
-              headers: {
-                Authorization: `token ${token}`
-              }
-            })
-            .then((resp) => {
-              state.loged = true;
-              state.user = [
-                {
-                  username: resp.data.name,
-                  email: resp.data.email,
-                  avatar_url: replaceTo(resp.data.avatar_url)
-                }
-              ];
-            });
-        }, 1000);
-      },
-      async login(state, payload) {
-        state.user = await axiosConfig
-          .post("/sessions", payload)
-          .then((response) => {
-            state.token = response.data.token;
-            state.loged = true;
-            return [
-              {
-                username: response.data.user.name,
-                email: response.data.user.email,
-                avatar_url: replaceTo(response.data.user.avatar_url)
-              }
-            ];
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      },
-      logout(state) {
-        (state.loged = false),
-          (state.token = ""),
-          (state.user = [
-            {
-              username: "Username",
-              email: "",
-              avatar_url: ""
-            }
-          ]);
-        eraseCookie();
-      }
-    },
-    getters: {
-      getUsername(state) {
-        return state.user[0].username;
-      },
-      getAvatar(state) {
-        return state.user[0].avatar_url;
-      }
-    }
-  },
-  
-  saved: {
-    state: () => ({
-      favorites: []
-    }),
-    actions: {},
-    mutations: {
-      addToFavorites(state, payload) {
-        const existProduct = state.favorites.find((o) => o.id == payload.id);
-        if (existProduct) {
-          state.favorites = state.favorites.filter((o) => o.id !== payload.id);
-        } else {
-          state.favorites.push(payload);
-        }
-      }
-    },
-    getters: {
-      getFavorites(state) {
-        return state.favorites;
-      }
-    }
-  }
+  session,
+  favorites,
 };
 
 export default new Vuex.Store({

@@ -159,7 +159,7 @@ import axiosConfig from "@/modules/axiosConfig";
 export default {
   name: "LoginView",
   computed: {
-    ...mapGetters({
+    ...mapGetters("session", {
         getUsername: 'getUsername',
     }),
   },
@@ -178,7 +178,10 @@ export default {
     };
   },
   methods: {
-    ...mapMutations({login: 'login'}),
+    ...mapMutations("session", 
+    {
+      login: 'login'
+    }),
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
@@ -213,13 +216,13 @@ export default {
 
       if (status == 200) {
 
-        this.$store.commit("login", {
+        this.login({
           email: this.email,
           password: this.password,
         });
         
         this.$bvToast.toast(
-          ` Welcome  ${this.$store.getters.getUsername}!`,
+          ` Welcome  ${this.getUsername}!`,
           {
             title: ` Login success. `,
             variant: "success",

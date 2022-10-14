@@ -115,7 +115,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from "vuex"
+import { mapState, mapGetters, mapMutations } from "vuex"
 import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";
 export default {
@@ -123,11 +123,11 @@ export default {
   components: {},
   computed: {
     ...mapState({
-      user: state => state.users.user,
-      token: state => state.users.token,
-      loged: state => state.users.loged,
+      user: state => state.session.user,
+      token: state => state.session.token,
+      loged: state => state.session.loged,
     }),
-    ...mapGetters({
+    ...mapGetters("session", {
         getAvatar: 'getAvatar',
         getUsername: 'getUsername',
     }),
@@ -135,7 +135,7 @@ export default {
   mounted() {
     const token = readCookie(document.cookie);
     if (isValidToken(token)) {
-      this.$store.commit("restoreSession", token);
+      this.restoreSession(token)
     }
 
     const body = document.querySelector("body"),
@@ -167,10 +167,12 @@ export default {
     return {};
   },
   methods: {
-    logout() {
-      //eraseCookie(this.$store.state.user.username);
-      this.$store.commit("logout");
-    }
+    ...mapMutations("session", {
+      restoreSession: "restoreSession"
+    }),
+    ...mapMutations("session", {
+      logout: "logout"
+    }),
   }
 };
 </script>
