@@ -48,14 +48,14 @@
           <b-row>
             <b-col lg="4" class="pb-2">
               <router-link to="/shop">
-                <b-button size="sm" pill
+                <b-button size="sm" class="sb-btn" pill
                 ><i class="bx bx-shopping-bag"></i> Shop</b-button
               >
               </router-link>
               </b-col
             >
             <b-col lg="4" class="pb-2"
-              ><b-button size="sm" pill @click="addToCart(product)"
+              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product)"
                 ><i class="bx bx-cart-alt"></i> Add to cart</b-button
               ></b-col
             >
@@ -67,10 +67,16 @@
 </template>
 <script>
 import axiosConfig from "@/modules/axiosConfig";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "ProductDisplay",
   props: ["pid"],
+  computed: {
+    ...mapGetters("products", {
+      getProductById: "getProductById"
+    }),
+  },
   async mounted() {
     this.product = await axiosConfig
       .get(`/products/${this.pid}`)
@@ -90,17 +96,21 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('cart', {
+      addToCart: 'addToCart'
+    }),
     addFavorite(product) {
       this.$store.commit("addToFavorites", product);
-    },
-    addToCart(product) {
-      this.$store.commit("addToCart", product);
     },
   },
 };
 </script>
 
 <style scoped>
+  .sb-btn {
+    background-color: rgb(0, 110, 255);
+    border: 1px white solid;
+  }
   .btn-like {
     position: absolute;
     padding-left: 3.05rem;

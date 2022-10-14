@@ -1,29 +1,11 @@
 import replaceTo from "@/modules/replaceToHost";
-import axiosConfig from "@/modules/axiosConfig";
-import Vue from "vue";
-import Vuex from "vuex";
 import { eraseCookie } from "@/modules/cookie";
-import products from "./modules/products";
-import cart from "./modules/cart";
+import axiosConfig from "@/modules/axiosConfig";
 
-Vue.use(Vuex);
-const state = {
-  message_count: 0,
-  cart_itens_count: 0,
-  saved_itens_count: 0
-};
+export default {
+    namespaced: true,
 
-const getters = {};
-
-const actions = {};
-
-const mutations = {};
-
-const modules = {
-  products,
-  cart,
-  users: {
-    state: () => ({
+    state: {
       loged: false,
       token: "",
       user: [
@@ -33,7 +15,7 @@ const modules = {
           avatar_url: ""
         }
       ]
-    }),
+    },
 
     actions: {
       login(commit, payload) {
@@ -100,64 +82,4 @@ const modules = {
         return state.user[0].avatar_url;
       }
     }
-  },
-  
-  saved: {
-    state: () => ({
-      favorites: []
-    }),
-    actions: {},
-    mutations: {
-      addToFavorites(state, payload) {
-        const existProduct = state.favorites.find((o) => o.id == payload.id);
-        if (existProduct) {
-          state.favorites = state.favorites.filter((o) => o.id !== payload.id);
-        } else {
-          state.favorites.push(payload);
-        }
-      }
-    },
-    getters: {
-      getFavorites(state) {
-        return state.favorites;
-      }
-    }
-  }
-};
-
-export default new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations,
-  modules
-});
-
-/*
-const user = {
-  state: () => ({ 
-    user: [
-      {
-        username: "Username",
-        email: "",
-        avatar_url: "",
-      },
-    ],
-  }),
-  mutations: {},
-  actions: {},
-  getters: {
-    getUsername(state) {
-      return state.user.username
-    }
-  }
-}
-
-const store = new Vuex.Store({
-  modules: {
-    user
-  }
-})
-
-export default store;
-*/
+  };

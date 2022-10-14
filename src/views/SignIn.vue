@@ -86,6 +86,11 @@
         </b-form-group>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <b-button variant="primary">Create account</b-button>
+      </b-col>
+    </b-row>
   </div>
 </template>
 <script>

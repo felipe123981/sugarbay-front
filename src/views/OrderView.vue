@@ -44,10 +44,19 @@
 
                   <p>
                     <b-row>
-                      <b-col> Price: {{ item.price }} </b-col>
+                      <b-col> Price: {{ item.price * item.quantity }} </b-col>
                     </b-row>
                     <b-row>
-                      <b-col> Quantity: {{ item.quantity }} </b-col>
+                      <b-col>
+                        <div>
+                          <label for="sb-inline">Quantity: </label><br />
+                          <b-form-spinbutton
+                            id="sb-inline"
+                            v-model="item.quantity"
+                            inline
+                          ></b-form-spinbutton>
+                        </div>
+                      </b-col>
                     </b-row>
                   </p>
                   <b-row>
@@ -56,10 +65,10 @@
                         ><i class="bx bx-cart-alt"></i> Checkout</b-button
                       ></b-col
                     >
-                  </b-row>
-                  <b-row>
+
                     <b-col lg="4" class="pb-2">
                       <b-button
+                        variant="danger"
                         size="sm"
                         pill
                         @click.prevent="removeFromCart(item)"
@@ -69,11 +78,12 @@
                   </b-row>
                 </b-media>
               </b-card>
+              <br />
+              Total: {{ this.getTotal }}
               <div class="checkout-all">
-                
-                
-                  <b-button class="float" variant="warning"><i class="bx bx-cart-alt"></i> Checkout</b-button>
-                
+                <b-button class="float" variant="warning"
+                  ><i class="bx bx-cart-alt"></i> Checkout</b-button
+                >
               </div>
             </b-card-text>
           </b-tab>
@@ -81,8 +91,8 @@
         </b-tabs>
       </b-card>
     </div>
-    <br>
-    <br>
+    <br />
+    <br />
   </div>
 </template>
 <script>
@@ -90,15 +100,21 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "CartView",
   computed: {
-    ...mapGetters({
-      getCart: "getCart"
-    })
+    ...mapGetters("cart", {
+      getCart: "getCart",
+    }),
+    ...mapGetters('cart', {
+      getTotal: "getTotal"
+    }),
   },
+  mounted() {},
   methods: {
-    ...mapMutations(["removeFromCart"]),
-    removeFromCart(item) {
-      this.$store.commit("removeFromCart", item);
-    }
+    ...mapMutations("cart", {
+      fetchTotal: "fetchTotal"
+    }),
+    ...mapMutations("cart", {
+      removeFromCart: "removeFromCart"
+    }),
   }
 };
 </script>
