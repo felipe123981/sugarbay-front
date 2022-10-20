@@ -20,8 +20,8 @@ export default {
     }
   },
   getters: {
-    getProductById(state, payload) {
-      const product = state.products.filter((o) => o.id == payload);
+    getProductById(state, id) {
+      const product = state.products.filter((o) => o.id === id);
       return product;
     },
     getProducts(state) {

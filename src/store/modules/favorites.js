@@ -13,6 +13,10 @@ export default {
       } else {
         state.favorites.push(payload);
       }
+    },
+    removeFromFavorites(state, payload) {
+      const idx = state.favorites.findIndex((o) => o.id === payload.id);
+      state.favorites.splice(idx, 1);
     }
   },
   getters: {

@@ -30,6 +30,9 @@ export default {
   },
 
   getters: {
+    getCartLenght(state, getters) {
+      return getters.getCart.lenght();
+    },
     getTotal(state) {
         state.total = state.cart.reduce((a, b) => a + parseFloat(b.price), 0);
         return state.total;

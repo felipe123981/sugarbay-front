@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <h3>Create your account:</h3>
     <b-row>
       <b-col class="avatar-upload">
@@ -84,16 +84,30 @@
             required
           ></b-form-input>
         </b-form-group>
+        <br>
+        <p style="color:red" v-if="passwordNotMatch">Password does not match!</p>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-button variant="primary">Create account</b-button>
+        <b-button
+          @click="
+            createUser(
+              form.username,
+              form.email,
+              form.password,
+              form.password_confirmation,
+            )
+          "
+          variant="primary"
+          >Create account</b-button
+        >
       </b-col>
     </b-row>
   </div>
 </template>
 <script>
+//import { mapMutations } from "vuex";
 import AvatarInput from "@/components/AvatarInput";
 export default {
   name: "SignIn",
@@ -102,19 +116,43 @@ export default {
   },
   data() {
     return {
+      passwordsNotMatch: false,
       form: {
         avatar: null,
-        username: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
+        username: null,
+        email: null,
+        password: null,
+        password_confirmation: null
       }
     };
+  },
+  methods: {
+    createUser(name, email, password, password_confirmation) {
+      if (name && email && password && password_confirmation !== null) {
+        if (password !== password_confirmation) {
+          this.passwordsNotMatch = true;
+          console.log("Password does not match!");
+        } 
+        else {
+          console.log("Registring...");
+        }
+      } else {
+        console.log("Please fill all data!");
+      }
+
+      this.form = {
+        avatar: null,
+        username: null,
+        email: null,
+        password: null,
+        password_confirmation: null
+      };
+    }
   }
 };
 </script>
 <style scoped>
-  .form-sb {
-    width: 70vw;
-  }
+.form-sb {
+  width: 70vw;
+}
 </style>

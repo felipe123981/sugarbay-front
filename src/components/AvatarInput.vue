@@ -31,7 +31,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "AvatarInput",
   computed: {
-    ...mapGetters({ 
+    ...mapGetters("session", { 
       getAvatar: 'getAvatar'
      })
   },

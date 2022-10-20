@@ -89,15 +89,15 @@ import { mapMutations, mapGetters } from "vuex";
 export default {
   name: "HomeView",
   computed: {
-    ...mapGetters('products', {
-      getProducts: 'getProducts'
-    }),
+    ...mapGetters("products", {
+      getProducts: "getProducts"
+    })
   },
   mounted() {
     this.fetchProducts();
     setTimeout(() => {
       this.products = this.getProducts;
-    }, 500)
+    }, 500);
   },
   data() {
     return {
@@ -125,8 +125,8 @@ export default {
     ProductDisplay
   },
   methods: {
-    ...mapMutations('products', {
-      fetchProducts: 'fetchProducts'
+    ...mapMutations("products", {
+      fetchProducts: "fetchProducts"
     }),
     makeToast(variant = null) {
       this.$bvToast.toast("Toast body content", {

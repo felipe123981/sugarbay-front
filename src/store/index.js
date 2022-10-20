@@ -4,6 +4,7 @@ import products from "./modules/products";
 import cart from "./modules/cart";
 import session from "./modules/session";
 import favorites from "./modules/favorites"
+import user from "./modules/user";
 
 Vue.use(Vuex);
 const state = {
@@ -23,6 +24,7 @@ const modules = {
   cart,
   session,
   favorites,
+  user,
 };
 
 export default new Vuex.Store({

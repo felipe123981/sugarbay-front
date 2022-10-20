@@ -101,11 +101,14 @@ export default {
   name: "CartView",
   computed: {
     ...mapGetters("cart", {
-      getCart: "getCart",
+      getCart: "getCart"
     }),
-    ...mapGetters('cart', {
+    ...mapGetters("cart", {
       getTotal: "getTotal"
     }),
+    ...mapGetters("cart", {
+      getCartLenght: "getCartLenght"
+    })
   },
   mounted() {},
   methods: {
@@ -114,7 +117,7 @@ export default {
     }),
     ...mapMutations("cart", {
       removeFromCart: "removeFromCart"
-    }),
+    })
   }
 };
 </script>
