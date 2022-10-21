@@ -90,7 +90,6 @@ export default {
   data() {
     return {
       product: [],
-      total: 50.99,
       rate: 5,
       currency: "U$",
     };
