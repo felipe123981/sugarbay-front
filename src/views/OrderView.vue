@@ -7,20 +7,14 @@
         <b-tabs pills card>
           <b-tab title="My cart" active
             ><b-card-text>
+              <div v-if="getCartLength == 0">
+                <h5>
+                  Your cart is empty!
+                </h5>
+              </div>
               <b-card class="cart-item" v-for="item in getCart" :key="item.id">
                 <b-media>
                   <template #aside>
-                    <!--
-
-            <b-img
-              blank
-              blank-color="#ccc"
-              width="50"
-              alt="placeholder"
-            ></b-img>
-
-            -->
-
                     <div class="img-wrapper">
                       <button
                         @click="addFavorite(product)"
@@ -44,7 +38,7 @@
 
                   <p>
                     <b-row>
-                      <b-col> Price: {{ item.price * item.quantity }} </b-col>
+                      <b-col> Price: {{ (item.price * item.quantity).toFixed(2) }} </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
@@ -79,7 +73,7 @@
                 </b-media>
               </b-card>
               <br />
-              Total: {{ this.getTotal }}
+              Total: {{ this.getTotal.toFixed(2) }}
               <div class="checkout-all">
                 <b-button class="float" variant="warning"
                   ><i class="bx bx-cart-alt"></i> Checkout</b-button
@@ -107,7 +101,7 @@ export default {
       getTotal: "getTotal"
     }),
     ...mapGetters("cart", {
-      getCartLenght: "getCartLenght"
+      getCartLength: "getCartLength"
     })
   },
   mounted() {},

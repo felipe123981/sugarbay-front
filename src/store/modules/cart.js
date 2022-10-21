@@ -30,11 +30,11 @@ export default {
   },
 
   getters: {
-    getCartLenght(state, getters) {
-      return getters.getCart.lenght();
+    getCartLength(state) {
+      return state.cart.length;
     },
     getTotal(state) {
-        state.total = state.cart.reduce((a, b) => a + parseFloat(b.price), 0);
+        state.total = state.cart.reduce((a, b) => a + (parseFloat(b.price) * b.quantity), 0);
         return state.total;
       },
     getCart(state) {
