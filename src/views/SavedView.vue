@@ -1,22 +1,13 @@
 <template>
   <div>
-    <h1>Saved Products:</h1>
+    <br>
+    <h3>Saved Products:</h3>
+    <HeaderNavbar></HeaderNavbar>
     <br />
     <div v-for="item in items" :key="item.id">
       <b-card>
         <b-media>
           <template #aside>
-            <!--
-
-            <b-img
-              blank
-              blank-color="#ccc"
-              width="50"
-              alt="placeholder"
-            ></b-img>
-
-            -->
-
             <div class="img-wrapper">
               <button
               @click="removeFromFavorites(item)"
@@ -74,28 +65,30 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import HeaderNavbar from "@/components/HeaderNavbar.vue";
 
 export default {
-  name: "SavedView",
-  computed: {
-    ...mapGetters("favorites", {
-      getFavorites: "getFavorites"
-    })
-  },
-  mounted() {
-    this.items = this.getFavorites;
-  },
-  data() {
-    return {
-      currency: "U$",
-      items: []
-    };
-  },
-  methods: {
-    ...mapMutations("favorites", {
-      removeFromFavorites: "removeFromFavorites"
-    }),
-  },
+    name: "SavedView",
+    computed: {
+        ...mapGetters("favorites", {
+            getFavorites: "getFavorites"
+        })
+    },
+    mounted() {
+        this.items = this.getFavorites;
+    },
+    data() {
+        return {
+            currency: "U$",
+            items: []
+        };
+    },
+    methods: {
+        ...mapMutations("favorites", {
+            removeFromFavorites: "removeFromFavorites"
+        }),
+    },
+    components: { HeaderNavbar }
 };
 </script>
 <style scoped>

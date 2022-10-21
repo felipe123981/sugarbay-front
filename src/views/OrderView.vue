@@ -2,15 +2,15 @@
   <div>
     <br />
     <h3>Orders:</h3>
+    <HeaderNavbar></HeaderNavbar>
+    <br />
     <div>
       <b-card no-body>
         <b-tabs pills card>
           <b-tab title="My cart" active
             ><b-card-text>
               <div v-if="getCartLength == 0">
-                <h5>
-                  Your cart is empty!
-                </h5>
+                <h5>Your cart is empty!</h5>
               </div>
               <b-card class="cart-item" v-for="item in getCart" :key="item.id">
                 <b-media>
@@ -38,7 +38,9 @@
 
                   <p>
                     <b-row>
-                      <b-col> Price: {{ (item.price * item.quantity).toFixed(2) }} </b-col>
+                      <b-col>
+                        Price: {{ (item.price * item.quantity).toFixed(2) }}
+                      </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
@@ -91,6 +93,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import HeaderNavbar from "@/components/HeaderNavbar.vue";
 export default {
   name: "CartView",
   computed: {
@@ -112,7 +115,8 @@ export default {
     ...mapMutations("cart", {
       removeFromCart: "removeFromCart"
     })
-  }
+  },
+  components: { HeaderNavbar }
 };
 </script>
 <style scoped>

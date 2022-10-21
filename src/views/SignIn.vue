@@ -84,8 +84,9 @@
             required
           ></b-form-input>
         </b-form-group>
-        <br>
-        <p style="color:red" v-if="passwordNotMatch">Password does not match!</p>
+        <p style="color: red" v-if="passwordsNotMatch">
+          Passwords does not match!
+        </p>
       </b-col>
     </b-row>
     <b-row>
@@ -96,7 +97,7 @@
               form.username,
               form.email,
               form.password,
-              form.password_confirmation,
+              form.password_confirmation
             )
           "
           variant="primary"
@@ -114,6 +115,14 @@ export default {
   components: {
     AvatarInput
   },
+  watch: {
+    'form.password': 'comparePasswords',
+    'form.password_confirmation': 'comparePasswords',
+
+    deep: true,
+    //if(password !== password_confirmation)
+    //passwordNotMatch = true
+  },
   data() {
     return {
       passwordsNotMatch: false,
@@ -127,17 +136,39 @@ export default {
     };
   },
   methods: {
+    comparePasswords() {
+      if(this.form.password !== this.form.password_confirmation) {
+        this.passwordsNotMatch = true;
+      }
+      else {
+        this.passwordsNotMatch = false;
+      }
+    },
     createUser(name, email, password, password_confirmation) {
       if (name && email && password && password_confirmation !== null) {
         if (password !== password_confirmation) {
           this.passwordsNotMatch = true;
           console.log("Password does not match!");
-        } 
+        }
         else {
-          console.log("Registring...");
+          this.$bvToast.toast(
+          "You can now Login!",
+          {
+            title: "Registration success.",
+            variant: "success",
+            solid: true,
+          }
+        );
         }
       } else {
-        console.log("Please fill all data!");
+        this.$bvToast.toast(
+          "Please fill all data!",
+          {
+            title: "Registration failed.",
+            variant: "danger",
+            solid: true,
+          }
+        );
       }
 
       this.form = {

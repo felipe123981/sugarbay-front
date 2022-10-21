@@ -58,7 +58,10 @@ export default {
     })
   },
   mounted() {
-    this.fetchProducts();
+    if(this.getProducts.length == 0) {
+      this.fetchProducts();
+    }
+    
     setTimeout(() => {
       this.products = this.getProducts;
     }, 500);
