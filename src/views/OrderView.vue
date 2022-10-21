@@ -9,7 +9,7 @@
         <b-tabs pills card>
           <b-tab title="My cart" active
             ><b-card-text>
-              <div v-if="getCartLength == 0">
+              <div v-if="!getCartLength">
                 <h5>Your cart is empty!</h5>
               </div>
               <b-card class="cart-item" v-for="item in getCart" :key="item.id">
