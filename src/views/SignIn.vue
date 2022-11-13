@@ -108,7 +108,7 @@
   </div>
 </template>
 <script>
-//import { mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 import AvatarInput from "@/components/AvatarInput";
 export default {
   name: "SignIn",
@@ -118,10 +118,7 @@ export default {
   watch: {
     'form.password': 'comparePasswords',
     'form.password_confirmation': 'comparePasswords',
-
     deep: true,
-    //if(password !== password_confirmation)
-    //passwordNotMatch = true
   },
   data() {
     return {
@@ -131,11 +128,17 @@ export default {
         username: null,
         email: null,
         password: null,
-        password_confirmation: null
-      }
+        password_confirmation: null,
+      }, 
     };
   },
   methods: {
+    ...mapMutations("user", {
+      sendConfirmationMail: "sendConfirmationMail"
+    }),
+    ...mapMutations("user", {
+      createUserAsCustomer: "createUserAsCustomer"
+    }),
     comparePasswords() {
       if(this.form.password !== this.form.password_confirmation) {
         this.passwordsNotMatch = true;
@@ -151,8 +154,9 @@ export default {
           console.log("Password does not match!");
         }
         else {
+          this.sendConfirmationMail("/" + this.form.username + "/" + this.form.email);
           this.$bvToast.toast(
-          "You can now Login!",
+          "A confirmation as been send to your email!",
           {
             title: "Registration success.",
             variant: "success",

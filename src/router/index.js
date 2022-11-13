@@ -10,6 +10,7 @@ import LoginView from '../views/LoginView.vue';
 import ProductRegister from '@/views/ProductRegister.vue';
 import SignIn from '@/views/SignIn.vue'
 import ShopView from "@/views/ShopView.vue"
+import AccountConfirmed from "@/views/AccountConfirmed.vue";
 import Router from 'vue-router';
 import Vue from "vue";
 
@@ -74,6 +75,11 @@ export default new Router({
             path: '/shop',
             name: 'shop',
             component: ShopView,
+        },
+        {
+            path: "/account-confirmed",
+            name: "account-confirmed",
+            component: AccountConfirmed, 
         }
     ]
 })

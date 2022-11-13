@@ -83,7 +83,30 @@
               </div>
             </b-card-text>
           </b-tab>
-          <b-tab title="Shops"><b-card-text>Tab contents 2</b-card-text></b-tab>
+          <b-tab title="Orders"
+            ><b-card-text>
+              <div v-if="pageWidth > 580">
+                <b-table hover :items="items">
+                  <template #cell(PAYMENT)="data">
+                    <span v-html="data.value"></span>
+                  </template>
+                  <template #cell(SHIPMENT)="data">
+                    <span v-html="data.value"></span>
+                  </template>
+                </b-table>
+              </div>
+              <div v-else>
+                <b-table stacked hover :items="items">
+                  <template #cell(PAYMENT)="data">
+                    <span v-html="data.value"></span>
+                  </template>
+                  <template #cell(SHIPMENT)="data">
+                    <span v-html="data.value"></span>
+                  </template>
+                </b-table>
+              </div>
+            </b-card-text>
+          </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -107,14 +130,55 @@ export default {
       getCartLength: "getCartLength"
     })
   },
-  mounted() {},
+  mounted() {
+    this.pageWidth = document.body.clientWidth;
+  },
+  data() {
+    return {
+      pageWidth: 0,
+      items: [
+        {
+          ID: "#01",
+          ORDER_DATE: "Yesterday",
+          PAYMENT:
+            "<button type='button' class='btn btn-warning btn-sm' style='border-radius:20px'>PENDING</button>",
+          SHIPMENT:
+            "<button type='button' class='btn btn-warning btn-sm' style='border-radius:20px'>OPEN</button>"
+        },
+        {
+          ID: "#02",
+          ORDER_DATE: "4 days ago",
+          PAYMENT:
+            "<button type='button' class='btn btn-success btn-sm' style='border-radius:20px'>SEATLED</button>",
+          SHIPMENT:
+            "<button type='button' class='btn btn-warning btn-sm' style='border-radius:20px'>OPEN</button>"
+        },
+        {
+          ID: "#03",
+          ORDER_DATE: "11 days ago",
+          PAYMENT:
+            "<button type='button' class='btn btn-success btn-sm' style='border-radius:20px'>SEATLED</button>",
+          SHIPMENT:
+            "<button type='button' class='btn btn-success btn-sm' style='border-radius:20px'>SHIPPED</button>"
+        },
+        {
+          ID: "#04",
+          ORDER_DATE: "2 months ago",
+          PAYMENT:
+            "<button type='button' class='btn btn-success btn-sm' style='border-radius:20px'>SEATLED</button>",
+          SHIPMENT:
+            "<button type='button' class='btn btn-success btn-sm' style='border-radius:20px'>SHIPPED</button>"
+        }
+      ]
+    };
+  },
   methods: {
     ...mapMutations("cart", {
       fetchTotal: "fetchTotal"
     }),
     ...mapMutations("cart", {
       removeFromCart: "removeFromCart"
-    })
+    }),
   },
   components: { HeaderNavbar }
 };

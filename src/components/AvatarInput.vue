@@ -30,10 +30,18 @@ import { mapGetters } from "vuex";
 //import userIcon  from "@/assets/img/userIcon.png"
 export default {
   name: "AvatarInput",
+  watch: {
+    file(newFile) {
+      localStorage.file = newFile;
+    }
+  },
   computed: {
     ...mapGetters("session", { 
       getAvatar: 'getAvatar'
      })
+  },
+  mounted() {
+    this.file = localStorage.file;
   },
   data() {
     return {

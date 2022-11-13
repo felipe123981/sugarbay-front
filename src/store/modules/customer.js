@@ -1,4 +1,4 @@
-//import axiosConfig; from "@/modules/axiosConfig"
+import axiosConfig from "@/modules/axiosConfig";
 
 export default {
     namespaced: true,
@@ -7,8 +7,15 @@ export default {
         customer: []
     },
     mutations: {
-        async createCustomer() {
-        //    state.customer = await axiosConfig.
+        async createCustomer(state, payload) {
+            state.customer  = await axiosConfig.post("/customers", payload)
+            .then(resp => {
+                return resp.data;
+            })
+            .catch(error => {
+                state.customer = [];
+                console.log(error);
+            })
         }
     },
     getters: {},
