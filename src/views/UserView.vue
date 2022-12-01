@@ -16,9 +16,16 @@
                         <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
                         Settings
                       </template>
-                      <b-dropdown-item-button>
+                      <b-dropdown-item-button
+                        v-if="lockform"
+                        @click="lockUnlockForm"
+                      >
                         <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
                         Locked <span class="sr-only">(Click to unlock)</span>
+                      </b-dropdown-item-button>
+                      <b-dropdown-item-button v-else @click="lockUnlockForm">
+                        <b-icon icon="unlock-fill" aria-hidden="true"></b-icon>
+                        Unlocked <span class="sr-only">(Click to unlock)</span>
                       </b-dropdown-item-button>
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-group header="Choose options" class="small">
@@ -71,6 +78,7 @@
                       v-model="form.id"
                       type="cpf"
                       placeholder="888.888.888-88"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -88,6 +96,7 @@
                       v-model="form.phome"
                       type="phone"
                       placeholder="(555) 555-1234"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -107,6 +116,7 @@
                       v-model="form.username"
                       type="text"
                       placeholder="ex: Michael123"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -124,6 +134,7 @@
                       v-model="form.email"
                       type="email"
                       placeholder="Enter email"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -143,6 +154,7 @@
                       v-model="form.firstname"
                       type="text"
                       placeholder="ex: Michael"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -160,6 +172,7 @@
                       v-model="form.lastname"
                       type="text"
                       placeholder="ex: Morris"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -179,6 +192,7 @@
                   v-model="form.address"
                   type="text"
                   placeholder="ex: Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                  :disabled="lockform"
                   required
                 ></b-form-input>
               </b-form-group>
@@ -196,6 +210,7 @@
                       v-model="form.city"
                       type="text"
                       placeholder="ex: New York"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -213,6 +228,7 @@
                       v-model="form.country"
                       type="text"
                       placeholder="ex: United States"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -230,6 +246,7 @@
                       v-model="form.zipcode"
                       type="text"
                       placeholder="ex: 437300"
+                      :disabled="lockform"
                       required
                     ></b-form-input>
                   </b-form-group>
@@ -241,120 +258,149 @@
               <h3>Your product list:</h3>
               <br />
               <b-col cols="4">
-              <div class="card-alt h-100">
-                <img
-                  src="@/assets/img/product.png"
-                  width="150px"
-                  class="card-img-top"
-                />
-                <div class="card-body">
-                  <div>
-                    <b-button
-                      v-b-modal.modal-1
-                      class="add_new"
-                      variant="primary"        
-                      ><i class='bx bxs-plus-circle'></i> Add new</b-button
-                    >
-                    <b-modal id="modal-1" title="Type of your product" v-once>
-                      <p class="my-4">
-                        <b-container>
-                          <b-row>
-                            <b-col cols="4" style="padding-left: 1px;">
-                              <div class="card-alt h-100">
-                                <img
-                                  src="@/assets/img/product.png"
-                                  width="150px"
-                                  class="card-img-top"
-                                />
-                                <div class="card-body">
-                                  <div>
-                                    <router-link to="/register">
-                                    <b-button
-                                      class="add_new"
-                                      variant="primary"
-                                      size="sm"
-                                      >Product
-                                      </b-button
-                                    >
-                                  </router-link>
+                <div class="card-alt h-100">
+                  <img
+                    src="@/assets/img/product.png"
+                    width="150px"
+                    class="card-img-top"
+                  />
+                  <div class="card-body">
+                    <div>
+                      <b-button
+                        v-b-modal.modal-1
+                        class="add_new"
+                        variant="primary"
+                        ><i class="bx bxs-plus-circle"></i> Add new</b-button
+                      >
+                      <b-modal id="modal-1" title="Type of your product" v-once>
+                        <p class="my-4">
+                          <b-container>
+                            <b-row>
+                              <b-col cols="4" style="padding-left: 1px">
+                                <div class="card-alt h-100">
+                                  <img
+                                    src="@/assets/img/product.png"
+                                    width="150px"
+                                    class="card-img-top"
+                                  />
+                                  <div class="card-body">
+                                    <div>
+                                      <router-link to="/register">
+                                        <b-button
+                                          class="add_new"
+                                          variant="primary"
+                                          size="sm"
+                                          >Product
+                                        </b-button>
+                                      </router-link>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </b-col>
-                            <b-col cols="4" style="padding-left: 10vh;">
-                              <div class="card-alt h-100">
-                                <img
-                                  src="@/assets/img/vehicle.png"
-                                  width="150px"
-                                  class="card-img-top"
-                                />
-                                <div class="card-body">
-                                  <div>
-                                    <b-button
-                                      class="add_new"
-                                      variant="primary"
-                                      size="sm"
-                                      >Vehicle</b-button
-                                    >
+                              </b-col>
+                              <b-col cols="4" style="padding-left: 10vh">
+                                <div class="card-alt h-100">
+                                  <img
+                                    src="@/assets/img/vehicle.png"
+                                    width="150px"
+                                    class="card-img-top"
+                                  />
+                                  <div class="card-body">
+                                    <div>
+                                      <b-button
+                                        class="add_new"
+                                        variant="primary"
+                                        size="sm"
+                                        >Vehicle</b-button
+                                      >
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </b-col>
-                          </b-row>
-                        </b-container>
-                        <b-container>
-                          <b-row>
-                            <b-col cols="4" style="padding-left: 1px;">
-                              <div class="card-alt h-100">
-                                <img
-                                  src="@/assets/img/house.png"
-                                  width="150px"
-                                  class="card-img-top"
-                                />
-                                <div class="card-body">
-                                  <div>
-                                    <b-button
-                                      class="add_new"
-                                      variant="primary"
-                                      size="sm"
-                                      >House</b-button
-                                    >
+                              </b-col>
+                            </b-row>
+                          </b-container>
+                          <b-container>
+                            <b-row>
+                              <b-col cols="4" style="padding-left: 1px">
+                                <div class="card-alt h-100">
+                                  <img
+                                    src="@/assets/img/house.png"
+                                    width="150px"
+                                    class="card-img-top"
+                                  />
+                                  <div class="card-body">
+                                    <div>
+                                      <b-button
+                                        class="add_new"
+                                        variant="primary"
+                                        size="sm"
+                                        >House</b-button
+                                      >
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </b-col>
-                            <b-col cols="4" style="padding-left: 10vh;">
-                              <div class="card-alt h-100">
-                                <img
-                                  src="@/assets/img/customer-service.png"
-                                  width="150px"
-                                  class="card-img-top"
-                                />
-                                <div class="card-body">
-                                  <div>
-                                    <b-button
-                                      class="add_new"
-                                      variant="primary"
-                                      size="sm"
-                                      >Service</b-button
-                                    >
+                              </b-col>
+                              <b-col cols="4" style="padding-left: 10vh">
+                                <div class="card-alt h-100">
+                                  <img
+                                    src="@/assets/img/customer-service.png"
+                                    width="150px"
+                                    class="card-img-top"
+                                  />
+                                  <div class="card-body">
+                                    <div>
+                                      <b-button
+                                        class="add_new"
+                                        variant="primary"
+                                        size="sm"
+                                        >Service</b-button
+                                      >
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </b-col>
-                          </b-row>
-                        </b-container>
-                      </p>
-                    </b-modal>
+                              </b-col>
+                            </b-row>
+                          </b-container>
+                        </p>
+                      </b-modal>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </b-col>
-              <!-- <TypeSelector></TypeSelector> -->
+              </b-col>
+              <br />
+              <div v-for="i in 3" :key="i">
+                <div>
+  <b-card>
+    <b-media>
+      <template #aside>
+        <b-img blank blank-color="#ccc" width="64" alt="placeholder"></b-img>
+      </template>
+
+      <h5 class="mt-0">Product title - U$ 49.90</h5>
+      <p>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+      </p>
+      <b-row>
+        <b-col>
+          <b-button class="registered-products-button" pill variant="primary"><i class='bx bx-edit-alt'></i> Edit</b-button>
+        </b-col>
+        <b-col>
+          <b-button class="registered-products-button" pill variant="danger"><i class='bx bx-trash' ></i> Remove</b-button>
+        </b-col>
+      </b-row>
+    </b-media>
+  </b-card>
+</div>
+              <br>
+            </div>
+              
             </b-card-text></b-tab
           >
           <b-tab title="Preferences"
-            ><b-card-text>Tab contents 2</b-card-text></b-tab
+            ><b-card-text>
+              <h3>Edit preferences:</h3>
+              <!-- Currency selector component -->
+              <!-- Language selector component -->
+            </b-card-text></b-tab
           >
           <b-tab title="Privacy and security"
             ><b-card-text>Tab contents 3</b-card-text></b-tab
@@ -365,16 +411,17 @@
   </div>
 </template>
 <script>
-  import AvatarInput from '@/components/AvatarInput.vue';
+import AvatarInput from "@/components/AvatarInput.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
 export default {
   name: "UserView",
   components: {
-    AvatarInput,
-},
+    AvatarInput
+  },
 
   data() {
     return {
+      lockform: true,
       form: {
         phone: "",
         id: "",
@@ -388,20 +435,23 @@ export default {
         email: "",
         name: "",
         food: null,
-        checked: [],
+        checked: []
       },
       foods: [
         { text: "Select One", value: null },
         "Carrots",
         "Beans",
         "Tomatoes",
-        "Corn",
+        "Corn"
       ],
       show: true,
-      isHovered: false,
+      isHovered: false
     };
   },
   methods: {
+    lockUnlockForm() {
+      this.lockform = this.lockform ? false : true;
+    },
     handleHover(hovered) {
       this.isHovered = hovered;
     },
@@ -430,8 +480,8 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -482,5 +532,8 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+}
+.registered-products-button {
+  width: 115px;
 }
 </style>

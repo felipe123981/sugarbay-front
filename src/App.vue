@@ -85,7 +85,7 @@
               <i class="bx bx-log-in icon"></i>
               <span class="text nav-text">Login</span>
             </router-link>
-            <a v-else @click="logout">
+            <a v-else @click="logoutConfirm">
               <i class="bx bx-log-out icon"></i>
               <span class="text nav-text">Logout</span>
             </a>
@@ -118,6 +118,8 @@
 import { mapState, mapGetters, mapMutations } from "vuex"
 import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";
+import router from "@/router";
+
 export default {
   name: "App",
   components: {},
@@ -133,6 +135,19 @@ export default {
     }),
   },
   mounted() {
+
+    router.beforeEach((to, from, next) => {
+      if(to.name === "login" && this.loged){ 
+        this.$bvToast.toast('Already loged-in!', {
+          title: 'Oops!',
+          variant: "warning",
+          solid: true
+        }),
+        next({ name: "home" })
+      }
+      else next();
+    });
+
     const token = readCookie(document.cookie);
     if (isValidToken(token)) {
       this.restoreSession(token)
@@ -173,6 +188,10 @@ export default {
     ...mapMutations("session", {
       logout: "logout"
     }),
+    logoutConfirm() {
+      if(confirm("Logout?"))
+        this.logout()
+    }
   }
 };
 </script>

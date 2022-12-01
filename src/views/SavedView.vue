@@ -4,7 +4,10 @@
     <h3>Saved Products:</h3>
     <HeaderNavbar></HeaderNavbar>
     <br />
-    <div v-for="item in items" :key="item.id">
+    <h4 v-if="items.length ==  0">
+        Your favorites will appears here!
+    </h4>
+    <div v-else v-for="item in items" :key="item.id">
       <b-card>
         <b-media>
           <template #aside>
@@ -79,6 +82,7 @@ export default {
     },
     data() {
         return {
+            text: "",
             currency: "U$",
             items: []
         };

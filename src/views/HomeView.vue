@@ -11,7 +11,7 @@
     </div>
     <div v-for="product in products" :key="product.id">
       <div>
-    <div>
+    <div class="product-display">
       <b-card>
         <b-media>
           <template #aside>
@@ -101,13 +101,11 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
-import headerNavbar from "@/components/HeaderNavbar.vue"
 import HeaderNavbar from "../components/HeaderNavbar.vue"
 
 export default {
   name: "HomeView",
   components: {
-    headerNavbar,
     HeaderNavbar
 },
   computed: {
@@ -230,5 +228,8 @@ h5 {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.product-display {
+  width: 70vw;
 }
 </style>

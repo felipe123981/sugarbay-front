@@ -134,34 +134,30 @@ strong {
         >Submit</b-button
       >
     </b-form>
-    <br>
+    <br />
     <strong>
       Don't have an account? <router-link to="/sign-in">Sign-in</router-link>.
     </strong>
-    <br>
-    <br>
-    <p v-b-modal.modal-1 class="password">
-      Forgot my password.
-    </p>
+    <br />
+    <br />
+    <p v-b-modal.modal-1 class="password">Forgot my password.</p>
     <b-modal id="modal-1" title="BootstrapVue">
-    <p class="my-4">Hello from modal!</p>
-  </b-modal>
+      <p class="my-4">Hello from modal!</p>
+    </b-modal>
   </div>
-  
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import { writeCookie } from "@/modules/cookie";
 import axiosConfig from "@/modules/axiosConfig";
-//import {  mapActions } from "vuex";
 
 export default {
   name: "LoginView",
   computed: {
     ...mapGetters("session", {
-        getUsername: 'getUsername',
-    }),
+      getUsername: "getUsername"
+    })
   },
   data() {
     return {
@@ -171,22 +167,21 @@ export default {
         {
           name: "",
           email: "",
-          token: "",
-        },
+          token: ""
+        }
       ],
-      show: true,
+      show: true
     };
   },
   methods: {
-    ...mapMutations("session", 
-    {
-      login: 'login'
+    ...mapMutations("session", {
+      login: "login"
     }),
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
           email: this.email,
-          password: this.password,
+          password: this.password
         })
         .then(function (response) {
           return response.status;
@@ -197,7 +192,7 @@ export default {
       const request = await axiosConfig
         .post("/sessions", {
           email: this.email,
-          password: this.password,
+          password: this.password
         })
         .then(function (response) {
           const cookie = [
@@ -205,8 +200,8 @@ export default {
               id: response.data.user.id,
               name: response.data.user.name,
               email: response.data.user.email,
-              token: response.data.token,
-            },
+              token: response.data.token
+            }
           ];
           return cookie[0];
         })
@@ -215,35 +210,28 @@ export default {
         });
 
       if (status == 200) {
-
         this.login({
           email: this.email,
-          password: this.password,
+          password: this.password
         });
-        
-        this.$bvToast.toast(
-          ` Welcome  ${this.getUsername}!`,
-          {
-            title: ` Login success. `,
-            variant: "success",
-            solid: true,
-          }
-        );
+
+        this.$bvToast.toast(` Welcome  ${this.getUsername}!`, {
+          title: ` Login success. `,
+          variant: "success",
+          solid: true
+        });
       } else {
-        this.$bvToast.toast(
-          "Incorrect email or password combination!",
-          {
-            title: ` Login failed. `,
-            variant: "danger",
-            solid: true,
-          }
-        );
+        this.$bvToast.toast("Incorrect email or password combination!", {
+          title: ` Login failed. `,
+          variant: "danger",
+          solid: true
+        });
       }
       this.email = "";
       this.password = "";
       writeCookie(request);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -251,6 +239,6 @@ export default {
   width: 60vw;
 }
 .password {
-  color:blue
+  color: blue;
 }
 </style>

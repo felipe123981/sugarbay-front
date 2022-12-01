@@ -48,6 +48,9 @@ export default {
   width: 95px;
 }
 .my-navbar {
+  position: relative;
   background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 2px 2px 3px #999;
 }
 </style>

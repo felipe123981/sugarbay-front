@@ -12,7 +12,7 @@ export default {
   mutations: {
     //verify user account
     sendConfirmationMail(state, payload) {
-       laravelConfig.get("/confirm-account" + payload)
+       laravelConfig.get("confirm-account" + payload)
        .then(resp => {
         console.log(resp.data);
        })

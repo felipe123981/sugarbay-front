@@ -197,9 +197,6 @@ export default {
   box-shadow: 2px 2px 3px #999;
 }
 
-.my-float {
-  margin-top: 22px;
-}
 .checkout-all {
   padding-left: 31vw;
 }
