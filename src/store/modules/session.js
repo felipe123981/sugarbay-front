@@ -1,4 +1,4 @@
-import replaceTo from "@/modules/replaceToHost";
+
 import { eraseCookie } from "@/modules/cookie";
 import axiosConfig from "@/modules/axiosConfig";
 
@@ -37,7 +37,7 @@ export default {
                 {
                   username: resp.data.name,
                   email: resp.data.email,
-                  avatar_url: replaceTo(resp.data.avatar_url)
+                  avatar_url: resp.data.avatar_url
                 }
               ];
             });
@@ -53,7 +53,7 @@ export default {
               {
                 username: response.data.user.name,
                 email: response.data.user.email,
-                avatar_url: replaceTo(response.data.user.avatar_url)
+                avatar_url: response.data.user.avatar_url
               }
             ];
           })

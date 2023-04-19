@@ -48,13 +48,14 @@
                 <span class="text nav-text">Talk to us</span>
               </router-link>
             </li>
-
+            <!--
             <li class="">
               <router-link to="/analytics">
                 <i class="bx bx-pie-chart-alt-2 icon"></i>
                 <span class="text nav-text">Analytics</span>
               </router-link>
             </li>
+            -->
 
             <li class="">
               <router-link to="/order">
@@ -115,6 +116,7 @@
   </div>
 </template>
 <script>
+import 'boxicons';
 import { mapState, mapGetters, mapMutations } from "vuex"
 import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";

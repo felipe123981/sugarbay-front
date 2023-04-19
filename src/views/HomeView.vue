@@ -6,9 +6,19 @@
     </div>
     <HeaderNavbar></HeaderNavbar>
     <br>
-    <div v-if="products.lenght == 0">
+    
+    <div v-if="products[0] == 0">
       <h3>Oops! there are no products...</h3>
     </div>
+    
+    <!--
+
+    <slot>
+      total in cart: {{ getCartLenght() }}
+    </slot>
+    
+    -->
+
     <div v-for="product in products" :key="product.id">
       <div>
     <div class="product-display">
@@ -58,7 +68,7 @@
           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
           <b-row>
             <b-col lg="4" class="pb-2">
-              <router-link to="/shop">
+              <router-link :to="{ name: 'product', params: { productId: product.id } }">
                 <b-button size="sm" class="sb-btn" pill
                 ><i class="bx bx-shopping-bag"></i> Shop</b-button
               >
@@ -66,7 +76,7 @@
               </b-col
             >
             <b-col lg="4" class="pb-2"
-              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product)"
+              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product), makeToast('success')"
                 ><i class="bx bx-cart-alt"></i> Add to cart</b-button
               ></b-col
             >
@@ -109,14 +119,19 @@ export default {
     HeaderNavbar
 },
   computed: {
-    ...mapGetters("products", {
+    ...mapGetters(
+    "cart", {
+      getCartLenght: "getCartLenght"
+    }),
+    ...mapGetters(
+    "products", {
       getProducts: "getProducts"
     })
   },
   mounted() {
-    if(this.getProducts.length == 0) {
+    
       this.fetchProducts();
-    }
+    
     
     setTimeout(() => {
       this.products = this.getProducts;
@@ -158,8 +173,8 @@ export default {
       fetchProducts: "fetchProducts"
     }),
     makeToast(variant = null) {
-      this.$bvToast.toast("Toast body content", {
-        title: `Variant ${variant || "default"}`,
+      this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
+        title: 'Pushed!',
         variant: variant,
         solid: true
       });

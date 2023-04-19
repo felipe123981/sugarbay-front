@@ -16,11 +16,13 @@ export default {
     addToCart(state, payload) {
       const existProduct = state.cart.find((o) => o.id == payload.id);
 
+      
       if (existProduct) {
         existProduct.quantity += 1;
       } else {
         payload.quantity = 1;
         state.cart.push(payload);
+        
       }
     },
     removeFromCart(state, payload) {

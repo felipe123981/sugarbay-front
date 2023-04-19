@@ -1,7 +1,7 @@
 import HomeView from "../views/HomeView.vue";
 import UserView from "../views/UserView.vue";
 import ChatView from "../views/ChatView.vue";
-import AnalyticsView from "../views/AnalyticsView.vue";
+//import AnalyticsView from "../views/AnalyticsView.vue";
 import OrderView from "../views/OrderView.vue";
 import SavedView from "../views/SavedView.vue";
 import ConfigView from "../views/ConfigView.vue";
@@ -34,11 +34,13 @@ const router =  new Router({
       name: "support",
       component: ChatView
     },
+    /*
     {
       path: "/analytics",
       name: "analytics",
       component: AnalyticsView
     },
+    */
     {
       path: "/order",
       name: "order",
@@ -71,9 +73,9 @@ const router =  new Router({
     },
     //lembre-se de adiocionar o param referente ao id do produto
     {
-      path: "/shop",
-      name: "shop",
-      component: ShopView
+      path: "/product/:productId",
+      name: "product",
+      component: ShopView,
     },
     {
       path: "/account-confirmed",
