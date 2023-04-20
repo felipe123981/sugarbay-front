@@ -31,6 +31,123 @@
                     <i class="bx bx-info-circle"></i> Info
                   </template>
                   <b-card-text>
+                    <b-row>
+                      <b-col>
+                        <div class="price-label">
+                          <p class="price-header">Price:</p>
+                          <p class="price-content info-content">
+                            U$ {{ (product.price * item_quantity).toFixed(2) }}
+                            <del>U$ 400.00</del>
+                          </p>
+                        </div>
+                      </b-col>
+                      <b-col>
+                        <div class="color-label">
+                          <p class="color-header">Color:</p>
+                          <p class="color-content info-content">
+                            <b-form-group label="" v-slot="{ ariaDescribedby }">
+                              <b-form-radio-group
+                                :aria-describedby="ariaDescribedby"
+                                name="radio-inline"
+                              >
+                                <b-form-radio
+                                  v-for="(color, index) in colors"
+                                  :key="index"
+                                  :value="'option' + (index + 1)"
+                                  :name="'option' + (index + 1)"
+                                  :class="'radio-' + (index + 1)"
+                                >
+                                  {{ color }}
+                                </b-form-radio>
+                              </b-form-radio-group>
+                            </b-form-group>
+                          </p>
+                        </div>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col>
+                        <div class="quantity-label">
+                          <p class="quantity-header">Quantity:</p>
+                          <p class="size-content info-content">
+                            <b-form-group class="input-num">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    @click="decrement"
+                                  >
+                                    -
+                                  </button>
+                                </div>
+                                <b-form-input
+                                  type="number"
+                                  v-model="item_quantity"
+                                  min="0"
+                                  :max="product.quantity"
+                                  :disabled="disabled"
+                                ></b-form-input>
+                                <div class="input-group-append">
+                                  <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    @click="increment"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                            </b-form-group>
+                          </p>
+                        </div>
+                      </b-col>
+                      <b-col>
+                        <div class="size-label">
+                          <p class="size-header">Size:</p>
+                          <p class="size-content info-content">
+                            <b-form-select
+                              class="size-select"
+                              v-model="selected"
+                              :options="options"
+                            ></b-form-select>
+                          </p>
+                        </div>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col>
+                        <div class="stock-label">
+                          <p class="stock-header">Stock:</p>
+                          <p v-if="product.quantity - item_quantity > 0" class="size-content info-content">
+                            {{ product.quantity - item_quantity }}
+                          </p>
+                          <p v-else class="size-content info-content">
+                            Empty!
+                          </p>
+                        </div>
+                      <br>
+                        <div class="total-label">
+                          <p class="total-header">Total with freight:</p>
+                          <p
+                            class="total-content info-content"
+                            v-if="item_quantity > 0"
+                          >
+                            U$
+                            {{
+                              (
+                                product.price * item_quantity +
+                                product.price * item_quantity * 0.1 +
+                                30
+                              ).toFixed(2)
+                            }}
+                          </p>
+                          <p class="total-content info-content" v-else>0</p>
+                        </div>
+                      </b-col>
+                    </b-row>
+
+                    <!--
                     <div class="price-label">
                       <p class="price-header">Price:</p>
                       <p class="price-content info-content">
@@ -72,8 +189,8 @@
                       </p>
                     </div>
 
-                    <div class="size-label">
-                      <p class="size-header">Quantity:</p>
+                    <div class="quantity-label">
+                      <p class="quantity-header">Quantity:</p>
                       <p class="size-content info-content">
                         <b-form-group class="input-num">
                           <div class="input-group">
@@ -131,6 +248,7 @@
                       </p>
                       <p class="total-content info-content" v-else>0</p>
                     </div>
+                    -->
                   </b-card-text>
                 </b-tab>
                 <b-tab>
@@ -289,5 +407,19 @@ export default {
   padding-left: 10px;
   border-radius: 15px;
   padding: 10px;
+}
+.price-content {
+  min-width: 200px;
+}
+.color-content {
+  min-width: 230px;
+}
+.size-content {
+}
+.quantity-content {
+}
+.stock-content {
+}
+.total-content {
 }
 </style>
