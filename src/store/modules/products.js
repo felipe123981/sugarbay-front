@@ -20,9 +20,8 @@ export default {
     }
   },
   getters: {
-    getProductById(state, id) {
-      const product = state.products.filter((o) => o.id === id);
-      return product;
+    getProductById: (state) => (id) => {
+      return state.products.find(product => product.id === id)
     },
     getProducts(state) {
       return state.products;

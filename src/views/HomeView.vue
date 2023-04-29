@@ -20,7 +20,7 @@
     -->
 
     <div v-for="product in products" :key="product.id">
-      <div>
+    
     <div class="product-display">
       <b-card>
         <b-media>
@@ -70,7 +70,7 @@
             <b-col lg="4" class="pb-2">
               <router-link :to="{ name: 'product', params: { productId: product.id } }">
                 <b-button size="sm" class="sb-btn" pill
-                ><i class="bx bx-shopping-bag"></i> Shop</b-button
+                ><i class='bx bxs-edit'></i> Detail</b-button
               >
               </router-link>
               </b-col
@@ -84,7 +84,7 @@
         </b-media>
       </b-card>
     </div>
-  </div>
+  
       <br />
     </div>
     <br />
@@ -95,10 +95,9 @@
         </li>
         <li class="page-item active"><a class="page-link" href="#">1</a></li>
         <li class="page-item">
-          <span class="page-link">
+          <a class="page-link">
             2
-            <span class="sr-only">(current)</span>
-          </span>
+          </a>
         </li>
         <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">

@@ -60,7 +60,7 @@
             <li class="">
               <router-link to="/order">
                 <i class="bx bx-cart-alt icon"></i>
-                <span class="text nav-text">Orders</span>
+                <span class="text nav-text">Cart</span>
               </router-link>
             </li>
 
@@ -91,7 +91,7 @@
               <span class="text nav-text">Logout</span>
             </a>
           </li>
-
+          <!--
           <li class="mode">
             <div class="sun-moon">
               <i class="bx bx-moon icon moon"></i>
@@ -103,6 +103,7 @@
               <span class="switch"></span>
             </div>
           </li>
+          -->
         </div>
       </div>
     </nav>
@@ -116,43 +117,49 @@
   </div>
 </template>
 <script>
-import 'boxicons';
-import { mapState, mapGetters, mapMutations } from "vuex"
+import "boxicons";
+import { mapState, mapGetters, mapMutations } from "vuex";
 import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: "App",
   components: {},
   computed: {
     ...mapState({
-      user: state => state.session.user,
-      token: state => state.session.token,
-      loged: state => state.session.loged,
+      user: (state) => state.session.user,
+      token: (state) => state.session.token,
+      loged: (state) => state.session.loged
     }),
     ...mapGetters("session", {
-        getAvatar: 'getAvatar',
-        getUsername: 'getUsername',
-    }),
+      getAvatar: "getAvatar",
+      getUsername: "getUsername"
+    })
   },
-  mounted() {
-
+   mounted() {
+    this.client_info = axios
+      .get("http://ipapi.co/json")
+      .then((resp) => {
+        //console.log(resp.data);
+        return resp.data;
+      })
+      .catch((err) => console.log(err));
     router.beforeEach((to, from, next) => {
-      if(to.name === "login" && this.loged){ 
-        this.$bvToast.toast('Already loged-in!', {
-          title: 'Oops!',
+      if (to.name === "login" && this.loged) {
+        this.$bvToast.toast("Already loged-in!", {
+          title: "Oops!",
           variant: "warning",
           solid: true
         }),
-        next({ name: "home" })
-      }
-      else next();
+          next({ name: "home" });
+      } else next();
     });
 
     const token = readCookie(document.cookie);
     if (isValidToken(token)) {
-      this.restoreSession(token)
+      this.restoreSession(token);
     }
 
     const body = document.querySelector("body"),
@@ -181,7 +188,10 @@ export default {
     });
   },
   data() {
-    return {};
+    return {
+      client_ip: "",
+      client_info: []
+    };
   },
   methods: {
     ...mapMutations("session", {
@@ -191,8 +201,7 @@ export default {
       logout: "logout"
     }),
     logoutConfirm() {
-      if(confirm("Logout?"))
-        this.logout()
+      if (confirm("Logout?")) this.logout();
     }
   }
 };
@@ -210,7 +219,7 @@ export default {
   text-decoration: none;
 }
 .router {
-  padding-left: 25px;
+  padding-left: 2px;
 }
 .close {
   float: right;
@@ -249,8 +258,10 @@ ul {
 }
 
 body {
+  background-image: url("@/assets/img/sugarbay-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 100vh;
-  background-color: var(--body-color);
   transition: var(--tran-05);
 }
 
@@ -518,8 +529,11 @@ body.dark .switch::before {
   left: 250px;
   height: 100vh;
   width: calc(100% - 250px);
-  background-color: var(--body-color);
   transition: var(--tran-05);
+  background-image: url("@/assets/img/sugarbay-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .home .text {
   font-size: 30px;

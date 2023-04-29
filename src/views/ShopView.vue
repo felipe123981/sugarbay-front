@@ -14,18 +14,59 @@
     </div>
     <br />
     <div>
-      <b-card>
-        <b-media>
-          <h5 class="mt-0">{{ product.name }}</h5>
-          <VueSlickCarousel v-bind="settings" arrows="true" class="VSCarrousel">
-            <div v-for="(image, index) in images" :key="index">
-              <img :alt="'image-' + (index + 1)" :src="image" />
-            </div>
-          </VueSlickCarousel>
+      <b-card class="sb-cart">
+        <b-media class="sb-media float-left">
+          <h5 class="mt-0 product-name">{{ product.name }}</h5>
+          <div class="img-wrapper">
+            <input
+              type="number"
+              style="
+                text-align: right;
+                width: 30px;
+                position: relative;
+                border: 0;
+              "
+              :placeholder="page"
+              v-model="page"
+              disabled
+            />/{{ images.length }}
+
+            <VueSlickCarousel
+              @swipe="getCurrentSlick(slides[0].childNodes)"
+              @afterChange="getCurrentSlick(slides[0].childNodes)"
+              v-bind="settings"
+              class="VSCarrousel"
+            >
+              <div
+                v-for="(image, index) in images"
+                :key="index"
+                :class="'image-' + (index + 1)"
+              >
+                <img :alt="'image-' + (index + 1)" :src="image" />
+              </div>
+            </VueSlickCarousel>
+          </div>
+          <!--
+
+           <div class="img-wrapper">
+                <button @click="addToFavorites(product)" class="btn btn-sm outline-primary btn-like">
+                  <i class='bx bxs-heart'></i>
+                </button>
+                <b-img class="img-responsive"
+                blank
+              blank-color="#ccc"
+              width="70"
+              alt="placeholder"
+                >
+                <div class="img-overlay">
+                </div></b-img>
+              </div>
+
+          -->
           <hr />
           <div>
             <b-card no-body>
-              <b-tabs card>
+              <b-tabs card style="background-color: var(--primary-color-light)">
                 <b-tab active>
                   <template #title>
                     <i class="bx bx-info-circle"></i> Info
@@ -37,7 +78,7 @@
                           <p class="price-header">Price:</p>
                           <p class="price-content info-content">
                             U$ {{ (product.price * item_quantity).toFixed(2) }}
-                            <del>U$ 400.00</del>
+                            <del style="color: gray">U$ 400.00</del>
                           </p>
                         </div>
                       </b-col>
@@ -51,6 +92,7 @@
                                 name="radio-inline"
                               >
                                 <b-form-radio
+                                  style="color: gray"
                                   v-for="(color, index) in colors"
                                   :key="index"
                                   :value="'option' + (index + 1)"
@@ -69,7 +111,7 @@
                       <b-col>
                         <div class="quantity-label">
                           <p class="quantity-header">Quantity:</p>
-                          <p class="size-content info-content">
+                          <p class="quantity-content quantity-content">
                             <b-form-group class="input-num">
                               <div class="input-group">
                                 <div class="input-group-prepend">
@@ -119,14 +161,17 @@
                       <b-col>
                         <div class="stock-label">
                           <p class="stock-header">Stock:</p>
-                          <p v-if="product.quantity - item_quantity > 0" class="size-content info-content">
+                          <p
+                            v-if="product.quantity - item_quantity > 0"
+                            class="stock-content info-content"
+                          >
                             {{ product.quantity - item_quantity }}
                           </p>
-                          <p v-else class="size-content info-content">
+                          <p v-else class="stock-content info-content">
                             Empty!
                           </p>
                         </div>
-                      <br>
+                        <br />
                         <div class="total-label">
                           <p class="total-header">Total with freight:</p>
                           <p
@@ -146,109 +191,6 @@
                         </div>
                       </b-col>
                     </b-row>
-
-                    <!--
-                    <div class="price-label">
-                      <p class="price-header">Price:</p>
-                      <p class="price-content info-content">
-                        U$ {{ (product.price * item_quantity).toFixed(2) }}
-                        <del>U$ 400.00</del>
-                      </p>
-                    </div>
-
-                    <div class="color-label">
-                      <p class="color-header">Color:</p>
-                      <p class="color-content info-content">
-                        <b-form-group label="" v-slot="{ ariaDescribedby }">
-                          <b-form-radio-group
-                            :aria-describedby="ariaDescribedby"
-                            name="radio-inline"
-                          >
-                            <b-form-radio
-                              v-for="(color, index) in colors"
-                              :key="index"
-                              value="option1"
-                              name="option1"
-                              :class="'radio-' + (index + 1)"
-                            >
-                              {{ color }}
-                            </b-form-radio>
-                          </b-form-radio-group>
-                        </b-form-group>
-                      </p>
-                    </div>
-
-                    <div class="size-label">
-                      <p class="size-header">Size:</p>
-                      <p class="size-content info-content">
-                        <b-form-select
-                          class="size-select"
-                          v-model="selected"
-                          :options="options"
-                        ></b-form-select>
-                      </p>
-                    </div>
-
-                    <div class="quantity-label">
-                      <p class="quantity-header">Quantity:</p>
-                      <p class="size-content info-content">
-                        <b-form-group class="input-num">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <button
-                                class="btn btn-outline-secondary"
-                                type="button"
-                                @click="decrement"
-                              >
-                                -
-                              </button>
-                            </div>
-                            <b-form-input
-                              type="number"
-                              v-model="item_quantity"
-                              min="0"
-                              :max="product.quantity"
-                              :disabled="disabled"
-                            ></b-form-input>
-                            <div class="input-group-append">
-                              <button
-                                class="btn btn-outline-secondary"
-                                type="button"
-                                @click="increment"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </b-form-group>
-                      </p>
-                    </div>
-
-                    <div class="stock-label">
-                      <p class="stock-header">Stock:</p>
-                      <p class="size-content info-content">
-                        {{ product.quantity - item_quantity }}
-                      </p>
-                    </div>
-
-                    <div class="total-label">
-                      <p class="total-header">Total with freight:</p>
-                      <p
-                        class="total-content info-content"
-                        v-if="item_quantity > 0"
-                      >
-                        U$
-                        {{
-                          (
-                            product.price * item_quantity +
-                            product.price * item_quantity * 0.1 +
-                            30
-                          ).toFixed(2)
-                        }}
-                      </p>
-                      <p class="total-content info-content" v-else>0</p>
-                    </div>
-                    -->
                   </b-card-text>
                 </b-tab>
                 <b-tab>
@@ -272,24 +214,60 @@
           </div>
         </b-media>
       </b-card>
+      <br />
+      <div id="shop-buttons">
+        <p>
+          <b-button pill class="sb-btn" variant="primary">
+            <i class="bx bx-shopping-bag"></i> Buy
+          </b-button>
+        </p>
+        <p>
+          <b-button pill class="sb-btn" variant="primary">
+            <i class="bx bx-cart-alt"></i> Add to cart
+          </b-button>
+        </p>
+      </div>
+
+      <div id="sugestions">
+        <p style="font-size: 18px">More from this vendor:</p>
+        <Pagination :products="paginated_products[currentPage - 1]" />
+        <p class="mt-3">Current Page: {{ currentPage }}</p>
+        <div class="overflow-auto">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="my-table"
+            prev-text="Previous"
+            next-text="Next"
+          ></b-pagination>
+        </div>
+      </div>
+      <br />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import axiosConfig from "@/modules/axiosConfig";
+import Pagination from "@/components/PaginationComponent.vue";
 
 export default {
   name: "MyComponent",
-  components: { VueSlickCarousel },
+  components: { VueSlickCarousel, Pagination },
   data() {
     return {
-      disabled: false,
+      perPage: 5,
+      currentPage: 1,
+      paginated_products: [],
+      vendor_products: [],
+      page: 1,
+      slides: document.getElementsByClassName("slick-dots"),
       item_quantity: 1,
       selected: 2,
       options: [
@@ -310,10 +288,11 @@ export default {
       ],
       product: [],
       settings: {
+        arrows: true,
         touchMove: true,
         useCSS: true,
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 4,
@@ -348,11 +327,18 @@ export default {
     };
   },
   computed: {
+    rows() {
+      return this.vendor_products.length;
+    },
     ...mapGetters("products", {
       getProductById: "getProductById"
+    }),
+    ...mapGetters("products", {
+      getProducts: "getProducts"
     })
   },
   async mounted() {
+    this.fetchProducts();
     await axiosConfig
       .get("/products/" + this.$route.params.productId)
       .then((resp) => {
@@ -362,9 +348,45 @@ export default {
         console.log(error);
         return 0;
       });
-    console.log(this.product);
+    this.vendor_products = this.getProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
+    //console.log(this.vendor_products);
+    this.paginated_products = this.paginate(this.vendor_products, this.perPage);
+    //console.log(this.paginated_products);
   },
   methods: {
+    ...mapMutations("products", {
+      fetchProducts: "fetchProducts"
+    }),
+    paginate(base, max) {
+      var result = [[]];
+      var group = 0;
+
+      for (var index = 0; index < base.length; index++) {
+        if (result[group] === undefined) {
+          result[group] = [];
+        }
+
+        result[group].push(base[index]);
+
+        if ((index + 1) % max === 0) {
+          group = group + 1;
+        }
+      }
+
+      return result;
+    },
+    getCurrentSlick(childNodes) {
+      for (var i = 0; i < childNodes.length; i++) {
+        if (childNodes[i].className.endsWith("slick-active")) {
+          this.page = i + 1;
+          return i + 1;
+        }
+      }
+    },
+    currentPosition() {
+      const currentSlide = this.$refs.carousel.currentSlide;
+      return `${currentSlide + 1}/${this.images.length}`;
+    },
     increment() {
       if (this.item_quantity < this.product.quantity) {
         this.item_quantity++;
@@ -403,6 +425,7 @@ export default {
   width: 22vh;
 }
 .info-content {
+  color: gray;
   background-color: #eff6e0;
   padding-left: 10px;
   border-radius: 15px;
@@ -412,7 +435,6 @@ export default {
   min-width: 200px;
 }
 .color-content {
-  min-width: 230px;
 }
 .size-content {
 }
@@ -421,5 +443,39 @@ export default {
 .stock-content {
 }
 .total-content {
+}
+.sb-media {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.23);
+}
+.product-name {
+  padding: 10px;
+  color: var(--text-color);
+}
+.sb-cart {
+  background-color: var(--primary-color-light);
+}
+
+*-content {
+  color: gray;
+}
+#shop-buttons {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.sb-btn {
+  background-color: rgb(0, 110, 255);
+  border: 1px white solid;
+  width: 25vh;
+}
+.pagination-component {
+  float: right;
+  width: 100%;
 }
 </style>

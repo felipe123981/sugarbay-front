@@ -368,43 +368,49 @@
               </b-col>
               <br />
               <div v-for="i in 3" :key="i">
-                <div>
-  <b-card>
-    <b-media>
-      <template #aside>
-        <b-img blank blank-color="#ccc" width="64" alt="placeholder"></b-img>
-      </template>
+                <div class="product-display">
+                  <b-card>
+                    <b-media>
+                      <template #aside>
+                        <b-img
+                          blank
+                          blank-color="#ccc"
+                          width="64"
+                          alt="placeholder"
+                        ></b-img>
+                      </template>
 
-      <h5 class="mt-0">Product title - U$ 49.90</h5>
-      <p>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-      </p>
-      <b-row>
-        <b-col>
-          <b-button class="registered-products-button" pill variant="primary"><i class='bx bx-edit-alt'></i> Edit</b-button>
-        </b-col>
-        <b-col>
-          <b-button class="registered-products-button" pill variant="danger"><i class='bx bx-trash' ></i> Remove</b-button>
-        </b-col>
-      </b-row>
-    </b-media>
-  </b-card>
-</div>
-              <br>
-            </div>
-              
-            </b-card-text></b-tab
-          >
-          <b-tab title="Preferences"
-            ><b-card-text>
-              <h3>Edit preferences:</h3>
-              <!-- Currency selector component -->
-              <!-- Language selector component -->
-            </b-card-text></b-tab
-          >
-          <b-tab title="Privacy and security"
-            ><b-card-text>Tab contents 3</b-card-text></b-tab
-          >
+                      <h5 class="mt-0">Product title - U$ 49.90</h5>
+                      <p>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel
+                        metus scelerisque ante sollicitudin.
+                      </p>
+                      <b-row>
+                        <b-col lg="4" class="pb-2">
+                          <b-button size="sm"
+                            class="registered-products-button"
+                            pill
+                            variant="primary"
+                            ><i class="bx bx-edit-alt"></i> Edit</b-button
+                          >
+                        </b-col>
+                        
+                        <b-col lg="4" class="pb-2">
+                          <b-button size="sm"
+                            class="registered-products-button"
+                            pill
+                            variant="danger"
+                            ><i class="bx bx-trash"></i> Remove</b-button
+                          >
+                        </b-col>
+                      </b-row>
+                    </b-media>
+                  </b-card>
+                </div>
+                <br />
+              </div> </b-card-text
+          ></b-tab>
+
         </b-tabs>
       </b-card>
     </div>
@@ -437,13 +443,6 @@ export default {
         food: null,
         checked: []
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
-      ],
       show: true,
       isHovered: false
     };
@@ -535,5 +534,8 @@ export default {
 }
 .registered-products-button {
   width: 115px;
+}
+.product-display {
+  width: 70vw;
 }
 </style>

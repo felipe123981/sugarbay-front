@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div>
+    <div class="product-display">
       <b-card>
         <b-media>
           <template #aside>
@@ -47,15 +46,15 @@
           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
           <b-row>
             <b-col lg="4" class="pb-2">
-              <router-link to="/shop">
+              <a :href="'http://localhost:8080/product/' + product.id">
                 <b-button size="sm" class="sb-btn" pill
-                ><i class="bx bx-shopping-bag"></i> Shop</b-button
+                ><i class='bx bxs-edit'></i> Detail</b-button
               >
-              </router-link>
+              </a>
               </b-col
             >
             <b-col lg="4" class="pb-2"
-              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product)"
+              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product), makeToast('success')"
                 ><i class="bx bx-cart-alt"></i> Add to cart</b-button
               ></b-col
             >
@@ -63,10 +62,10 @@
         </b-media>
       </b-card>
     </div>
-  </div>
+  
 </template>
 <script>
-import axiosConfig from "@/modules/axiosConfig";
+//import axiosConfig from "@/modules/axiosConfig";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -78,7 +77,10 @@ export default {
     }),
   },
   async mounted() {
-    this.product = await axiosConfig
+    this.fetchProducts();
+    this.product = this.getProductById(this.pid);
+    /*
+     await axiosConfig
       .get(`/products/${this.pid}`)
       .then((resp) => {
         return resp.data;
@@ -86,9 +88,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+      */
   },
   data() {
     return {
+      products: [],
       product: [],
       rate: 5,
       currency: "U$",
@@ -101,6 +105,16 @@ export default {
     ...mapMutations('favorites', {
       addToFavorites: 'addToFavorites'
     }),
+    ...mapMutations("products", {
+      fetchProducts: "fetchProducts"
+    }),
+    makeToast(variant = null) {
+      this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
+        title: 'Pushed!',
+        variant: variant,
+        solid: true
+      });
+    }
   },
 };
 </script>

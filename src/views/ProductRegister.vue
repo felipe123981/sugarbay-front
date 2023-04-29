@@ -17,7 +17,7 @@
       </div>
     </div>
     <br />
-    <b-form  @reset="onReset" v-if="show">
+    <b-form @reset="onReset" v-if="show">
       <b-row>
         <b-col>
           <b-form-group
@@ -75,21 +75,43 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="submit" @click="registerProduct" variant="primary">Register</b-button>
+      <b-button type="submit" @click="registerProduct" variant="primary"
+        >Register</b-button
+      >
     </b-form>
+    {{ print }}
   </div>
 </template>
 <script>
-  import axiosConfig from "@/modules/axiosConfig";
-  import Uploader from "vux-uploader-component";
+import axiosConfig from "@/modules/axiosConfig";
+import Uploader from "vux-uploader-component";
 
 export default {
   name: "ProductRegister",
   components: {
-    Uploader,
+    Uploader
   },
   data() {
     return {
+      
+      /*
+      
+      product_register: [
+        {
+          name: "",
+          model: "",
+          brand: "",
+          zipcode :"",
+          box_dimensions: [ 
+            {
+              hight: 0,
+              width: 0,
+              lenght: 0
+            }
+          ]
+        }
+      ],
+      */
       fileList: [],
       show: true,
       form: [
@@ -97,8 +119,18 @@ export default {
           name: "",
           quantity: 0,
           price: "free",
-        },
-      ],
+          model: "",
+          brand: "",
+          zipcode: "",
+          box_dimensions: [
+            {
+              hight: 0,
+              width: 0,
+              lenght: 0
+            }
+          ]
+        }
+      ]
     };
   },
   methods: {
@@ -119,26 +151,28 @@ export default {
       });
     },
     async registerProduct() {
-      await axiosConfig.post("/products", {
-        name: this.form.name,
-        price: this.form.price,
-        quantity: this.form.quantity,
-      })
-      .then(resp => {
-        console.log(resp.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+      await axiosConfig
+        .post("/products", {
+          name: this.form.name,
+          price: this.form.price,
+          quantity: this.form.quantity
+        })
+        .then((resp) => {
+          console.log(resp.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  },
+  }
 };
 </script>
 <style scoped>
-  .header-title {
-    padding-top: 8px;
-    padding-left: 30px;
-  }
+
+.header-title {
+  padding-top: 8px;
+  padding-left: 30px;
+}
 .form {
   width: 60vw;
 }
@@ -157,5 +191,40 @@ export default {
 }
 .uploader-title {
   color: white;
+}
+
+.sb-btn {
+    background-color: rgb(0, 110, 255);
+    border: 1px white solid;
+  }
+  .btn-like {
+    position: absolute;
+    padding-left: 3.05rem;
+  }
+  .btn-like:hover {
+    color: rgb(216, 25, 25);
+  }
+
+.img-wrapper {
+  position: relative;
+}
+
+.img-responsive {
+  height: auto;
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.img-overlay:before {
+  content: ' ';
+  display: block; 
+  height: 0;
 }
 </style>
