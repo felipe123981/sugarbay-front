@@ -68,45 +68,19 @@ export default {
 };
 </script>
 <style scoped>
-.sb-btn {
-  background-color: rgb(0, 110, 255);
-  border: 1px white solid;
-  width: auto;
-}
-.btn-like {
-  position: absolute;
-  padding-left: 3.05rem;
-}
-.btn-like:hover {
-  color: rgb(216, 25, 25);
-}
 
-.img-wrapper {
-  position: relative;
-}
-
-.img-responsive {
-  height: auto;
-}
-
-.img-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-}
-
-.img-overlay:before {
-  content: " ";
-  display: block;
-  height: 0;
-}
-.product-display {
-  width: 70vw;
-}
 .catalog {
+      /* From https://css.glass */
+background: rgba(255, 255, 255, 0.07);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(1.7px);
+-webkit-backdrop-filter: blur(1.7px);
+border: 1px solid rgba(255, 255, 255, 0.25);
+overflow-y: scroll;
+height: 490px;
+padding: 2px;
+  /*
             height: 490px;
             overflow-y: scroll;
             
@@ -115,5 +89,6 @@ export default {
             
             padding: 5px;
             background-color: var(--body-color);
-        }
+        */
+          }
 </style>

@@ -25,8 +25,11 @@
                       </b-dropdown-item-button>
                       <b-dropdown-item-button v-else @click="lockUnlockForm">
                         <b-icon icon="unlock-fill" aria-hidden="true"></b-icon>
-                        Unlocked <span class="sr-only">(Click to unlock)</span>
-                      </b-dropdown-item-button>
+                        Unlocked
+                        <span class="sr-only"
+                          >(Click to unlock)</span
+                        > </b-dropdown-item-button
+                      ><!--
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-group header="Choose options" class="small">
                         <b-dropdown-item-button>
@@ -54,6 +57,7 @@
                         <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
                         Delete
                       </b-dropdown-item-button>
+                      -->
                     </b-dropdown>
                   </div>
                 </b-col>
@@ -253,7 +257,7 @@
                 </b-col>
               </b-row> </b-card-text
           ></b-tab>
-          <b-tab title="My products" v-once
+          <b-tab title="My products"   
             ><b-card-text>
               <h3>Your product list:</h3>
               <br />
@@ -272,7 +276,7 @@
                         variant="primary"
                         ><i class="bx bxs-plus-circle"></i> Add new</b-button
                       >
-                      <b-modal id="modal-1" title="Type of your product" v-once>
+                      <b-modal id="modal-1" title="Type of your product">
                         <p class="my-4">
                           <b-container>
                             <b-row>
@@ -367,6 +371,7 @@
                 </div>
               </b-col>
               <br />
+              <!--
               <div v-for="i in 3" :key="i">
                 <div class="product-display">
                   <b-card>
@@ -387,16 +392,18 @@
                       </p>
                       <b-row>
                         <b-col lg="4" class="pb-2">
-                          <b-button size="sm"
+                          <b-button
+                            size="sm"
                             class="registered-products-button"
                             pill
                             variant="primary"
                             ><i class="bx bx-edit-alt"></i> Edit</b-button
                           >
                         </b-col>
-                        
+
                         <b-col lg="4" class="pb-2">
-                          <b-button size="sm"
+                          <b-button
+                            size="sm"
                             class="registered-products-button"
                             pill
                             variant="danger"
@@ -408,25 +415,53 @@
                   </b-card>
                 </div>
                 <br />
-              </div> </b-card-text
-          ></b-tab>
+              </div>
+              -->
 
+              
+              
+            
+              
+              {{ currentPage }}
+              <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                prev-text="Prev"
+                next-text="Next"
+              ></b-pagination>
+               </b-card-text
+          ></b-tab>
         </b-tabs>
       </b-card>
     </div>
   </div>
 </template>
 <script>
+//import Pagination from "@/components/PaginationComponent.vue";
+import { mapGetters, mapMutations } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
 export default {
   name: "UserView",
   components: {
-    AvatarInput
+    AvatarInput,
+   // Pagination
   },
-
+  mounted() {
+    this.fetchProducts();
+    setTimeout( () => {
+      this.my_products = this.getProducts;
+    }, 500 );
+    
+    this.paginated_products = this.paginate(this.my_products, this.perPage);
+  },
   data() {
     return {
+      currentPage: 1,
+      perPage: 5,
+      my_products: [],
+      paginated_products: [],
       lockform: true,
       form: {
         phone: "",
@@ -447,7 +482,36 @@ export default {
       isHovered: false
     };
   },
+  computed: {
+    rows() {
+      return this.my_products.length;
+    },
+    ...mapGetters("products", {
+      getProducts: "getProducts"
+    })
+  },
   methods: {
+    ...mapMutations("products", {
+      fetchProducts: "fetchProducts"
+    }),
+    paginate(base, max) {
+      var result = [[]];
+      var group = 0;
+
+      for (var index = 0; index < base.length; index++) {
+        if (result[group] === undefined) {
+          result[group] = [];
+        }
+
+        result[group].push(base[index]);
+
+        if ((index + 1) % max === 0) {
+          group = group + 1;
+        }
+      }
+
+      return result;
+    },
     lockUnlockForm() {
       this.lockform = this.lockform ? false : true;
     },
@@ -537,5 +601,16 @@ export default {
 }
 .product-display {
   width: 70vw;
+}
+.myProducts {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.7px);
+  -webkit-backdrop-filter: blur(1.7px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow-y: scroll;
+  height: 490px;
+  padding: 2px;
 }
 </style>

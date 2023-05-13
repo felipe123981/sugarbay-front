@@ -1,12 +1,11 @@
 <template>
   <div>
     <br>
-    <h3>Saved Products:</h3>
-    <HeaderNavbar></HeaderNavbar>
+    <HeaderNavbar headerTitle="Saved products:"></HeaderNavbar>
     <br />
-    <h4 v-if="items.length ==  0">
-        Your favorites will appears here!
-    </h4>
+    <div  v-if="items.length ==  0">
+        <h4 style="color: var(--text-color)"> <i class='bx bxs-heart-circle'></i> Your favorites will appears here!</h4> 
+    </div>
     <div v-else v-for="item in items" :key="item.id">
       <b-card>
         <b-media>

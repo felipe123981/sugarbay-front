@@ -10,6 +10,7 @@ import ProductRegister from "@/views/ProductRegister.vue";
 import SignIn from "@/views/SignIn.vue";
 import ShopView from "@/views/ShopView.vue";
 import AccountConfirmed from "@/views/AccountConfirmed.vue";
+import AboutView from "@/views/AboutView.vue"
 import Router from "vue-router";
 import Vue from "vue";
 
@@ -81,6 +82,11 @@ const router =  new Router({
       path: "/account-confirmed",
       name: "account-confirmed",
       component: AccountConfirmed
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: AboutView
     }
   ]
 

@@ -1,8 +1,7 @@
 <template>
   <div>
     <br />
-    <h3>Orders:</h3>
-    <HeaderNavbar></HeaderNavbar>
+    <HeaderNavbar headerTitle="Cart:"></HeaderNavbar>
     <br />
     <div>
       <b-card no-body>

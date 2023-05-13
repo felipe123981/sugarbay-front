@@ -1,123 +1,63 @@
 <template>
   <div>
     <br />
-    <div>
-      <h3 class="page-header">Product List:</h3>
-    </div>
-    <HeaderNavbar></HeaderNavbar>
+    <HeaderNavbar headerTitle="Catalog:"></HeaderNavbar>
     <br>
-    
-    <div v-if="products[0] == 0">
-      <h3>Oops! there are no products...</h3>
+       
+    <div v-if="products.length == 0">
+      <p>
+        <b-icon style="color: var(--text-color);" icon="arrow-clockwise" animation="spin-pulse" font-scale="4"></b-icon>
+      </p>
+      <strong style="color: var(--text-color);">
+        Loading Content...
+      </strong>
     </div>
     
     <!--
 
     <slot>
-      total in cart: {{ getCartLenght() }}
+      total in cart: {{ getCartLenght }}
     </slot>
     
     -->
-
+    <!--
     <div v-for="product in products" :key="product.id">
-    
-    <div class="product-display">
-      <b-card>
-        <b-media>
-          <template #aside>
-            <!--
-
-            <b-img
-              blank
-              blank-color="#ccc"
-              width="50"
-              alt="placeholder"
-            ></b-img>
-
-            -->
-
-              <div class="img-wrapper">
-                <button @click="addToFavorites(product)" class="btn btn-sm outline-primary btn-like">
-                  <i class='bx bxs-heart'></i>
-                </button>
-                <b-img class="img-responsive"
-                blank
-              blank-color="#ccc"
-              width="70"
-              alt="placeholder"
-                >
-                <div class="img-overlay">
-                </div></b-img>
-              </div>
-
-            
-          </template>
-
-          <h5 class="mt-0">
-            {{ product.name }} - {{ currency }} {{ product.price }}
-          </h5>
-          <div class="star-rating">
-            <b-form-rating
-              v-model="rate"
-              variant="warning"
-              class="mb-2"
-              id="form-control"
-            ></b-form-rating>
-          </div>
-
-          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
-          <b-row>
-            <b-col lg="4" class="pb-2">
-              <router-link :to="{ name: 'product', params: { productId: product.id } }">
-                <b-button size="sm" class="sb-btn" pill
-                ><i class='bx bxs-edit'></i> Detail</b-button
-              >
-              </router-link>
-              </b-col
-            >
-            <b-col lg="4" class="pb-2"
-              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product), makeToast('success')"
-                ><i class="bx bx-cart-alt"></i> Add to cart</b-button
-              ></b-col
-            >
-          </b-row>
-        </b-media>
-      </b-card>
-    </div>
-  
+      <ProductDisplay :pid="product.id" />
       <br />
     </div>
-    <br />
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <span class="page-link">Previous</span>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item">
-          <a class="page-link">
-            2
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
+  -->
+    <Pagination :products="paginated_products[currentPage - 1]" />
+    <br>
+    <div class="overflow-auto">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="my-table"
+            prev-text="Previous"
+            next-text="Next"
+          ></b-pagination>
+        </div>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import HeaderNavbar from "../components/HeaderNavbar.vue"
+import Pagination from "@/components/PaginationComponent.vue";
+//import ProductDisplay from "@/components/ProductDisplay.vue";
 
 export default {
   name: "HomeView",
   components: {
-    HeaderNavbar
+    HeaderNavbar,
+    Pagination
+    //ProductDisplay
 },
   computed: {
+    rows() {
+      return this.products.length;
+    },
     ...mapGetters(
     "cart", {
       getCartLenght: "getCartLenght"
@@ -134,16 +74,19 @@ export default {
     
     setTimeout(() => {
       this.products = this.getProducts;
+      this.paginated_products = this.paginate(this.products, this.perPage);
     }, 500);
+    
   },
   data() {
     return {
+      paginated_products: [],
       loading: false,
       loadingTime: 0,
       maxLoadingTime: 3,
       products: [],
       value: ["all"],
-      perPage: 3,
+      perPage: 5,
       currentPage: 1,
       product: [],
       rate: 5,
@@ -177,7 +120,25 @@ export default {
         variant: variant,
         solid: true
       });
-    }
+    },
+    paginate(base, max) {
+      var result = [[]];
+      var group = 0;
+
+      for (var index = 0; index < base.length; index++) {
+        if (result[group] === undefined) {
+          result[group] = [];
+        }
+
+        result[group].push(base[index]);
+
+        if ((index + 1) % max === 0) {
+          group = group + 1;
+        }
+      }
+
+      return result;
+    },
   }
 };
 </script>

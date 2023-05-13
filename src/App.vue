@@ -77,6 +77,13 @@
                 <span class="text nav-text">Config</span>
               </router-link>
             </li>
+
+            <li class="">
+              <router-link to="/about">
+                <i class='bx bx-info-circle icon'></i>
+                <span class="text nav-text">About us</span>
+              </router-link>
+            </li>
           </ul>
         </div>
 
@@ -111,8 +118,11 @@
     <section class="home">
       <div class="logo">
         <img alt="Vue logo" src="./assets/logo.png" height="70vh" />
-        <router-view class="router"></router-view>
       </div>
+      <br>
+      <router-view class="router"></router-view>
+      <br>
+      <Footer style="width: 100%" />
     </section>
   </div>
 </template>
@@ -123,10 +133,13 @@ import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";
 import router from "@/router";
 import axios from "axios";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
-  components: {},
+  components: {
+    Footer
+  },
   computed: {
     ...mapState({
       user: (state) => state.session.user,
@@ -219,7 +232,8 @@ export default {
   text-decoration: none;
 }
 .router {
-  padding-left: 2px;
+  padding-left: 30px;
+  
 }
 .close {
   float: right;
@@ -257,10 +271,13 @@ ul {
   --tran-05: all 0.3s ease;
 }
 
-body {
+body {/*
   background-image: url("@/assets/img/sugarbay-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  */
+  
+  background-color: var(--body-color);
   min-height: 100vh;
   transition: var(--tran-05);
 }
@@ -529,11 +546,13 @@ body.dark .switch::before {
   left: 250px;
   height: 100vh;
   width: calc(100% - 250px);
-  transition: var(--tran-05);
+  transition: var(--tran-05);/*
   background-image: url("@/assets/img/sugarbay-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  */
+  background-color: var(--body-color);
 }
 .home .text {
   font-size: 30px;

@@ -231,7 +231,6 @@
       <div id="sugestions">
         <p style="font-size: 18px">More from this vendor:</p>
         <Pagination :products="paginated_products[currentPage - 1]" />
-        <p class="mt-3">Current Page: {{ currentPage }}</p>
         <div class="overflow-auto">
           <b-pagination
             v-model="currentPage"
@@ -265,7 +264,6 @@ export default {
       perPage: 5,
       currentPage: 1,
       paginated_products: [],
-      vendor_products: [],
       page: 1,
       slides: document.getElementsByClassName("slick-dots"),
       item_quantity: 1,

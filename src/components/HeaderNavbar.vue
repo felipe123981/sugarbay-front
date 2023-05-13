@@ -1,16 +1,10 @@
 <template>
   <div>
     <b-navbar  type="dark" class="my-navbar">
-      <b-navbar-brand href="#"> </b-navbar-brand>
+      <b-navbar-brand href="#">{{ headerTitle }}</b-navbar-brand>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-form>
-          <b-form-input
-            size="sm"
-            class="mr-sm-2 search-input"
-            placeholder="Search"
-          ></b-form-input>
-        </b-nav-form>
+        
       </b-navbar-nav>
       <b-navbar-nav>
         <b-nav-item-dropdown right>
@@ -40,7 +34,10 @@
 </template>
 <script>
 export default {
-  name: "headerNavbar"
+  name: "headerNavbar",
+  props: {
+    headerTitle: null,
+  }
 };
 </script>
 <style scoped>

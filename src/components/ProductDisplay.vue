@@ -46,7 +46,7 @@
           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
           <b-row>
             <b-col lg="4" class="pb-2">
-              <a :href="'http://localhost:8080/product/' + product.id">
+              <a :href="`${url}:8080/product/` + product.id">
                 <b-button size="sm" class="sb-btn" pill
                 ><i class='bx bxs-edit'></i> Detail</b-button
               >
@@ -66,9 +66,11 @@
 </template>
 <script>
 //import axiosConfig from "@/modules/axiosConfig";
+import axiosConfig from "@/modules/axiosConfig";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
+  // eslint-disable-next-line
   name: "ProductDisplay",
   props: ["pid"],
   computed: {
@@ -92,6 +94,7 @@ export default {
   },
   data() {
     return {
+      url: axiosConfig.defaults.baseURL.replace(":3333/", ""),
       products: [],
       product: [],
       rate: 5,
