@@ -11,6 +11,83 @@
               <div v-if="!getCartLength">
                 <h5>Your cart is empty!</h5>
               </div>
+              <!--
+                
+                <div class="catalog">
+                  <b-card class="cart-item" v-for="item in getCart" :key="item.id">
+                <b-media>
+                  <template #aside>
+                    <div class="img-wrapper">
+                      <button
+                        @click="addFavorite(product)"
+                        class="btn btn-sm outline-primary btn-like"
+                      >
+                        <i class="bx bxs-heart"></i>
+                      </button>
+                      <b-img
+                        class="img-responsive"
+                        blank
+                        blank-color="#ccc"
+                        width="70"
+                        alt="placeholder"
+                      >
+                        <div class="img-overlay"></div
+                      ></b-img>
+                    </div>
+                  </template>
+
+                  <h5 class="mt-0">{{ item.name }}</h5>
+
+                  <p>
+                    <b-row>
+                      <b-col>
+                        Price: {{ (item.price * item.quantity).toFixed(2) }}
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col>
+                        <div>
+                          <label for="sb-inline">Quantity: </label><br />
+                          <b-form-spinbutton
+                            id="sb-inline"
+                            v-model="item.quantity"
+                            inline
+                          ></b-form-spinbutton>
+                        </div>
+                      </b-col>
+                    </b-row>
+                  </p>
+                  <b-row>
+                    <b-col lg="4" class="pb-2">
+                      <b-button size="sm" pill
+                        ><i class="bx bx-cart-alt"></i> Checkout</b-button
+                      ></b-col
+                    >
+
+                    <b-col lg="4" class="pb-2">
+                      <b-button
+                        variant="danger"
+                        size="sm"
+                        pill
+                        @click.prevent="removeFromCart(item)"
+                        ><i class="bx bxs-trash"></i> Remove</b-button
+                      >
+                    </b-col>
+                  </b-row>
+                </b-media>
+              </b-card>
+              <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                prev-text="Prev"
+                next-text="Next"
+              ></b-pagination>
+                </div>
+
+                
+
+              -->
               <b-card class="cart-item" v-for="item in getCart" :key="item.id">
                 <b-media>
                   <template #aside>

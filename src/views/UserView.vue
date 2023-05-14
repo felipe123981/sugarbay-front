@@ -257,7 +257,7 @@
                 </b-col>
               </b-row> </b-card-text
           ></b-tab>
-          <b-tab title="My products"   
+          <b-tab title="My products"
             ><b-card-text>
               <h3>Your product list:</h3>
               <br />
@@ -371,18 +371,29 @@
                 </div>
               </b-col>
               <br />
-              <!--
+
               <div v-for="i in 3" :key="i">
                 <div class="product-display">
                   <b-card>
                     <b-media>
                       <template #aside>
-                        <b-img
-                          blank
-                          blank-color="#ccc"
-                          width="64"
-                          alt="placeholder"
-                        ></b-img>
+                        <div class="img-wrapper">
+                          <button
+                            @click="addFavorite(product)"
+                            class="btn btn-sm outline-primary btn-like"
+                          >
+                            <i class="bx bxs-heart"></i>
+                          </button>
+                          <b-img
+                            class="img-responsive"
+                            blank
+                            blank-color="#ccc"
+                            width="70"
+                            alt="placeholder"
+                          >
+                            <div class="img-overlay"></div
+                          ></b-img>
+                        </div>
                       </template>
 
                       <h5 class="mt-0">Product title - U$ 49.90</h5>
@@ -416,12 +427,7 @@
                 </div>
                 <br />
               </div>
-              -->
 
-              
-              
-            
-              
               {{ currentPage }}
               <b-pagination
                 v-model="currentPage"
@@ -429,8 +435,7 @@
                 :per-page="perPage"
                 prev-text="Prev"
                 next-text="Next"
-              ></b-pagination>
-               </b-card-text
+              ></b-pagination> </b-card-text
           ></b-tab>
         </b-tabs>
       </b-card>
@@ -445,15 +450,15 @@ import AvatarInput from "@/components/AvatarInput.vue";
 export default {
   name: "UserView",
   components: {
-    AvatarInput,
-   // Pagination
+    AvatarInput
+    // Pagination
   },
   mounted() {
     this.fetchProducts();
-    setTimeout( () => {
+    setTimeout(() => {
       this.my_products = this.getProducts;
-    }, 500 );
-    
+    }, 500);
+
     this.paginated_products = this.paginate(this.my_products, this.perPage);
   },
   data() {
@@ -548,6 +553,35 @@ export default {
 };
 </script>
 <style scoped>
+.btn-like {
+  position: absolute;
+  padding-left: 3.05rem;
+}
+.btn-like:hover {
+  color: rgb(216, 25, 25);
+}
+.img-wrapper {
+  position: relative;
+}
+
+.img-responsive {
+  height: auto;
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.img-overlay:before {
+  content: " ";
+  display: block;
+  height: 0;
+}
 .form-sb {
   width: 28vw;
   min-width: 230px;

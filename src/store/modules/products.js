@@ -17,7 +17,11 @@ export default {
           console.log(error);
           return 0;
         });
-    }
+    },
+    removeProduct(state, payload) {
+      const idx = state.favorites.findIndex((o) => o.id === payload.id);
+      state.products.splice(idx, 1);
+    },
   },
   getters: {
     getProductById: (state) => (id) => {
