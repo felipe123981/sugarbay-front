@@ -2,17 +2,20 @@
   <div>
     <br />
     <HeaderNavbar headerTitle="Catalog:"></HeaderNavbar>
-    <br>
-       
+    <br />
+
     <div v-if="products.length == 0">
       <p>
-        <b-icon style="color: var(--text-color);" icon="arrow-clockwise" animation="spin-pulse" font-scale="4"></b-icon>
+        <b-icon
+          style="color: var(--text-color)"
+          icon="arrow-clockwise"
+          animation="spin-pulse"
+          font-scale="4"
+        ></b-icon>
       </p>
-      <strong style="color: var(--text-color);">
-        Loading Content...
-      </strong>
+      <strong style="color: var(--text-color)"> Loading Content... </strong>
     </div>
-    
+
     <!--
 
     <slot>
@@ -20,30 +23,25 @@
     </slot>
     
     -->
-    <!--
-    <div v-for="product in products" :key="product.id">
-      <ProductDisplay :pid="product.id" />
-      <br />
-    </div>
-  -->
+    
     <Pagination :products="paginated_products[currentPage - 1]" />
-    <br>
+    <br />
     <div class="overflow-auto">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="rows"
-            :per-page="perPage"
-            aria-controls="my-table"
-            prev-text="Previous"
-            next-text="Next"
-          ></b-pagination>
-        </div>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="my-table"
+        prev-text="Previous"
+        next-text="Next"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
-import HeaderNavbar from "../components/HeaderNavbar.vue"
+import HeaderNavbar from "../components/HeaderNavbar.vue";
 import Pagination from "@/components/PaginationComponent.vue";
 //import ProductDisplay from "@/components/ProductDisplay.vue";
 
@@ -53,30 +51,25 @@ export default {
     HeaderNavbar,
     Pagination
     //ProductDisplay
-},
+  },
   computed: {
     rows() {
       return this.products.length;
     },
-    ...mapGetters(
-    "cart", {
+    ...mapGetters("cart", {
       getCartLenght: "getCartLenght"
     }),
-    ...mapGetters(
-    "products", {
+    ...mapGetters("products", {
       getProducts: "getProducts"
     })
   },
   mounted() {
-    
-      this.fetchProducts();
-    
-    
+    this.fetchProducts();
+
     setTimeout(() => {
       this.products = this.getProducts;
       this.paginated_products = this.paginate(this.products, this.perPage);
     }, 500);
-    
   },
   data() {
     return {
@@ -91,32 +84,21 @@ export default {
       product: [],
       rate: 5,
       currency: "U$",
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
     };
   },
   methods: {
-    ...mapMutations('cart', {
-      addToCart: 'addToCart'
+    ...mapMutations("cart", {
+      addToCart: "addToCart"
     }),
-    ...mapMutations('favorites', {
-      addToFavorites: 'addToFavorites'
+    ...mapMutations("favorites", {
+      addToFavorites: "addToFavorites"
     }),
     ...mapMutations("products", {
       fetchProducts: "fetchProducts"
     }),
     makeToast(variant = null) {
       this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
-        title: 'Pushed!',
+        title: "Pushed!",
         variant: variant,
         solid: true
       });
@@ -138,7 +120,7 @@ export default {
       }
 
       return result;
-    },
+    }
   }
 };
 </script>
@@ -154,16 +136,16 @@ h5 {
   font-weight: 400;
 }
 .sb-btn {
-    background-color: rgb(0, 110, 255);
-    border: 1px white solid;
-  }
-  .btn-like {
-    position: absolute;
-    padding-left: 3.05rem;
-  }
-  .btn-like:hover {
-    color: rgb(216, 25, 25);
-  }
+  background-color: rgb(0, 110, 255);
+  border: 1px white solid;
+}
+.btn-like {
+  position: absolute;
+  padding-left: 3.05rem;
+}
+.btn-like:hover {
+  color: rgb(216, 25, 25);
+}
 
 .img-wrapper {
   position: relative;
@@ -183,8 +165,8 @@ h5 {
 }
 
 .img-overlay:before {
-  content: ' ';
-  display: block; 
+  content: " ";
+  display: block;
   height: 0;
 }
 

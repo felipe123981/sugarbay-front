@@ -371,64 +371,73 @@
                 </div>
               </b-col>
               <br />
+              <div class="catalog">
+                <div
+                  v-for="product in paginated_products[currentPage - 1]"
+                  :key="product.id"
+                >
+                  <div class="product-display">
+                    <b-card>
+                      <b-media>
+                        <template #aside>
+                          <div class="img-wrapper">
+                            <button
+                              @click="addToFavorites(product)"
+                              class="btn btn-sm outline-primary btn-like"
+                            >
+                              <i class="bx bxs-heart"></i>
+                            </button>
+                            <b-img
+                              class="img-responsive"
+                              blank
+                              blank-color="#ccc"
+                              width="70"
+                              alt="placeholder"
+                            >
+                              <div class="img-overlay"></div
+                            ></b-img>
+                          </div>
+                        </template>
 
-              <div v-for="i in 3" :key="i">
-                <div class="product-display">
-                  <b-card>
-                    <b-media>
-                      <template #aside>
-                        <div class="img-wrapper">
-                          <button
-                            @click="addFavorite(product)"
-                            class="btn btn-sm outline-primary btn-like"
-                          >
-                            <i class="bx bxs-heart"></i>
-                          </button>
-                          <b-img
-                            class="img-responsive"
-                            blank
-                            blank-color="#ccc"
-                            width="70"
-                            alt="placeholder"
-                          >
-                            <div class="img-overlay"></div
-                          ></b-img>
-                        </div>
-                      </template>
+                        <h5 class="mt-0">
+                          {{ product.name }} - U$ {{ product.price }}
+                        </h5>
+                        <p>
+                          Cras sit amet nibh libero, in gravida nulla. Nulla vel
+                          metus scelerisque ante sollicitudin.
+                        </p>
+                        <b-row>
+                          <b-col lg="4" class="pb-2">
+                            <router-link :to="'/register/' + product.id">
+                            <b-button
+                              size="sm"
+                              class="registered-products-button"
+                              pill
+                              variant="primary"
+                              ><i class="bx bx-edit-alt"></i> Edit</b-button
+                            >
+                          </router-link>
+                          </b-col>
 
-                      <h5 class="mt-0">Product title - U$ 49.90</h5>
-                      <p>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel
-                        metus scelerisque ante sollicitudin.
-                      </p>
-                      <b-row>
-                        <b-col lg="4" class="pb-2">
-                          <b-button
-                            size="sm"
-                            class="registered-products-button"
-                            pill
-                            variant="primary"
-                            ><i class="bx bx-edit-alt"></i> Edit</b-button
-                          >
-                        </b-col>
-
-                        <b-col lg="4" class="pb-2">
-                          <b-button
-                            size="sm"
-                            class="registered-products-button"
-                            pill
-                            variant="danger"
-                            ><i class="bx bx-trash"></i> Remove</b-button
-                          >
-                        </b-col>
-                      </b-row>
-                    </b-media>
-                  </b-card>
+                          <b-col lg="4" class="pb-2">
+                            <b-button
+                              @click="
+                                removeElement(paginated_products, product)
+                              "
+                              size="sm"
+                              class="registered-products-button"
+                              pill
+                              variant="danger"
+                              ><i class="bx bx-trash"></i> Remove</b-button
+                            >
+                          </b-col>
+                        </b-row>
+                      </b-media>
+                    </b-card>
+                  </div>
+                  <br />
                 </div>
-                <br />
               </div>
-
-              {{ currentPage }}
               <b-pagination
                 v-model="currentPage"
                 :total-rows="rows"
@@ -443,6 +452,7 @@
   </div>
 </template>
 <script>
+//import { removeElement } from "@/modules/pagination"
 //import Pagination from "@/components/PaginationComponent.vue";
 import { mapGetters, mapMutations } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
@@ -457,9 +467,8 @@ export default {
     this.fetchProducts();
     setTimeout(() => {
       this.my_products = this.getProducts;
+      this.paginated_products = this.paginate(this.my_products, this.perPage);
     }, 500);
-
-    this.paginated_products = this.paginate(this.my_products, this.perPage);
   },
   data() {
     return {
@@ -496,8 +505,14 @@ export default {
     })
   },
   methods: {
+    ...mapMutations("favorites", {
+      addToFavorites: "addToFavorites"
+    }),
     ...mapMutations("products", {
       fetchProducts: "fetchProducts"
+    }),
+    ...mapMutations("products", {
+      removeFromProducts: "removeFromProducts"
     }),
     paginate(base, max) {
       var result = [[]];
@@ -516,6 +531,13 @@ export default {
       }
 
       return result;
+    },
+    removeElement(array, element) {
+      if(confirm("Are you sure?")) {
+      const idx = array[this.currentPage - 1].findIndex((o) => o.id === element.id);
+      array[this.currentPage - 1].splice(idx, 1);
+      this.removeFromProducts(element);
+      }
     },
     lockUnlockForm() {
       this.lockform = this.lockform ? false : true;
@@ -553,6 +575,17 @@ export default {
 };
 </script>
 <style scoped>
+.catalog {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.7px);
+  -webkit-backdrop-filter: blur(1.7px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow-y: scroll;
+  height: 490px;
+  padding: 2px;
+}
 .btn-like {
   position: absolute;
   padding-left: 3.05rem;

@@ -46,6 +46,16 @@
           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
           <b-row>
             <b-col lg="4" class="pb-2">
+              <!--
+
+                <router-link :to="`/product/` + product.id">
+                <b-button size="sm" class="sb-btn" pill
+                ><i class='bx bxs-edit'></i> Detail</b-button
+              >
+                </router-link>
+
+              -->
+
               <a :href="`${url}:8080/product/` + product.id">
                 <b-button size="sm" class="sb-btn" pill
                 ><i class='bx bxs-edit'></i> Detail</b-button

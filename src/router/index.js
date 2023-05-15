@@ -11,6 +11,9 @@ import SignIn from "@/views/SignIn.vue";
 import ShopView from "@/views/ShopView.vue";
 import AccountConfirmed from "@/views/AccountConfirmed.vue";
 import AboutView from "@/views/AboutView.vue"
+//
+import Checkout from "@/views/CheckoutView.vue"
+//
 import Router from "vue-router";
 import Vue from "vue";
 
@@ -63,7 +66,7 @@ const router =  new Router({
       component: LoginView
     },
     {
-      path: "/register",
+      path: "/register/:productId?",
       name: "register",
       component: ProductRegister
     },
@@ -72,7 +75,7 @@ const router =  new Router({
       name: "sign-in",
       component: SignIn
     },
-    //lembre-se de adiocionar o param referente ao id do produto
+    // param referente ao id do produto
     {
       path: "/product/:productId",
       name: "product",
@@ -87,7 +90,14 @@ const router =  new Router({
       path: "/about",
       name: "about",
       component: AboutView
+    },
+    //
+    {
+      path: "/checkout",
+      name: "checkout",
+      component: Checkout
     }
+    //
   ]
 
 });

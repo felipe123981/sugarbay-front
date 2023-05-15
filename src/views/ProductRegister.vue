@@ -75,8 +75,15 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="submit" @click="registerProduct" variant="primary"
+      <b-button
+        v-if="form.length == 0"
+        type="submit"
+        @click="registerProduct"
+        variant="primary"
         >Register</b-button
+      >
+      <b-button v-else type="submit" @click="updateProduct" variant="primary"
+        >Update</b-button
       >
     </b-form>
     {{ print }}
@@ -91,29 +98,21 @@ export default {
   components: {
     Uploader
   },
+  async mounted() {
+    await axiosConfig
+      .get("/products/" + this.$route.params.productId)
+      .then((resp) => {
+        this.form = resp.data;
+      })
+      .catch((error) => {
+        console.log(error);
+        return 0;
+      });
+  },
   data() {
     return {
-      
       /*
       
-      product_register: [
-        {
-          name: "",
-          model: "",
-          brand: "",
-          zipcode :"",
-          box_dimensions: [ 
-            {
-              hight: 0,
-              width: 0,
-              lenght: 0
-            }
-          ]
-        }
-      ],
-      */
-      fileList: [],
-      show: true,
       form: [
         {
           name: "",
@@ -121,7 +120,6 @@ export default {
           price: "free",
           model: "",
           brand: "",
-          zipcode: "",
           box_dimensions: [
             {
               hight: 0,
@@ -131,6 +129,10 @@ export default {
           ]
         }
       ]
+      */
+      fileList: [],
+      show: true,
+      form: []
     };
   },
   methods: {
@@ -150,6 +152,7 @@ export default {
         this.show = true;
       });
     },
+    //warning
     async registerProduct() {
       await axiosConfig
         .post("/products", {
@@ -163,12 +166,25 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    }
+    },
+    async updateProduct() {
+      await axiosConfig
+        .put("products/" + this.product.id, {
+          name: this.form.name,
+          quantity: this.form.quantity,
+          price: this.form.price
+        })
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   }
 };
 </script>
 <style scoped>
-
 .header-title {
   padding-top: 8px;
   padding-left: 30px;
@@ -194,16 +210,16 @@ export default {
 }
 
 .sb-btn {
-    background-color: rgb(0, 110, 255);
-    border: 1px white solid;
-  }
-  .btn-like {
-    position: absolute;
-    padding-left: 3.05rem;
-  }
-  .btn-like:hover {
-    color: rgb(216, 25, 25);
-  }
+  background-color: rgb(0, 110, 255);
+  border: 1px white solid;
+}
+.btn-like {
+  position: absolute;
+  padding-left: 3.05rem;
+}
+.btn-like:hover {
+  color: rgb(216, 25, 25);
+}
 
 .img-wrapper {
   position: relative;
@@ -223,8 +239,8 @@ export default {
 }
 
 .img-overlay:before {
-  content: ' ';
-  display: block; 
+  content: " ";
+  display: block;
   height: 0;
 }
 </style>
