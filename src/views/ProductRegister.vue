@@ -169,7 +169,7 @@ export default {
     },
     async updateProduct() {
       await axiosConfig
-        .put("products/" + this.product.id, {
+        .put("products/" + this.form.id, {
           name: this.form.name,
           quantity: this.form.quantity,
           price: this.form.price
