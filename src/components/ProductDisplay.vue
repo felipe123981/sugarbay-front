@@ -18,6 +18,7 @@
                 <button @click="addToFavorites(product)" class="btn btn-sm outline-primary btn-like">
                   <i class='bx bxs-heart'></i>
                 </button>
+                
                 <b-img class="img-responsive"
                 blank
               blank-color="#ccc"
@@ -56,7 +57,7 @@
 
               -->
 
-              <a :href="`${url}:8080/product/` + product.id">
+              <a :href="`${url}:${port}/product/` + product.id">
                 <b-button size="sm" class="sb-btn" pill
                 ><i class='bx bxs-edit'></i> Detail</b-button
               >
@@ -105,6 +106,7 @@ export default {
   data() {
     return {
       url: axiosConfig.defaults.baseURL.replace(":3333/", ""),
+      port: 8080,
       products: [],
       product: [],
       rate: 5,
@@ -141,6 +143,7 @@ export default {
     position: absolute;
     padding-left: 3.05rem;
   }
+ 
   .btn-like:hover {
     color: rgb(216, 25, 25);
   }

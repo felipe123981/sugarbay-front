@@ -8,11 +8,11 @@
         plain
       ></b-form-file>
     </div>
-    <div 
+    <div
       v-else
       class="wrapper-2"
       :style="{
-        'background': 'url(' + getAvatar + ')',
+        background: 'url(' + getAvatar + ')',
         'background-size': 'contain'
       }"
     >
@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex"; 
+import { mapGetters } from "vuex";
 //import userIcon  from "@/assets/img/userIcon.png"
 export default {
   name: "AvatarInput",
@@ -36,9 +36,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("session", { 
-      getAvatar: 'getAvatar'
-     })
+    ...mapGetters("session", {
+      getAvatar: "getAvatar"
+    })
   },
   mounted() {
     this.file = localStorage.file;

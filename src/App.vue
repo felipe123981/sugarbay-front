@@ -8,7 +8,7 @@
               v-if="getAvatar == ''"
               src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"
             ></b-avatar>
-            <b-avatar v-else :src="getAvatar"></b-avatar>
+            <b-avatar v-else :src="this.avatar_url"></b-avatar>
           </span>
 
           <div class="text logo-text">
@@ -203,7 +203,7 @@ export default {
   data() {
     return {
       client_ip: "",
-      client_info: []
+      client_info: [],
     };
   },
   methods: {

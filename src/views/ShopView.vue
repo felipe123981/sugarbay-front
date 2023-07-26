@@ -198,16 +198,137 @@
                     <i class="bx bxs-purchase-tag"></i> Description
                   </template>
                   <b-card-text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    <div class="info-content">
+                      <strong> Vendor: </strong>
+                    </div>
+                    <div class="header">
+                      <div class="avatar">
+                        <b-avatar variant="secondary"></b-avatar>
+                      </div>
+                      <div class="username" v-b-modal="'my-modal' + cid">
+                        @{{ username }}
+                        <br />
+                      </div>
+                      <!-- The modal -->
+                      <b-modal centered ok-only :id="'my-modal' + cid">
+                        <div class="modal-container">
+                          <h1>{{ username }}</h1>
+                          <div class="modal-header">
+                            <div class="customer-thumbnail">
+                              <b-img
+                                thumbnail
+                                fluid
+                                src="https://picsum.photos/70/70/?image=59"
+                                alt="Image 3"
+                              ></b-img>
+                            </div>
+                            <div class="customer-header-description">
+                              <div class="customer-name">
+                                <p>
+                                  {{ username }}
+                                </p>
+                              </div>
+                              <div class="customer-description">
+                                Sugarbay official vendor
+                              </div>
+                            </div>
+                          </div>
+                          <div class="customer-reputation">
+                            <div class="customer-level market-leader">
+                              <h3>Market leader</h3>
+                            </div>
+                            <p>Is a excellent vendor!</p>
+                          </div>
+                          <div class="ui-gauge">
+                            <ul
+                              aria-hidden="true"
+                              class="ui-thermometer"
+                              value="5"
+                            >
+                              <li
+                                class="ui-thermometer__level ui-thermometer__level--1"
+                              ></li>
+                              <li
+                                class="ui-thermometer__level ui-thermometer__level--2"
+                              ></li>
+                              <li
+                                class="ui-thermometer__level ui-thermometer__level--3"
+                              ></li>
+                              <li
+                                class="ui-thermometer__level ui-thermometer__level--4"
+                              ></li>
+                              <li
+                                class="ui-thermometer__level ui-thermometer__level--5"
+                              ></li>
+                            </ul>
+                          </div>
+
+                          <div class="customer-qualities">
+                            <div class="customer-sales">
+                              <div class="sales-number">
+                                <h4>+{{ sales_number }}</h4>
+                              </div>
+                              <div class="sales-time">
+                                <p>sales in the last 60 days!</p>
+                              </div>
+                            </div>
+                            <div class="customer-service">
+                              <i class="bx bx-conversation modal-icon"></i>
+                              <p>provides good service.</p>
+                            </div>
+                            <div class="deliver-on-time">
+                              <i class="bx bx-timer modal-icon"></i>
+                              <p>deliver products on time.</p>
+                            </div>
+                          </div>
+                          <br />
+                          <BR></BR>
+                          <a href="#" class="about-vendor"
+                            >More about this vendor</a
+                          >
+                        </div>
+                      </b-modal>
+                    </div>
+                    <div v-if="brand" class="info-content">
+                      <strong> Brand: </strong>
+                    </div>
+                    <div v-if="brand" class="description-details">
+                      {{ brand }}
+                    </div>
+                    <div v-if="model" class="info-content">
+                      <strong> Model: </strong>
+                    </div>
+                    <div v-if="model" class="description-details">
+                      {{ model }}
+                    </div>
+                    <div v-if="publisher" class="info-content">
+                      <strong> Publisher: </strong>
+                    </div>
+                    <div v-if="publisher" class="description-details">
+                      {{ publisher }}
+                    </div>
+                    <div v-if="description" class="info-content">
+                      <strong> Description: </strong>
+                    </div>
+                    <div v-if="description" class="description-details">
+                      {{ description }}
+                    </div>
                   </b-card-text>
                 </b-tab>
                 <b-tab>
                   <template #title>
                     <i class="bx bx-conversation"></i> Reviews
                   </template>
-                  <b-card-text>Tab contents 3</b-card-text>
+                  <b-card-text>
+                    <!--<div class="catalog">
+                      <div v-for="i in 3" :key="i" :id="i">
+                        <Comment :cid="i"></Comment>
+                        <br>
+                      </div>
+                    </div>
+                    -->
+                    <Reviews></Reviews>
+                  </b-card-text>
                 </b-tab>
               </b-tabs>
             </b-card>
@@ -222,7 +343,7 @@
           </b-button>
         </p>
         <p>
-          <b-button pill class="sb-btn" variant="primary">
+          <b-button pill class="sb-btn" variant="primary" @click.prevent.stop="addToCart(product) ,makeToast('success'), product = fetch()">
             <i class="bx bx-cart-alt"></i> Add to cart
           </b-button>
         </p>
@@ -255,12 +376,21 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import axiosConfig from "@/modules/axiosConfig";
 import Pagination from "@/components/PaginationComponent.vue";
+//import Comment from "@/components/CommentComponent.vue";
+import Reviews from "@/components/ReviewInput.vue";
 
 export default {
   name: "MyComponent",
-  components: { VueSlickCarousel, Pagination },
+  components: { VueSlickCarousel, Pagination, /*Comment,*/ Reviews },
   data() {
     return {
+      sales_number: 10000,
+      username: "Donut_Lavigne",
+      brand: "Chevrollet",
+      model: "V12",
+      publisher: null,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       perPage: 5,
       currentPage: 1,
       paginated_products: [],
@@ -335,6 +465,7 @@ export default {
       getProducts: "getProducts"
     })
   },
+  
   async mounted() {
     this.fetchProducts();
     await axiosConfig
@@ -352,9 +483,19 @@ export default {
     //console.log(this.paginated_products);
   },
   methods: {
-    ...mapMutations("products", {
-      fetchProducts: "fetchProducts"
+    ...mapMutations('products', {
+      fetchProducts: 'fetchProducts'
     }),
+    ...mapMutations('cart', {
+      addToCart: 'addToCart'
+    }),
+    makeToast(variant = null) {
+      this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
+        title: 'Pushed!',
+        variant: variant,
+        solid: true
+      });
+    },
     paginate(base, max) {
       var result = [[]];
       var group = 0;
@@ -403,6 +544,9 @@ export default {
   width: 80vw;
   padding-left: 10px;
 }
+.description-details {
+  padding: 1rem;
+}
 .container-sm1 {
   color: var(--text-color);
   position: relative;
@@ -432,6 +576,7 @@ export default {
 .price-content {
   min-width: 200px;
 }
+/*
 .color-content {
 }
 .size-content {
@@ -442,6 +587,7 @@ export default {
 }
 .total-content {
 }
+*/
 .sb-media {
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.25);
@@ -472,8 +618,120 @@ export default {
   border: 1px white solid;
   width: 25vh;
 }
-.pagination-component {
-  float: right;
+.ui-thermometer {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  height: auto;
+  margin-left: -6px;
+  overflow: hidden;
+  vertical-align: baseline;
   width: 100%;
+}
+.modal-icon {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
+.sales-number {
+  padding: 10px;
+}
+.deliver-on-time {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 10px;
+  border-left: 1px solid black;
+}
+.customer-sales {
+  padding-left: 5px;
+  border-right: 1px solid black;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+.customer-service {
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+.ui-thermometer__level {
+  border-left: 6px solid #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  height: 8px;
+  margin-top: 2px;
+  width: 20%;
+}
+.ui-thermometer__level--1 {
+  background: #fff0f0;
+}
+.ui-thermometer__level--2 {
+  background: #fff5e8;
+}
+.ui-thermometer__level--3 {
+  background: #fffcda;
+}
+.ui-thermometer__level--4 {
+  background: #f1fdd7;
+}
+.ui-thermometer__level--5 {
+  background: #119933;
+  height: 12px;
+  margin: 0;
+  /* 
+    background: #edf8ee;
+    */
+}
+.customer-qualities {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.customer-reputation {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+.market-leader {
+  color: green;
+}
+.customer-name {
+  font-weight: bold;
+}
+.customer-header-description {
+  padding-left: 15px;
+}
+.modal-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  flex-flow: row wrap;
+}
+.username {
+  padding-left: 1vw;
+  font-weight: bold;
+}
+.username:hover {
+  color: #822e81;
+}
+.username:active {
+  color: #822e81;
+}
+.about-vendor {
+  color: #822e81;
+  cursor: pointer;
 }
 </style>

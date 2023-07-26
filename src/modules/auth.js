@@ -14,8 +14,8 @@ export async function isValidToken(token) {
     .then(() => {
       return true;
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((/*error*/) => {
+      //console.log(error);
       return false;
     });
 }
