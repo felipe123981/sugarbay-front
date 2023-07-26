@@ -197,7 +197,6 @@ export default {
         .then(function (response) {
           const cookie = [
             {
-              id: response.data.user.id,
               name: response.data.user.name,
               email: response.data.user.email,
               token: response.data.token

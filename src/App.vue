@@ -8,7 +8,7 @@
               v-if="getAvatar == ''"
               src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"
             ></b-avatar>
-            <b-avatar v-else :src="this.avatar_url"></b-avatar>
+            <b-avatar v-else :src="getAvatar"></b-avatar>
           </span>
 
           <div class="text logo-text">

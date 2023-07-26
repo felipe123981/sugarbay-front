@@ -37,7 +37,7 @@ export default {
                 {
                   username: resp.data.name,
                   email: resp.data.email,
-                  avatar_url: resp.data.user.avatar_url
+                  avatar_url: resp.data.avatar_url
                 }
               ];
             });
