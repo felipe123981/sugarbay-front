@@ -38,11 +38,11 @@
               class="VSCarrousel"
             >
               <div
-                v-for="(image, index) in images"
+                v-for="(image, index) in product.photos"
                 :key="index"
                 :class="'image-' + (index + 1)"
               >
-                <img :alt="'image-' + (index + 1)" :src="image" />
+                <img width="200" height="200" :alt="'image-' + (index + 1)" :src="`${api_url}files/` + image" />
               </div>
             </VueSlickCarousel>
           </div>
@@ -384,6 +384,7 @@ export default {
   components: { VueSlickCarousel, Pagination, /*Comment,*/ Reviews },
   data() {
     return {
+      api_url: axiosConfig.defaults.baseURL,
       sales_number: 10000,
       username: "Donut_Lavigne",
       brand: "Chevrollet",

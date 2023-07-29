@@ -276,7 +276,6 @@ body {/*
   background-repeat: no-repeat;
   background-size: cover;
   */
-  
   background-color: var(--body-color);
   min-height: 100vh;
   transition: var(--tran-05);

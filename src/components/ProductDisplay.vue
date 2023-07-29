@@ -1,6 +1,6 @@
 <template>
     <div class="product-display">
-      <b-card>
+      <b-card class="card-body">
         <b-media>
           <template #aside>
             <!--
@@ -20,9 +20,8 @@
                 </button>
                 
                 <b-img class="img-responsive"
-                blank
-              blank-color="#ccc"
-              width="70"
+                
+              :src="`${api_url}files/` + product.photos[0]"
               alt="placeholder"
                 >
                 <div class="img-overlay">
@@ -76,7 +75,6 @@
   
 </template>
 <script>
-//import axiosConfig from "@/modules/axiosConfig";
 import axiosConfig from "@/modules/axiosConfig";
 import { mapGetters, mapMutations } from "vuex";
 
@@ -105,8 +103,9 @@ export default {
   },
   data() {
     return {
+      api_url:axiosConfig.defaults.baseURL,
       url: axiosConfig.defaults.baseURL.replace(":3333/", ""),
-      port: 8080,
+      port: 80,
       products: [],
       product: [],
       rate: 5,
@@ -153,7 +152,8 @@ export default {
 }
 
 .img-responsive {
-  height: auto;
+  height: 7ch;
+  width: 7ch;
 }
 
 .img-overlay {
@@ -186,5 +186,8 @@ export default {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.card-body {
+  padding: 0.6rem;
 }
 </style>
