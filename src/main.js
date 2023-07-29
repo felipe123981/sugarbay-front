@@ -18,12 +18,7 @@ Vue.use(ToastPlugin)
 Vue.use(VueRouter);
 Vue.config.productionTip = true;
 
-const env = {
-  API_URL: process.env.VUE_APP_API_URL
-};
-
 new Vue({
-  data: env,
   render: (h) => h(App),
   store,
   router
