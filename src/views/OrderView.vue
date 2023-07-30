@@ -100,8 +100,7 @@
                       </button>
                       <b-img
                         class="img-responsive"
-                        blank
-                        blank-color="#ccc"
+                        :src="`${api_url}files/` + item.photos[0]"
                         width="70"
                         alt="placeholder"
                       >
@@ -191,6 +190,7 @@
   </div>
 </template>
 <script>
+import axiosConfig from "@/modules/axiosConfig";
 import { mapGetters, mapMutations } from "vuex";
 import HeaderNavbar from "@/components/HeaderNavbar.vue";
 export default {
@@ -211,6 +211,7 @@ export default {
   },
   data() {
     return {
+      api_url: axiosConfig.defaults.baseURL,
       pageWidth: 0,
       items: [
         {

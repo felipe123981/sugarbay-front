@@ -29,7 +29,7 @@
               :placeholder="page"
               v-model="page"
               disabled
-            />/{{ images.length }}
+            />/{{ product.photos.length }}
 
             <VueSlickCarousel
               @swipe="getCurrentSlick(slides[0].childNodes)"
@@ -405,16 +405,6 @@ export default {
         { value: 3, text: "G" }
       ],
       colors: ["white", "grey", "black"],
-      images: [
-        "https://placekitten.com/g/200/200",
-        "https://placekitten.com/200/200",
-        "https://placekitten.com/200/200",
-        "https://placekitten.com/g/200/200",
-        "https://placekitten.com/200/200",
-        "https://placekitten.com/200/200",
-        "https://placekitten.com/g/200/200",
-        "https://placekitten.com/200/200"
-      ],
       product: [],
       settings: {
         arrows: true,

@@ -389,9 +389,7 @@
                             </button>
                             <b-img
                               class="img-responsive"
-                              blank
-                              blank-color="#ccc"
-                              width="70"
+                              :src="`${api_url}files/` + product.photos[0]"
                               alt="placeholder"
                             >
                               <div class="img-overlay"></div
@@ -457,6 +455,7 @@
 import { mapGetters, mapMutations } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
+import axiosConfig from "@/modules/axiosConfig";
 export default {
   name: "UserView",
   components: {
@@ -472,6 +471,7 @@ export default {
   },
   data() {
     return {
+      api_url: axiosConfig.defaults.baseURL,
       currentPage: 1,
       perPage: 5,
       my_products: [],
@@ -598,7 +598,8 @@ export default {
 }
 
 .img-responsive {
-  height: auto;
+  height: 70px;
+  width: 70px;
 }
 
 .img-overlay {

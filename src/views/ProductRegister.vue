@@ -4,14 +4,15 @@
       <h3 class="header-title">Tell us about your product:</h3>
       <div class="box2">
         <Uploader
+          name="photos"
           style="color: white"
           v-model="fileList"
-          :url="remoteUrl"
+          :url="`${api_url}products/photos/` + form.id"
           title="Upload atleast 3 pics or videos"
           @on-change="onChange"
           @on-cancel="onCancel"
           @on-success="onSuccess"
-          @on-error="onError"
+          @on-error="onError(fileList)"
           @on-delete="onDelete"
         ></Uploader>
       </div>
@@ -77,8 +78,7 @@
       </b-row>
       <b-button
         v-if="form.length == 0"
-        type="submit"
-        @click="registerProduct"
+        @click="registerProduct(form)"
         variant="primary"
         >Register</b-button
       >
@@ -91,6 +91,7 @@
 </template>
 <script>
 import axiosConfig from "@/modules/axiosConfig";
+import { readCookie } from "@/modules/cookie";
 import Uploader from "vux-uploader-component";
 
 export default {
@@ -99,6 +100,7 @@ export default {
     Uploader
   },
   async mounted() {
+    this.token = readCookie(document.cookie);
     await axiosConfig
       .get("/products/" + this.$route.params.productId)
       .then((resp) => {
@@ -112,7 +114,7 @@ export default {
   data() {
     return {
       /*
-      
+
       form: [
         {
           name: "",
@@ -130,12 +132,40 @@ export default {
         }
       ]
       */
+      product_id: null,
+      token: null,
+      api_url: axiosConfig.defaults.baseURL,
+      fileName: null,
       fileList: [],
       show: true,
       form: []
     };
   },
   methods: {
+    async sendPhotos(fileList) {
+      let formData = new FormData();
+
+      fileList.forEach((file, index) => {
+        console.log(`file ${index}:`, file);
+        formData.append("photos", file.blob);
+      });
+      await axiosConfig
+        .post(`products/photos/${this.form.id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `token ${this.token}`
+          }
+        })
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    onError(event) {
+      console.log(event);
+    },
     onSubmit(event) {
       event.preventDefault();
       alert(JSON.stringify(this.form));
@@ -153,19 +183,36 @@ export default {
       });
     },
     //warning
-    async registerProduct() {
-      await axiosConfig
-        .post("/products", {
-          name: this.form.name,
-          price: this.form.price,
-          quantity: this.form.quantity
-        })
-        .then((resp) => {
-          console.log(resp.data);
-        })
-        .catch((error) => {
-          console.log(error);
+    async registerProduct(form) {
+      if (this.fileList.length >= 3) {
+        await axiosConfig
+          .post("/products", {
+            name: form.name,
+            price: form.price,
+            quantity: form.quantity
+          })
+          .then((resp) => {
+            this.form.id = resp.data.id;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        await this.sendPhotos(this.fileList);
+
+        this.$bvToast.toast("Your product is now for sale!", {
+          title: "Successfully registered",
+          variant: "success",
+          solid: true
         });
+
+        this.$route.params.productId = this.form.id;
+      } else {
+        this.$bvToast.toast("Upload atleast 3 pics of your product.", {
+          title: "Failed",
+          variant: "danger",
+          solid: true
+        });
+      }
     },
     async updateProduct() {
       await axiosConfig
@@ -180,7 +227,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    },
+    }
   }
 };
 </script>

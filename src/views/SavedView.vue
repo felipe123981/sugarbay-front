@@ -6,8 +6,8 @@
     <div  v-if="items.length ==  0">
         <h4 style="color: var(--text-color)"> <i class='bx bxs-heart-circle'></i> Your favorites will appears here!</h4> 
     </div>
-    <div v-else v-for="item in items" :key="item.id">
-      <b-card>
+    <div v-else>
+      <b-card v-for="item in items" :key="item.id">
         <b-media>
           <template #aside>
             <div class="img-wrapper">
@@ -18,8 +18,7 @@
               </button>
               <b-img
                 class="img-responsive"
-                blank
-                blank-color="#ccc"
+                :src="`${api_url}files/` + item.photos[0]"
                 width="70"
                 alt="placeholder"
               >
@@ -68,6 +67,7 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import HeaderNavbar from "@/components/HeaderNavbar.vue";
+import axiosConfig from "@/modules/axiosConfig";
 
 export default {
     name: "SavedView",
@@ -81,6 +81,7 @@ export default {
     },
     data() {
         return {
+            api_url: axiosConfig.defaults.baseURL,
             text: "",
             currency: "U$",
             items: []
@@ -112,7 +113,8 @@ export default {
 }
 
 .img-responsive {
-  height: auto;
+  height: 70px;
+  width: 70px;
 }
 
 .img-overlay {
