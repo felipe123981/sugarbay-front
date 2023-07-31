@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 style="color: var(--text-color)"><i class='bx bxs-cog' ></i> Settings:</h1>
+    <h2 style="color: var(--text-color)"><i class='bx bxs-cog' ></i> Settings:</h2>
     <div>
       <b-card no-body>
         <b-tabs pills card vertical>

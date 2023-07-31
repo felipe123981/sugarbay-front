@@ -100,7 +100,7 @@ strong {
 
 <template>
   <div>
-    <h2>Login Panel:</h2>
+    <h2 style="color: var(--text-color)"><i class='bx bxs-user'></i> Login Panel:</h2>
     <b-form v-if="show">
       <b-form-group
         id="input-group-1"

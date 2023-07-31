@@ -407,14 +407,14 @@
                         <b-row>
                           <b-col lg="4" class="pb-2">
                             <router-link :to="'/register/' + product.id">
-                            <b-button
-                              size="sm"
-                              class="registered-products-button"
-                              pill
-                              variant="primary"
-                              ><i class="bx bx-edit-alt"></i> Edit</b-button
-                            >
-                          </router-link>
+                              <b-button
+                                size="sm"
+                                class="registered-products-button"
+                                pill
+                                variant="primary"
+                                ><i class="bx bx-edit-alt"></i> Edit</b-button
+                              >
+                            </router-link>
                           </b-col>
 
                           <b-col lg="4" class="pb-2">
@@ -452,7 +452,7 @@
 <script>
 //import { removeElement } from "@/modules/pagination"
 //import Pagination from "@/components/PaginationComponent.vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapState } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
 import axiosConfig from "@/modules/axiosConfig";
@@ -500,6 +500,9 @@ export default {
     rows() {
       return this.my_products.length;
     },
+    ...mapState({
+      token: (state) => state.session.token
+    }),
     ...mapGetters("products", {
       getProducts: "getProducts"
     })
@@ -533,10 +536,16 @@ export default {
       return result;
     },
     removeElement(array, element) {
-      if(confirm("Are you sure?")) {
-      const idx = array[this.currentPage - 1].findIndex((o) => o.id === element.id);
-      array[this.currentPage - 1].splice(idx, 1);
-      this.removeFromProducts(element);
+      if (!this.token) {
+        alert("Login required.");
+      } else {
+        if (confirm("Are you sure?")) {
+          const idx = array[this.currentPage - 1].findIndex(
+            (o) => o.id === element.id
+          );
+          array[this.currentPage - 1].splice(idx, 1);
+          this.removeFromProducts(element);
+        }
       }
     },
     lockUnlockForm() {

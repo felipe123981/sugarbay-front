@@ -91,7 +91,7 @@
 </template>
 <script>
 import axiosConfig from "@/modules/axiosConfig";
-import { readCookie } from "@/modules/cookie";
+import { mapState } from "vuex";
 import Uploader from "vux-uploader-component";
 
 export default {
@@ -99,8 +99,12 @@ export default {
   components: {
     Uploader
   },
+  computed: {
+    ...mapState({
+      token: (state) => state.session.token
+    })
+  },
   async mounted() {
-    this.token = readCookie(document.cookie);
     await axiosConfig
       .get("/products/" + this.$route.params.productId)
       .then((resp) => {
@@ -186,11 +190,19 @@ export default {
     async registerProduct(form) {
       if (this.fileList.length >= 3) {
         await axiosConfig
-          .post("/products", {
-            name: form.name,
-            price: form.price,
-            quantity: form.quantity
-          })
+          .post(
+            "/products",
+            {
+              name: form.name,
+              price: form.price,
+              quantity: form.quantity
+            },
+            {
+              headers: {
+                Authorization: `token ${this.token}`
+              }
+            }
+          )
           .then((resp) => {
             this.form.id = resp.data.id;
           })
@@ -216,11 +228,19 @@ export default {
     },
     async updateProduct() {
       await axiosConfig
-        .put("products/" + this.form.id, {
-          name: this.form.name,
-          quantity: this.form.quantity,
-          price: this.form.price
-        })
+        .put(
+          "products/" + this.form.id,
+          {
+            name: this.form.name,
+            quantity: this.form.quantity,
+            price: this.form.price
+          },
+          {
+            headers: {
+              Authorization: `token ${this.token}`
+            }
+          }
+        )
         .then((resp) => {
           console.log(resp);
         })

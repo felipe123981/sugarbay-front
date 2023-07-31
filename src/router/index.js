@@ -10,16 +10,17 @@ import ProductRegister from "@/views/ProductRegister.vue";
 import SignIn from "@/views/SignIn.vue";
 import ShopView from "@/views/ShopView.vue";
 import AccountConfirmed from "@/views/AccountConfirmed.vue";
-import AboutView from "@/views/AboutView.vue"
+import AboutView from "@/views/AboutView.vue";
 //
-import Checkout from "@/views/CheckoutView.vue"
+import Checkout from "@/views/CheckoutView.vue";
 //
 import Router from "vue-router";
 import Vue from "vue";
+import { readCookie } from "@/modules/cookie";
 
 Vue.use(Router);
 
-const router =  new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -68,7 +69,8 @@ const router =  new Router({
     {
       path: "/register/:productId?",
       name: "register",
-      component: ProductRegister
+      component: ProductRegister,
+      meta: { requiresAuth: true }
     },
     {
       path: "/sign-in",
@@ -79,7 +81,7 @@ const router =  new Router({
     {
       path: "/product/:productId",
       name: "product",
-      component: ShopView,
+      component: ShopView
     },
     {
       path: "/account-confirmed",
@@ -99,7 +101,18 @@ const router =  new Router({
     }
     //
   ]
-
 });
 
-export default  router;
+router.beforeEach((to, from, next) => {
+  const token = readCookie(document.cookie);
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if(requiresAuth && !token) {
+    alert("Login required.")
+    next('/login');
+  } else {
+    next();
+  }
+});
+
+export default router;

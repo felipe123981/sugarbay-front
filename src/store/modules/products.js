@@ -19,16 +19,21 @@ export default {
         });
     },
     removeFromProducts(state, payload) {
-      axiosConfig.delete("products/" + payload.id)
-      .then((resp) => {
-        if (resp.status == 200) {
-          const idx = state.products.findIndex((o) => o.id === payload.id);
-          state.products.splice(idx, 1);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      axiosConfig
+        .delete("products/" + payload.id, {
+          headers: {
+            Authorization: `token ${state.session.token}`
+          }
+        })
+        .then((resp) => {
+          if (resp.status == 200) {
+            const idx = state.products.findIndex((o) => o.id === payload.id);
+            state.products.splice(idx, 1);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   },
   getters: {
