@@ -4,7 +4,7 @@ import axios from "axios";
 import axiosConfig from "./axiosConfig";
 const API_URL = axiosConfig.defaults.baseURL;
 //import { readCookie } from "./cookie";
-const url = `${API_URL}profile/`;
+const url = `${API_URL}users/`;
 
 export async function isValidToken(token) {
    await axios

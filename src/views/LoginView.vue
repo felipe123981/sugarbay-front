@@ -100,7 +100,9 @@ strong {
 
 <template>
   <div>
-    <h2 style="color: var(--text-color)"><i class='bx bxs-user'></i> Login Panel:</h2>
+    <h2 style="color: var(--text-color)">
+      <i class="bx bxs-user"></i> Login Panel:
+    </h2>
     <b-form v-if="show">
       <b-form-group
         id="input-group-1"
@@ -148,7 +150,7 @@ strong {
 </template>
 
 <script>
-import { mapMutations, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { writeCookie } from "@/modules/cookie";
 import axiosConfig from "@/modules/axiosConfig";
 
@@ -156,27 +158,22 @@ export default {
   name: "LoginView",
   computed: {
     ...mapGetters("session", {
-      getUsername: "getUsername"
+      getUsername: "getUsername",
+      getEmail: "getEmail",
+      getToken: "getToken"
     })
   },
   data() {
     return {
       email: "",
       password: "",
-      cookie: [
-        {
-          name: "",
-          email: "",
-          token: ""
-        }
-      ],
       show: true
     };
   },
   methods: {
-    ...mapMutations("session", {
+    ...mapActions("session", {
       login: "login"
-    }),
+  }),
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
@@ -189,32 +186,16 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      const request = await axiosConfig
-        .post("/sessions", {
-          email: this.email,
-          password: this.password
-        })
-        .then(function (response) {
-          const cookie = [
-            {
-              name: response.data.user.name,
-              email: response.data.user.email,
-              token: response.data.token
-            }
-          ];
-          return cookie[0];
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
 
       if (status == 200) {
-        this.login({
+        await this.login({
           email: this.email,
           password: this.password
         });
 
-        this.$bvToast.toast(` Welcome  ${this.getUsername}!`, {
+        
+        //this.$router.push({ name: 'home' });
+        this.$bvToast.toast(` Welcome back ${this.getUsername}!`, {
           title: ` Login success. `,
           variant: "success",
           solid: true
@@ -226,9 +207,16 @@ export default {
           solid: true
         });
       }
+
+      let cookie = {
+        email: this.getEmail,
+        name: this.getUsername,
+        token: this.getToken
+      };
       this.email = "";
       this.password = "";
-      writeCookie(request);
+      
+      writeCookie(cookie);
     }
   }
 };

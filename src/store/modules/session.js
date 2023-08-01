@@ -1,85 +1,88 @@
-
-import { eraseCookie } from "@/modules/cookie";
+import { eraseCookie, readCookie } from "@/modules/cookie";
 import axiosConfig from "@/modules/axiosConfig";
 
 export default {
-    namespaced: true,
+  namespaced: true,
 
-    state: {
-      loged: false,
-      token: "",
-      user: [
-        {
-          username: "Username",
-          email: "",
-          avatar_url: ""
-        }
-      ]
-    },
+  state: {
+    loged: false,
+    token: "",
+    user: [
+      {
+        username: "Username",
+        email: "",
+        avatar_url: ""
+      }
+    ]
+  },
 
-    actions: {
-      login(commit, payload) {
-        commit("login", payload);
-      }
-    },
-    mutations: {
-      restoreSession(state, token) {
-        setTimeout(() => {
-          axiosConfig
-            .get("/profile", {
-              headers: {
-                Authorization: `token ${token}`
-              }
-            })
-            .then((resp) => {
-              state.loged = true;
-              state.user = [
-                {
-                  username: resp.data.name,
-                  email: resp.data.email,
-                  avatar_url: resp.data.avatar_url
-                }
-              ];
-            });
-        }, 1000);
-      },
-      async login(state, payload) {
-        state.user = await axiosConfig
-          .post("/sessions", payload)
-          .then((response) => {
-            state.token = response.data.token;
-            state.loged = true;
-            return [
-              {
-                username: response.data.user.name,
-                email: response.data.user.email,
-                avatar_url: response.data.user.avatar_url
-              }
-            ];
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      },
-      logout(state) {
-        (state.loged = false),
-          (state.token = ""),
-          (state.user = [
-            {
-              username: "Username",
-              email: "",
-              avatar_url: ""
-            }
-          ]);
-        eraseCookie();
-      }
-    },
-    getters: {
-      getUsername(state) {
-        return state.user[0].username;
-      },
-      getAvatar(state) {
-        return state.user[0].avatar_url;
+  actions: {
+    async login({ commit }, payload) {
+      try {
+        const response = await axiosConfig.post("/sessions", payload);
+        const userData = {
+          username: response.data.user.name,
+          email: response.data.user.email,
+          avatar_url: response.data.user.avatar_url
+        };
+        commit("login", { token: response.data.token, user: userData });
+      } catch (error) {
+        console.log(error);
       }
     }
-  };
+  },
+  mutations: {
+    async restoreSession(state, token) {
+        await axiosConfig
+          .get("/users", {
+            headers: {
+              Authorization: `token ${token}`
+            }
+          })
+          .then((resp) => {
+            state.token = readCookie(document.cookie);
+            state.loged = true;
+            state.user = [
+              {
+                username: resp.data[0].name,
+                email: resp.data[0].email,
+                avatar_url: resp.data[0].avatar_url
+              }
+            ];
+          });
+    },
+    login(state, { token, user }) {
+      state.token = token;
+      state.loged = true;
+      state.user[0].username = user.username;
+      state.user[0].email = user.email;
+      state.user[0].avatar_url = user.avatar_url;
+    },
+    logout(state) {
+      (state.loged = false),
+        (state.token = ""),
+        (state.user = [
+          {
+            username: "Username",
+            email: "",
+            avatar_url: ""
+          }
+        ]);
+      eraseCookie();
+    }
+  },
+  getters: {
+    getUsername(state) {
+      return state.user[0].username;
+    },
+    getEmail(state) {
+      return state.user[0].email;
+    },
+    getToken(state) {
+      return state.token;
+    },
+    getAvatar(state) {
+      return state.user[0].avatar_url;
+    }
+  }
+};

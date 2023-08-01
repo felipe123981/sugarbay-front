@@ -78,6 +78,7 @@
       </b-row>
       <b-button
         v-if="form.length == 0"
+        type="submit"
         @click="registerProduct(form)"
         variant="primary"
         >Register</b-button
@@ -91,7 +92,7 @@
 </template>
 <script>
 import axiosConfig from "@/modules/axiosConfig";
-import { mapState } from "vuex";
+import { readCookie } from "@/modules/cookie";
 import Uploader from "vux-uploader-component";
 
 export default {
@@ -99,12 +100,9 @@ export default {
   components: {
     Uploader
   },
-  computed: {
-    ...mapState({
-      token: (state) => state.session.token
-    })
-  },
+  computed: {},
   async mounted() {
+    this.token = readCookie(document.cookie);
     await axiosConfig
       .get("/products/" + this.$route.params.productId)
       .then((resp) => {
