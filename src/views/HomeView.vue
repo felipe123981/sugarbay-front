@@ -28,7 +28,7 @@
       v-if="filteredProducts.length > 0"
       :products="paginated_products[currentPage - 1]"
     />
-    <div class="no-results" v-if="products.length > 0">
+    <div class="no-results" v-if="products.length > 0 && searchQuery && filteredProducts.length == 0">
       <b-img
         :src="require('@/assets/img/cat.png')"
         width="280vw"
