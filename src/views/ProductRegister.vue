@@ -78,7 +78,6 @@
       </b-row>
       <b-button
         v-if="form.length == 0"
-        type="submit"
         @click="registerProduct(form)"
         variant="primary"
         >Register</b-button
