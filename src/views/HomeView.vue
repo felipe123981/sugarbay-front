@@ -23,8 +23,22 @@
     </slot>
     
     -->
-    
-    <Pagination :products="paginated_products[currentPage - 1]" />
+
+    <Pagination
+      v-if="filteredProducts.length > 0"
+      :products="paginated_products[currentPage - 1]"
+    />
+    <div class="no-results" v-if="products.length > 0">
+      <b-img
+        :src="require('@/assets/img/cat.png')"
+        width="280vw"
+        alt="placeholder"
+      ></b-img>
+      <div>
+        <h2 style="color: var(--text-color)">No results for this search...</h2>
+      </div>
+    </div>
+
     <br />
     <div class="overflow-auto">
       <b-pagination
@@ -47,6 +61,7 @@ import Pagination from "@/components/PaginationComponent.vue";
 
 export default {
   name: "HomeView",
+  props: ["searchQuery"],
   components: {
     HeaderNavbar,
     Pagination
@@ -61,7 +76,23 @@ export default {
     }),
     ...mapGetters("products", {
       getProducts: "getProducts"
-    })
+    }),
+    filteredProducts() {
+      if (!this.searchQuery) return this.products;
+
+      const searchTerm = this.searchQuery.toUpperCase();
+      return this.products.filter((product) =>
+        product.name.toUpperCase().includes(searchTerm)
+      );
+    }
+  },
+  watch: {
+    searchQuery() {
+      this.paginated_products = this.paginate(
+        this.filteredProducts,
+        this.perPage
+      );
+    }
   },
   mounted() {
     this.fetchProducts();
@@ -83,7 +114,7 @@ export default {
       currentPage: 1,
       product: [],
       rate: 5,
-      currency: "U$",
+      currency: "U$"
     };
   },
   methods: {

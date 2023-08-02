@@ -24,7 +24,7 @@
         <div class="menu">
           <li class="search-box">
             <i class="bx bx-search icon"></i>
-            <input type="text" placeholder="Search..." />
+            <input type="text" placeholder="Search..." v-model="search" />
           </li>
 
           <ul class="menu-links">
@@ -80,7 +80,7 @@
 
             <li class="">
               <router-link to="/about">
-                <i class='bx bx-info-circle icon'></i>
+                <i class="bx bx-info-circle icon"></i>
                 <span class="text nav-text">About us</span>
               </router-link>
             </li>
@@ -98,7 +98,7 @@
               <span class="text nav-text">Logout</span>
             </a>
           </li>
-          <!--
+
           <li class="mode">
             <div class="sun-moon">
               <i class="bx bx-moon icon moon"></i>
@@ -110,7 +110,6 @@
               <span class="switch"></span>
             </div>
           </li>
-          -->
         </div>
       </div>
     </nav>
@@ -119,9 +118,9 @@
       <div class="logo">
         <img alt="Vue logo" src="./assets/logo.png" height="70vh" />
       </div>
-      <br>
-      <router-view class="router"></router-view>
-      <br>
+      <br />
+      <router-view :searchQuery="search" class="router"></router-view>
+
       <Footer style="width: 100%" />
     </section>
   </div>
@@ -151,7 +150,7 @@ export default {
       getUsername: "getUsername"
     })
   },
-   mounted() {
+  mounted() {
     this.client_info = axios
       .get("http://ipapi.co/json")
       .then((resp) => {
@@ -202,8 +201,9 @@ export default {
   },
   data() {
     return {
+      search: "",
       client_ip: "",
-      client_info: [],
+      client_info: []
     };
   },
   methods: {
@@ -223,6 +223,10 @@ export default {
 /* Google Font Import - Poppins */
 /* Google Font Import - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+p,
+h5 {
+  color: var(--text-color);
+}
 .logo {
   padding-left: 30px;
   padding-top: 20px;
@@ -233,7 +237,7 @@ export default {
 }
 .router {
   padding-left: 30px;
-  
+  background-color: var(--body-color);
 }
 .close {
   float: right;
@@ -257,6 +261,7 @@ ul {
 
 :root {
   /* ===== Colors ===== */
+  --button-color: #007bff;
   --body-color: #e4e9f7;
   --sidebar-color: #fff;
   --primary-color: #f37a17;
@@ -271,11 +276,13 @@ ul {
   --tran-05: all 0.3s ease;
 }
 
-body {/*
+body {
+  /*
   background-image: url("@/assets/img/sugarbay-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   */
+  background-size: cover;
   background-color: var(--body-color);
   min-height: 100vh;
   transition: var(--tran-05);
@@ -287,6 +294,7 @@ body {/*
 }
 
 body.dark {
+  --button-color: #3a3b3c;
   --body-color: #18191a;
   --sidebar-color: #242526;
   --primary-color: #3a3b3c;
@@ -545,7 +553,9 @@ body.dark .switch::before {
   left: 250px;
   height: 100vh;
   width: calc(100% - 250px);
-  transition: var(--tran-05);/*
+  transition: var(
+    --tran-05
+  ); /*
   background-image: url("@/assets/img/sugarbay-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;

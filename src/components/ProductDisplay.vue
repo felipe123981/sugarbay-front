@@ -1,6 +1,6 @@
 <template>
     <div class="product-display">
-      <b-card class="card-body">
+      <b-card class="card-body" style="background-color: var(--primary-color-light);">
         <b-media>
           <template #aside>
             <!--
@@ -36,6 +36,7 @@
           </h5>
           <div class="star-rating">
             <b-form-rating
+            style="background-color: var(--primary-color-light);"
               v-model="rate"
               variant="warning"
               class="mb-2"
@@ -57,14 +58,16 @@
               -->
 
               <a :href="`${url}:${port}/product/` + product.id">
-                <b-button size="sm" class="sb-btn" pill
+                <b-button
+                style="background-color: var(--button-color);"
+                size="sm" class="sb-btn" pill
                 ><i class='bx bxs-edit'></i> Detail</b-button
               >
               </a>
               </b-col
             >
             <b-col lg="4" class="pb-2"
-              ><b-button size="sm" class="sb-btn" pill @click="addToCart(product), makeToast('success')"
+              ><b-button style="background-color: var(--button-color);" size="sm" class="sb-btn" pill @click="addToCart(product), makeToast('success')"
                 ><i class="bx bx-cart-alt"></i> Add to cart</b-button
               ></b-col
             >
@@ -141,9 +144,13 @@ export default {
   .btn-like {
     position: absolute;
     padding-left: 3.05rem;
+    color: #ccc
   }
  
   .btn-like:hover {
+    color: rgb(216, 25, 25);
+  }
+  .btn-like:active {
     color: rgb(216, 25, 25);
   }
 
