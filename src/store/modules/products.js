@@ -1,4 +1,5 @@
 import axiosConfig from "@/modules/axiosConfig";
+import { readCookie } from "@/modules/cookie";
 
 export default {
   namespaced: true,
@@ -19,10 +20,11 @@ export default {
         });
     },
     removeFromProducts(state, payload) {
+      const token = readCookie(document.cookie);
       axiosConfig
         .delete("products/" + payload.id, {
           headers: {
-            Authorization: `token ${state.session.token}`
+            Authorization: `token ${token}`
           }
         })
         .then((resp) => {
