@@ -159,4 +159,7 @@
         .divider{
             border-top: 2px solid rgba(189, 196, 203, 0.5);;
         }
+        *{
+            color: var(--text-color);
+        }
 </style>

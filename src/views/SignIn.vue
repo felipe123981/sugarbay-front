@@ -1,7 +1,7 @@
 <template>
   <div>
     <br />
-    <h3>Create your account:</h3>
+    <h3 style="color: var(--text-color)">Create your account:</h3>
     <b-row>
       <b-col class="avatar-upload">
         <AvatarInput
@@ -34,14 +34,14 @@
     <b-row>
       <b-col>
         <b-form-group
-          id="input-group-1"
+          id="input-group-2"
           label="Email address:"
-          label-for="input-1"
+          label-for="input-2"
           description="We'll never share your email with anyone else."
         >
           <b-form-input
             class="form-sb"
-            id="input-1"
+            id="input-3"
             v-model="form.email"
             type="email"
             placeholder="Enter email"
@@ -53,14 +53,14 @@
     <b-row>
       <b-col>
         <b-form-group
-          id="input-group-1"
+          id="input-group-4"
           label="Password:"
-          label-for="input-1"
+          label-for="input-4"
           description=""
         >
           <b-form-input
             class="form-sb"
-            id="input-1"
+            id="input-5"
             v-model="form.password"
             type="password"
             required
@@ -105,6 +105,7 @@
         >
       </b-col>
     </b-row>
+    <br>
   </div>
 </template>
 <script>
@@ -187,6 +188,15 @@ export default {
 };
 </script>
 <style scoped>
+#input-group-1 {
+  color: var(--text-color);
+}
+#input-group-2 {
+  color: var(--text-color);
+}
+#input-group-4 {
+  color: var(--text-color);
+}
 .form-sb {
   width: 70vw;
 }

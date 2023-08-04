@@ -138,7 +138,6 @@ export default {
 
 <style scoped>
   .sb-btn {
-    background-color: rgb(0, 110, 255);
     border: 1px white solid;
   }
   .btn-like {

@@ -17,7 +17,7 @@
       <b-card class="sb-cart">
         <b-media class="sb-media float-left">
           <h5 class="mt-0 product-name">{{ product.name }}</h5>
-          <div class="img-wrapper">
+          <div class="img-wrapper" style="color: var(--text-color);">
             <input
               type="number"
               style="
@@ -25,6 +25,7 @@
                 width: 30px;
                 position: relative;
                 border: 0;
+                color: var(--text-color);
               "
               :placeholder="page"
               v-model="page"
@@ -78,7 +79,7 @@
                           <p class="price-header">Price:</p>
                           <p class="price-content info-content">
                             U$ {{ (product.price * item_quantity).toFixed(2) }}
-                            <del style="color: gray">U$ 400.00</del>
+                            <del style="color: var(--text-color)">U$ 400.00</del>
                           </p>
                         </div>
                       </b-col>
@@ -92,7 +93,7 @@
                                 name="radio-inline"
                               >
                                 <b-form-radio
-                                  style="color: gray"
+                                  style="color: var(--text-color)"
                                   v-for="(color, index) in colors"
                                   :key="index"
                                   :value="'option' + (index + 1)"
@@ -558,8 +559,8 @@ export default {
   width: 22vh;
 }
 .info-content {
-  color: gray;
-  background-color: #eff6e0;
+  color: var(--text-color);
+  background-color: var(--primary-color-light);
   padding-left: 10px;
   border-radius: 15px;
   padding: 10px;

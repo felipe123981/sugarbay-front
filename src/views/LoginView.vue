@@ -137,7 +137,7 @@ strong {
       >
     </b-form>
     <br />
-    <strong>
+    <strong style="color: var(--text-color);">
       Don't have an account? <router-link to="/sign-in">Sign-in</router-link>.
     </strong>
     <br />
@@ -173,7 +173,7 @@ export default {
   methods: {
     ...mapActions("session", {
       login: "login"
-  }),
+    }),
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
@@ -193,7 +193,6 @@ export default {
           password: this.password
         });
 
-        
         //this.$router.push({ name: 'home' });
         this.$bvToast.toast(` Welcome back ${this.getUsername}!`, {
           title: ` Login success. `,
@@ -215,13 +214,19 @@ export default {
       };
       this.email = "";
       this.password = "";
-      
+
       writeCookie(cookie);
     }
   }
 };
 </script>
 <style scoped>
+#input-group-1 {
+  color: var(--text-color);
+}
+#input-group-2 {
+  color: var(--text-color);
+}
 .form {
   width: 60vw;
 }

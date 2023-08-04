@@ -4,7 +4,7 @@
     <HeaderNavbar headerTitle="Cart:"></HeaderNavbar>
     <br />
     <div>
-      <b-card no-body>
+      <b-card no-body style="background-color: var(--primary-color-light);">
         <b-tabs pills card>
           <b-tab title="My cart" active
             ><b-card-text>
@@ -161,9 +161,9 @@
           <b-tab title="Orders"
             ><b-card-text>
               <div v-if="pageWidth > 580">
-                <b-table hover :items="items">
+                <b-table style="color: var(--text-color);" hover :items="items">
                   <template #cell(PAYMENT)="data">
-                    <span v-html="data.value"></span>
+                    <span  v-html="data.value"></span>
                   </template>
                   <template #cell(SHIPMENT)="data">
                     <span v-html="data.value"></span>
@@ -261,24 +261,27 @@ export default {
 };
 </script>
 <style scoped>
+body {
+  line-height: 1;
+}
 .float {
   position: fixed;
   width: 8rem;
   height: 40px;
   bottom: 30px;
   right: 20px;
-  background-color: var(--primary-color);
+  background-color: #f37a17;
   color: #fff;
   border-radius: 50px;
   text-align: center;
   box-shadow: 2px 2px 3px #999;
 }
-
 .checkout-all {
   padding-left: 31vw;
 }
 .cart-item {
   width: 63vw;
+  background-color: var(--sidebar-color);
 }
 .btn-like {
   position: absolute;

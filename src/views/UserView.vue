@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <b-card no-body>
+      <b-card no-body style="background-color: var(--primary-color-light);">
         <b-tabs pills card vertical>
           <b-tab title="Account" active
             ><b-card-text>
@@ -125,7 +125,7 @@
                     ></b-form-input>
                   </b-form-group>
                 </b-col>
-                <b-col>
+                <b-col >
                   <b-form-group
                     id="input-group-1"
                     label="Email address:"
@@ -584,6 +584,9 @@ export default {
 };
 </script>
 <style scoped>
+.text-muted {
+    color: var(--text-color);
+}
 .catalog {
   background: rgba(255, 255, 255, 0.07);
   border-radius: 16px;

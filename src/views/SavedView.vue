@@ -1,19 +1,26 @@
 <template>
   <div>
-    <br>
+    <br />
     <HeaderNavbar headerTitle="Saved products:"></HeaderNavbar>
     <br />
-    <div  v-if="items.length ==  0">
-        <h4 style="color: var(--text-color)"> <i class='bx bxs-heart-circle'></i> Your favorites will appears here!</h4> 
+    <div v-if="items.length == 0">
+      <h4 style="color: var(--text-color)">
+        <i class="bx bxs-heart-circle"></i> Your favorites will appears here!
+      </h4>
     </div>
     <div v-else>
-      <b-card v-for="item in items" :key="item.id">
+      <b-card
+        style="background-color: var(--primary-color-light)"
+        v-for="item in items"
+        :key="item.id"
+      >
         <b-media>
           <template #aside>
             <div class="img-wrapper">
               <button
-              @click="removeFromFavorites(item)"
-              class="btn btn-sm outline-primary btn-like">
+                @click="removeFromFavorites(item)"
+                class="btn btn-sm outline-primary btn-like"
+              >
                 <i class="bx bxs-heart"></i>
               </button>
               <b-img
@@ -32,6 +39,7 @@
           </h5>
           <div class="star-rating">
             <b-form-rating
+              style="background-color: var(--primary-color-light)"
               v-model="rate"
               variant="warning"
               class="mb-2"
@@ -49,14 +57,14 @@
               </router-link>
             </b-col>
             <b-col lg="4" class="pb-2">
-            <b-button
-              variant="danger"
-              size="sm"
-              pill
-              @click="removeFromFavorites(item)"
-              ><i class="bx bxs-trash"></i> Remove</b-button
-            >
-          </b-col>
+              <b-button
+                variant="danger"
+                size="sm"
+                pill
+                @click="removeFromFavorites(item)"
+                ><i class="bx bxs-trash"></i> Remove</b-button
+              >
+            </b-col>
           </b-row>
         </b-media>
       </b-card>
@@ -70,29 +78,29 @@ import HeaderNavbar from "@/components/HeaderNavbar.vue";
 import axiosConfig from "@/modules/axiosConfig";
 
 export default {
-    name: "SavedView",
-    computed: {
-        ...mapGetters("favorites", {
-            getFavorites: "getFavorites"
-        })
-    },
-    mounted() {
-        this.items = this.getFavorites;
-    },
-    data() {
-        return {
-            api_url: axiosConfig.defaults.baseURL,
-            text: "",
-            currency: "U$",
-            items: []
-        };
-    },
-    methods: {
-        ...mapMutations("favorites", {
-            removeFromFavorites: "removeFromFavorites"
-        }),
-    },
-    components: { HeaderNavbar }
+  name: "SavedView",
+  computed: {
+    ...mapGetters("favorites", {
+      getFavorites: "getFavorites"
+    })
+  },
+  mounted() {
+    this.items = this.getFavorites;
+  },
+  data() {
+    return {
+      api_url: axiosConfig.defaults.baseURL,
+      text: "",
+      currency: "U$",
+      items: []
+    };
+  },
+  methods: {
+    ...mapMutations("favorites", {
+      removeFromFavorites: "removeFromFavorites"
+    })
+  },
+  components: { HeaderNavbar }
 };
 </script>
 <style scoped>

@@ -24,7 +24,7 @@
         <div class="menu">
           <li class="search-box">
             <i class="bx bx-search icon"></i>
-            <input type="text" placeholder="Search..." v-model="search" />
+            <input type="search" placeholder="Search..." v-model="search" />
           </li>
 
           <ul class="menu-links">
@@ -294,7 +294,7 @@ body {
 }
 
 body.dark {
-  --button-color: #3a3b3c;
+  --button-color: #242526;
   --body-color: #18191a;
   --sidebar-color: #242526;
   --primary-color: #3a3b3c;

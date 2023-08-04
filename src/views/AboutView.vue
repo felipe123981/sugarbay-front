@@ -1,8 +1,8 @@
 <template>
-    <!--About Section-->
+  <!--About Section-->
   <div class="about-site">
-    <div class="market">
-      <b-card>
+    <div>
+      <b-card class="market">
         <b-media>
           <template #aside>
             <b-img
@@ -14,14 +14,16 @@
 
           <h5 class="mt-0">This market</h5>
           <p>
-            Store for online buying and selling of products. Consumers can find unique products at competitive prices and companies can expand their sales on a single platform.
+            Store for online buying and selling of products. Consumers can find
+            unique products at competitive prices and companies can expand their
+            sales on a single platform.
           </p>
         </b-media>
       </b-card>
     </div>
     <br />
-    <div class="security">
-      <b-card>
+    <div>
+      <b-card class="security">
         <b-media>
           <template #aside>
             <b-img
@@ -33,16 +35,16 @@
 
           <h5 class="mt-0">Security</h5>
           <p>
-            This platform is fully encrypted point-to-point (P2P). Also
-            we have secure payment methods and a highly specialized team
-            to ensure the safety of customers.
+            This platform is fully encrypted point-to-point (P2P). Also we have
+            secure payment methods and a highly specialized team to ensure the
+            safety of customers.
           </p>
         </b-media>
       </b-card>
     </div>
-    <br>
-    <div class="benefits">
-      <b-card>
+    <br />
+    <div>
+      <b-card class="benefits">
         <b-media>
           <template #aside>
             <b-img
@@ -54,16 +56,17 @@
 
           <h5 class="mt-0">Offered benefits</h5>
           <p>
-            Some of  benefits include low prices in competition with others in the
-market, ease of payment methods, various product possibilities
-in addition to the benefits offered to sellers such as sales expansion!
+            Some of benefits include low prices in competition with others in
+            the market, ease of payment methods, various product possibilities
+            in addition to the benefits offered to sellers such as sales
+            expansion!
           </p>
         </b-media>
       </b-card>
     </div>
-    <br>
-    <div class="shippment">
-      <b-card>
+    <br />
+    <div>
+      <b-card class="shippment">
         <b-media>
           <template #aside>
             <b-img
@@ -75,8 +78,9 @@ in addition to the benefits offered to sellers such as sales expansion!
 
           <h5 class="mt-0">Shippment</h5>
           <p>
-            We rely on the postal delivery system in partnership with the company,
-            thus ensuring more agility, integrity, and discounts on your purchases!
+            We rely on the postal delivery system in partnership with the
+            company, thus ensuring more agility, integrity, and discounts on
+            your purchases!
           </p>
         </b-media>
       </b-card>
@@ -194,6 +198,18 @@ export default {
 };
 </script>
 <style scoped>
+.market {
+  background-color: var(--primary-color-light);
+}
+.security {
+  background-color: var(--primary-color-light);
+}
+.benefits {
+  background-color: var(--primary-color-light);
+}
+.shippment {
+  background-color: var(--primary-color-light);
+}
 .about-site {
   /* From https://css.glass */
   height: 80vh;
@@ -207,5 +223,4 @@ export default {
   padding-bottom: 20px;
   padding-top: 20px;
 }
-
 </style>
