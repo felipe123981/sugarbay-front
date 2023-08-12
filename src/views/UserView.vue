@@ -377,7 +377,7 @@
                   :key="product.id"
                 >
                   <div class="product-display">
-                    <b-card>
+                    <b-card style="background-color: var(--sidebar-color);">
                       <b-media>
                         <template #aside>
                           <div class="img-wrapper">
@@ -601,6 +601,7 @@ export default {
 .btn-like {
   position: absolute;
   padding-left: 3.05rem;
+  color: #ccc;
 }
 .btn-like:hover {
   color: rgb(216, 25, 25);
@@ -653,7 +654,7 @@ export default {
   flex-direction: column;
   min-width: 160px;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: var(--sidebar-color);
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;

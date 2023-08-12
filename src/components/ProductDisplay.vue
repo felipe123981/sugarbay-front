@@ -1,6 +1,6 @@
 <template>
     <div class="product-display">
-      <b-card class="card-body" style="background-color: var(--primary-color-light);">
+      <b-card class="card-body" style="background-color: var(--sidebar-color);">
         <b-media>
           <template #aside>
             <!--
