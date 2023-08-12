@@ -4,7 +4,7 @@
     <HeaderNavbar headerTitle="Cart:"></HeaderNavbar>
     <br />
     <div>
-      <b-card no-body style="background-color: var(--primary-color-light);">
+      <b-card no-body style="background-color: var(--primary-color-light)">
         <b-tabs pills card>
           <b-tab title="My cart" active
             ><b-card-text>
@@ -161,9 +161,9 @@
           <b-tab title="Orders"
             ><b-card-text>
               <div v-if="pageWidth > 580">
-                <b-table style="color: var(--text-color);" hover :items="items">
+                <b-table style="color: var(--text-color)" hover :items="items">
                   <template #cell(PAYMENT)="data">
-                    <span  v-html="data.value"></span>
+                    <span v-html="data.value"></span>
                   </template>
                   <template #cell(SHIPMENT)="data">
                     <span v-html="data.value"></span>
@@ -255,7 +255,7 @@ export default {
     }),
     ...mapMutations("cart", {
       removeFromCart: "removeFromCart"
-    }),
+    })
   },
   components: { HeaderNavbar }
 };
@@ -286,6 +286,7 @@ body {
 .btn-like {
   position: absolute;
   padding-left: 3.05rem;
+  color: #ccc;
 }
 .btn-like:hover {
   color: rgb(216, 25, 25);
@@ -295,7 +296,8 @@ body {
 }
 
 .img-responsive {
-  height: auto;
+  height: 7ch;
+  width: 7ch;
 }
 
 .img-overlay {

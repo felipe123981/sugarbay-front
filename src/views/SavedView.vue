@@ -108,9 +108,11 @@ export default {
   background-color: rgb(0, 110, 255);
   border: 1px white solid;
 }
+
 .btn-like {
   position: absolute;
   padding-left: 3.05rem;
+  color: #ccc;
 }
 .btn-like:hover {
   color: rgb(216, 25, 25);
@@ -121,8 +123,8 @@ export default {
 }
 
 .img-responsive {
-  height: 70px;
-  width: 70px;
+  height: 7ch;
+  width: 7ch;
 }
 
 .img-overlay {
