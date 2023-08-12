@@ -75,7 +75,8 @@ const router = new Router({
     {
       path: "/sign-in",
       name: "sign-in",
-      component: SignIn
+      component: SignIn,
+      meta: { requiresAuth: false }
     },
     // param referente ao id do produto
     {
@@ -106,10 +107,19 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const token = readCookie(document.cookie);
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-
-  if(requiresAuth && !token) {
-    alert("Login required.")
-    next('/login');
+  if (!requiresAuth && to.name == "sign-in" && token) {
+    if(from.name != null) {
+      next(`/${from.name}`);
+    }
+    else{
+      next('/')
+    }
+  } else {
+    next();
+  }
+  if (requiresAuth && !token) {
+    alert("Login required.");
+    next("/login");
   } else {
     next();
   }
