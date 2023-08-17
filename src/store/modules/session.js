@@ -7,6 +7,7 @@ export default {
   state: {
     loged: false,
     token: "",
+    profile: undefined,
     user: [
       {
         username: "Username",
@@ -33,24 +34,25 @@ export default {
   },
   mutations: {
     async restoreSession(state, token) {
-        await axiosConfig
-          .get("/users", {
-            headers: {
-              Authorization: `token ${token}`
+      await axiosConfig
+        .get("/users", {
+          headers: {
+            Authorization: `token ${token}`
+          }
+        })
+        .then((resp) => {
+          state.token = readCookie(document.cookie);
+          state.loged = true;
+          state.user = [
+            {
+              username: resp.data[0].name,
+              email: resp.data[0].email,
+              avatar_url: resp.data[0].avatar_url
             }
-          })
-          .then((resp) => {
-            state.token = readCookie(document.cookie);
-            state.loged = true;
-            state.user = [
-              {
-                username: resp.data[0].name,
-                email: resp.data[0].email,
-                avatar_url: resp.data[0].avatar_url
-              }
-            ];
-          });
+          ];
+        });
     },
+
     login(state, { token, user }) {
       state.token = token;
       state.loged = true;
@@ -72,6 +74,9 @@ export default {
     }
   },
   getters: {
+    getProfile(state) {
+      return state.profile;
+    },
     getUsername(state) {
       return state.user[0].username;
     },

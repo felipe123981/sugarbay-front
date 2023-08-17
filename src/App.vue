@@ -199,6 +199,13 @@ export default {
       }
     });
   },
+  watch: {
+    token(newValue) {
+      if (newValue == "") {
+        this.eraseProfile();
+      }
+    }
+  },
   data() {
     return {
       search: "",
@@ -212,6 +219,9 @@ export default {
     }),
     ...mapMutations("session", {
       logout: "logout"
+    }),
+    ...mapMutations("profile", {
+      eraseProfile: "eraseProfile"
     }),
     logoutConfirm() {
       if (confirm("Logout?")) this.logout();

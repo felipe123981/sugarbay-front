@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <b-card no-body style="background-color: var(--primary-color-light);">
+      <b-card no-body style="background-color: var(--primary-color-light)">
         <b-tabs pills card vertical>
           <b-tab title="Account" active
             ><b-card-text>
@@ -79,7 +79,7 @@
                     <b-form-input
                       class="form-sb"
                       id="input-1"
-                      v-model="form.id"
+                      v-model="form.pid"
                       type="cpf"
                       placeholder="888.888.888-88"
                       :disabled="lockform"
@@ -117,7 +117,7 @@
                     <b-form-input
                       class="form-sb"
                       id="input-1"
-                      v-model="form.username"
+                      v-model="form.name"
                       type="text"
                       placeholder="ex: Michael123"
                       :disabled="lockform"
@@ -125,7 +125,7 @@
                     ></b-form-input>
                   </b-form-group>
                 </b-col>
-                <b-col >
+                <b-col>
                   <b-form-group
                     id="input-group-1"
                     label="Email address:"
@@ -377,7 +377,7 @@
                   :key="product.id"
                 >
                   <div class="product-display">
-                    <b-card style="background-color: var(--sidebar-color);">
+                    <b-card style="background-color: var(--sidebar-color)">
                       <b-media>
                         <template #aside>
                           <div class="img-wrapper">
@@ -452,7 +452,7 @@
 <script>
 //import { removeElement } from "@/modules/pagination"
 //import Pagination from "@/components/PaginationComponent.vue";
-import { mapGetters, mapMutations, mapState } from "vuex";
+import { mapGetters, mapMutations, mapState, mapActions } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
 import axiosConfig from "@/modules/axiosConfig";
@@ -462,12 +462,16 @@ export default {
     AvatarInput
     // Pagination
   },
-  mounted() {
+  async mounted() {
     this.fetchProducts();
+    await this.fetchProfile();
     setTimeout(() => {
       this.my_products = this.getProducts;
       this.paginated_products = this.paginate(this.my_products, this.perPage);
     }, 500);
+    if (this.getProfile != undefined) {
+      this.form = this.getProfile;
+    }
   },
   data() {
     return {
@@ -496,6 +500,27 @@ export default {
       isHovered: false
     };
   },
+  watch: {
+    token(newValue) {
+      if (newValue == "") {
+        this.form = {
+          phone: "",
+          id: "",
+          city: "",
+          country: "",
+          zipcode: "",
+          address: "",
+          firstname: "",
+          lastname: "",
+          username: "",
+          email: "",
+          name: "",
+          food: null,
+          checked: []
+        };
+      }
+    }
+  },
   computed: {
     rows() {
       return this.my_products.length;
@@ -505,9 +530,15 @@ export default {
     }),
     ...mapGetters("products", {
       getProducts: "getProducts"
+    }),
+    ...mapGetters("profile", {
+      getProfile: "getProfile"
     })
   },
   methods: {
+    ...mapActions("profile", {
+      fetchProfile: "fetchProfile"
+    }),
     ...mapMutations("favorites", {
       addToFavorites: "addToFavorites"
     }),
@@ -585,7 +616,7 @@ export default {
 </script>
 <style scoped>
 .text-muted {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 .catalog {
   background: rgba(255, 255, 255, 0.07);

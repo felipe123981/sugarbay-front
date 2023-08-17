@@ -6,6 +6,7 @@ import session from "./modules/session";
 import favorites from "./modules/favorites";
 import user from "./modules/user";
 import customer from "./modules/customer";
+import profile from "./modules/profile";
 
 Vue.use(Vuex);
 const state = {
@@ -26,7 +27,8 @@ const modules = {
   session,
   favorites,
   user,
-  customer
+  customer,
+  profile
 };
 
 export default new Vuex.Store({
