@@ -6,7 +6,7 @@
           <span class="image">
             <b-avatar
               v-if="getAvatar == ''"
-              src="https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png"
+              :src="require('@/assets/img/34-512.webp')"
             ></b-avatar>
             <b-avatar v-else :src="getAvatar"></b-avatar>
           </span>

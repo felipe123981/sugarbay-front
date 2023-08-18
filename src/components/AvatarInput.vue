@@ -1,6 +1,15 @@
 <template>
   <div>
-    <div class="wrapper-1" v-if="getAvatar === ''">
+    <div
+      v-if="
+        getAvatar != '' && this.file === require('@/assets/img/34-512.webp')
+      "
+      class="wrapper"
+      :style="{
+        background: 'url(' + getAvatar + ')',
+        'background-size': 'contain'
+      }"
+    >
       <b-form-file
         class="my_file"
         v-model="file"
@@ -8,14 +17,7 @@
         plain
       ></b-form-file>
     </div>
-    <div
-      v-else
-      class="wrapper-2"
-      :style="{
-        background: 'url(' + getAvatar + ')',
-        'background-size': 'contain'
-      }"
-    >
+    <div v-else class="wrapper" :style="{ 'background-image': `url(${file})` }">
       <b-form-file
         class="my_file"
         v-model="file"
@@ -30,24 +32,27 @@ import { mapGetters } from "vuex";
 //import userIcon  from "@/assets/img/userIcon.png"
 export default {
   name: "AvatarInput",
-  watch: {
-    file(newFile) {
-      localStorage.file = newFile;
-    }
-  },
   computed: {
     ...mapGetters("session", {
       getAvatar: "getAvatar"
     })
   },
-  mounted() {
-    this.file = localStorage.file;
-  },
   data() {
     return {
-      file: ""
+      file: require('@/assets/img/34-512.webp'),
     };
-  }
+  },
+  watch: {
+    file(newFile) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.file = e.target.result;
+        //console.log(this.fileBlob)
+      };
+      reader.readAsDataURL(newFile);
+      this.$emit("input", newFile);
+    }
+  },
 };
 </script>
 <style scoped>
@@ -56,26 +61,18 @@ export default {
   padding: 0;
   background: transparent;
 }
-.wrapper-1 {
-  background: url("https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png");
-  background-size: contain;
+.wrapper {
+  /*
+   background: url("https://cdn0.iconfinder.com/data/icons/basic-11/97/34-512.png");
+  */
+
+  background-size: cover;
   height: 150px;
   width: 150px;
   position: relative;
   border: 5px solid #fff;
   border-radius: 50%;
-  background-size: contain;
-  margin: 10px left;
-  overflow: hidden;
-}
-.wrapper-2 {
-  height: 150px;
-  width: 150px;
-  position: relative;
-  border: 5px solid #fff;
-  border-radius: 50%;
-  background-size: contain;
-  margin: 10px left;
+  cursor: pointer;
   overflow: hidden;
 }
 .my_file {

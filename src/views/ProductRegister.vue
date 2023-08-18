@@ -90,6 +90,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 import axiosConfig from "@/modules/axiosConfig";
 import { readCookie } from "@/modules/cookie";
 import Uploader from "vux-uploader-component";
@@ -143,6 +144,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations("products", {
+      removeFromProducts: "removeFromProducts"
+    }),
     async sendPhotos(fileList) {
       let formData = new FormData();
 
@@ -160,8 +164,13 @@ export default {
         .then((resp) => {
           console.log(resp);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          this.removeFromProducts(this.form);
+          this.$bvToast.toast("Cannot upload pics. Try again.", {
+            title: "Failed",
+            variant: "danger",
+            solid: true
+          });
         });
     },
     onError(event) {
@@ -206,13 +215,22 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+
         await this.sendPhotos(this.fileList);
 
-        this.$bvToast.toast("Your product is now for sale!", {
-          title: "Successfully registered",
-          variant: "success",
-          solid: true
-        });
+        const status = axiosConfig
+          .get(`products/${this.form.id}`)
+          .then((resp) => {
+            console.log(resp.status)
+            return resp.status;
+          });
+        if (status == 200) {
+          this.$bvToast.toast("Your product is now for sale!", {
+            title: "Successfully registered",
+            variant: "success",
+            solid: true
+          });
+        }
 
         this.$route.params.productId = this.form.id;
       } else {

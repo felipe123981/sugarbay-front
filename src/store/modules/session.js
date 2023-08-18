@@ -7,7 +7,6 @@ export default {
   state: {
     loged: false,
     token: "",
-    profile: undefined,
     user: [
       {
         username: "Username",
