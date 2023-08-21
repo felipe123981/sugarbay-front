@@ -24,11 +24,11 @@
           <b-form-group
             id="input-group-1"
             label="Product name:"
+            class="form form-name"
             label-for="input-1"
             description="This is how your product will appear to customers."
           >
             <b-form-input
-              class="form"
               id="input-1"
               v-model="form.name"
               type="text"
@@ -43,11 +43,11 @@
           <b-form-group
             id="input-group-1"
             label="Quantity:"
+            class="form form-quantity"
             label-for="input-1"
             description=""
           >
             <b-form-input
-              class="form-number"
               id="input-1"
               v-model="form.quantity"
               type="number"
@@ -61,12 +61,12 @@
         <b-col>
           <b-form-group
             id="input-group-1"
+            class="form form-price"
             label="Price:"
             label-for="input-1"
             description=""
           >
             <b-form-input
-              class="form-price"
               id="input-1"
               v-model="form.price"
               type="text"
@@ -221,7 +221,7 @@ export default {
         const status = axiosConfig
           .get(`products/${this.form.id}`)
           .then((resp) => {
-            console.log(resp.status)
+            console.log(resp.status);
             return resp.status;
           });
         if (status == 200) {
@@ -272,6 +272,9 @@ export default {
   padding-left: 30px;
 }
 .form {
+  color: var(--text-color);
+}
+.form-name {
   width: 60vw;
 }
 .form-number {
