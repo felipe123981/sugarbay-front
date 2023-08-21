@@ -165,7 +165,6 @@ export default {
           console.log(resp);
         })
         .catch(() => {
-          
           this.removeFromProducts(this.form);
           this.$bvToast.toast("Cannot upload pics. Try again.", {
             title: "Failed",
