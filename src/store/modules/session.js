@@ -49,6 +49,10 @@ export default {
               avatar_url: resp.data[0].avatar_url
             }
           ];
+        })
+        .catch((err) => {
+          console.log(err);
+          eraseCookie(document.cookie);
         });
     },
 

@@ -5,7 +5,6 @@
       <div class="box2">
         <Uploader
           name="photos"
-          style="color: white"
           v-model="fileList"
           :url="`${api_url}products/photos/` + form.id"
           title="Upload atleast 3 pics or videos"
