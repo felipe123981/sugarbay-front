@@ -165,6 +165,7 @@ export default {
           console.log(resp);
         })
         .catch(() => {
+          
           this.removeFromProducts(this.form);
           this.$bvToast.toast("Cannot upload pics. Try again.", {
             title: "Failed",
@@ -221,7 +222,6 @@ export default {
         const status = axiosConfig
           .get(`products/${this.form.id}`)
           .then((resp) => {
-            console.log(resp.status);
             return resp.status;
           });
         if (status == 200) {
