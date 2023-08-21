@@ -64,7 +64,7 @@ const router = new Router({
     {
       path: "/login",
       name: "login",
-      component: LoginView
+      component: LoginView,
     },
     {
       path: "/register/:productId?",

@@ -34,7 +34,7 @@ export default {
   mutations: {
     async restoreSession(state, token) {
       await axiosConfig
-        .get("/users", {
+        .get("/profile", {
           headers: {
             Authorization: `token ${token}`
           }
@@ -44,9 +44,9 @@ export default {
           state.loged = true;
           state.user = [
             {
-              username: resp.data[0].name,
-              email: resp.data[0].email,
-              avatar_url: resp.data[0].avatar_url
+              username: resp.data.name,
+              email: resp.data.email,
+              avatar_url: resp.data.avatar_url
             }
           ];
         })
