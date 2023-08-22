@@ -46,8 +46,9 @@ export default {
     file(newFile) {
       let reader = new FileReader();
       reader.onload = (e) => {
+        this.$emit('pick_image', this.file);
         this.file = e.target.result;
-        //console.log(this.fileBlob)
+        //console.log(this.file)
       };
       reader.readAsDataURL(newFile);
       this.$emit("input", newFile);

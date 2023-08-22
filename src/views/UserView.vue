@@ -64,48 +64,11 @@
               </b-row>
               <hr />
 
-              <p>User information:</p>
+              <h5><i class='bx bxs-user-account' ></i> User info:</h5>
               <b-row>
-                <AvatarInput></AvatarInput>
+                <AvatarInput @pick_image="setImage"></AvatarInput>
               </b-row>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="CPF:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.pid"
-                      type="cpf"
-                      placeholder="888.888.888-88"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Phone number:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.phome"
-                      type="phone"
-                      placeholder="(555) 555-1234"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
+              <br />
               <b-row>
                 <b-col>
                   <b-form-group
@@ -128,26 +91,6 @@
                 <b-col>
                   <b-form-group
                     id="input-group-1"
-                    label="Email address:"
-                    label-for="input-1"
-                    description="We'll never share your email with anyone else."
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.email"
-                      type="email"
-                      placeholder="Enter email"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
                     label="First name:"
                     label-for="input-1"
                     description=""
@@ -163,6 +106,8 @@
                     ></b-form-input>
                   </b-form-group>
                 </b-col>
+              </b-row>
+              <b-row>
                 <b-col>
                   <b-form-group
                     id="input-group-1"
@@ -181,9 +126,107 @@
                     ></b-form-input>
                   </b-form-group>
                 </b-col>
+                <b-col>
+                  <b-form-group
+                    id="input-group-1"
+                    label="Gender:"
+                    label-for="input-1"
+                    description=""
+                  >
+                    <div>
+                      <b-dropdown
+                        id="dropdown-1"
+                        :text="selected"
+                        class="gender-select"
+                        :disabled="lockform"
+                      >
+                        <b-dropdown-item
+                          v-for="gender in form.gender"
+                          :key="gender"
+                          @click="selected = gender"
+                          >{{ gender }}</b-dropdown-item
+                        >
+                      </b-dropdown>
+                    </div>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-form-group
+                    id="input-group-1"
+                    label="Birthday:"
+                    label-for="input-1"
+                    description=""
+                  >
+                    <div>
+                      <DataPicker
+                        :disabled="lockform"
+                        @birthdate-changed="changeDate"
+                      />
+                    </div>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+
+              <hr />
+              <h5><i class='bx bxs-notepad'></i> Contact info:</h5>
+              <b-row>
+                <b-col>
+                  <b-form-group
+                    id="input-group-1"
+                    label="Email address:"
+                    label-for="input-1"
+                    description="We'll never share your email with anyone else."
+                  >
+                    <b-form-input
+                      class="form-sb"
+                      id="input-1"
+                      v-model="form.email"
+                      type="email"
+                      placeholder="Enter email"
+                      :disabled="lockform"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col>
+                  <b-form-group
+                    id="input-group-1"
+                    label="Phone number:"
+                    label-for="input-1"
+                    description=""
+                  >
+                    <b-form-input
+                      class="form-sb"
+                      id="input-1"
+                      v-model="form.phone"
+                      type="phone"
+                      placeholder="(555) 555-1234"
+                      :disabled="lockform"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
               </b-row>
               <hr />
-              <p>Contact information:</p>
+              <h5><i class='bx bxs-map-pin' ></i> Shippment info:</h5>
+              <b-form-group
+                id="input-group-1"
+                label="Zipcode:"
+                label-for="input-1"
+                description=""
+              >
+                <b-form-input
+                  class="form-sb-2"
+                  id="input-1"
+                  v-model="form.zipcode"
+                  type="text"
+                  placeholder="ex: 437300"
+                  :disabled="lockform"
+                  required
+                ></b-form-input>
+              </b-form-group>
               <b-form-group
                 id="input-group-1"
                 label="Address:"
@@ -232,24 +275,6 @@
                       v-model="form.country"
                       type="text"
                       placeholder="ex: United States"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Zipcode:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb-2"
-                      id="input-1"
-                      v-model="form.zipcode"
-                      type="text"
-                      placeholder="ex: 437300"
                       :disabled="lockform"
                       required
                     ></b-form-input>
@@ -454,12 +479,14 @@
 //import Pagination from "@/components/PaginationComponent.vue";
 import { mapGetters, mapMutations, mapState, mapActions } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
+import DataPicker from "@/components/DataPicker.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
 import axiosConfig from "@/modules/axiosConfig";
 export default {
   name: "UserView",
   components: {
-    AvatarInput
+    AvatarInput,
+    DataPicker
     // Pagination
   },
   async mounted() {
@@ -472,6 +499,9 @@ export default {
     if (this.getProfile != undefined) {
       this.form = this.getProfile;
     }
+    this.$root.$on("bv::dropdown::show", (bvEvent) => {
+      console.log("Dropdown is about to be shown", bvEvent);
+    });
   },
   data() {
     return {
@@ -482,20 +512,21 @@ export default {
       paginated_products: [],
       lockform: true,
       form: {
-        phone: "",
-        id: "",
-        city: "",
-        country: "",
-        zipcode: "",
-        address: "",
+        name: "",
         firstname: "",
         lastname: "",
-        username: "",
         email: "",
-        name: "",
-        food: null,
-        checked: []
+        phone: "",
+        avatar: "",
+        gender: ["Male", "Female", "Other"],
+        birthdate: "",
+        zipcode: "",
+        streeth: "",
+        district: "",
+        city: "",
+        country: ""
       },
+      selected: "Select one",
       show: true,
       isHovered: false
     };
@@ -504,19 +535,18 @@ export default {
     token(newValue) {
       if (newValue == "") {
         this.form = {
-          phone: "",
-          id: "",
-          city: "",
-          country: "",
-          zipcode: "",
-          address: "",
+          name: "",
           firstname: "",
           lastname: "",
-          username: "",
           email: "",
-          name: "",
-          food: null,
-          checked: []
+          phone: "",
+          avatar: "",
+          birthdate: "",
+          zipcode: "",
+          streeth: "",
+          district: "",
+          city: "",
+          country: ""
         };
       }
     }
@@ -589,27 +619,11 @@ export default {
       event.preventDefault();
       alert(JSON.stringify(this.form));
     },
-    onReset(event) {
-      event.preventDefault();
-      // Reset our form values
-      this.form.phone = "";
-      this.form.id = "";
-      this.form.city = "";
-      this.form.country = "";
-      this.form.zipcode = "";
-      this.form.address = "";
-      this.form.firstname = "";
-      this.form.lastname = "";
-      this.form.username = "";
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+    changeDate(value) {
+      this.form.birthdate = value;
+    },
+    setImage(value) {
+      this.form.avatar = value;
     }
   }
 };
