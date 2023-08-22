@@ -64,7 +64,7 @@
               </b-row>
               <hr />
 
-              <h5><i class='bx bxs-user-account' ></i> User info:</h5>
+              <h5><i class="bx bxs-user-account"></i> User info:</h5>
               <b-row>
                 <AvatarInput @pick_image="setImage"></AvatarInput>
               </b-row>
@@ -136,14 +136,14 @@
                     <div>
                       <b-dropdown
                         id="dropdown-1"
-                        :text="selected"
+                        :text="selected_gender"
                         class="gender-select"
                         :disabled="lockform"
                       >
                         <b-dropdown-item
                           v-for="gender in form.gender"
                           :key="gender"
-                          @click="selected = gender"
+                          @click="selected_gender = gender"
                           >{{ gender }}</b-dropdown-item
                         >
                       </b-dropdown>
@@ -170,7 +170,7 @@
               </b-row>
 
               <hr />
-              <h5><i class='bx bxs-notepad'></i> Contact info:</h5>
+              <h5><i class="bx bxs-notepad"></i> Contact info:</h5>
               <b-row>
                 <b-col>
                   <b-form-group
@@ -210,7 +210,7 @@
                 </b-col>
               </b-row>
               <hr />
-              <h5><i class='bx bxs-map-pin' ></i> Shippment info:</h5>
+              <h5><i class="bx bxs-map-pin"></i> Shippment info:</h5>
               <b-form-group
                 id="input-group-1"
                 label="Zipcode:"
@@ -280,8 +280,38 @@
                     ></b-form-input>
                   </b-form-group>
                 </b-col>
-              </b-row> </b-card-text
-          ></b-tab>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-form-group
+                    label="Pick up method"
+                    v-slot="{ ariaDescribedby }"
+                  >
+                    <b-form-radio-group
+                      id="radio-group-2"
+                      v-model="selected"
+                      :aria-describedby="ariaDescribedby"
+                      name="radio-sub-component"
+                    >
+                      <b-form-radio :disabled="lockform" value="at home"
+                        >at home</b-form-radio
+                      >
+                      <br />
+                      <b-form-radio :disabled="lockform" value="post office"
+                        >post office</b-form-radio
+                      >
+                    </b-form-radio-group>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+              <br />
+              <!--<hr />
+              <h5><i class="bx bx-lock-open"></i> Security:</h5>
+              -->
+
+              <b-button pill variant="primary">Save</b-button>
+            </b-card-text></b-tab
+          >
           <b-tab title="My products"
             ><b-card-text>
               <h3>Your product list:</h3>
@@ -484,6 +514,9 @@ import DataPicker from "@/components/DataPicker.vue";
 import axiosConfig from "@/modules/axiosConfig";
 export default {
   name: "UserView",
+  props: {
+    searchQuery: undefined
+  },
   components: {
     AvatarInput,
     DataPicker
@@ -499,9 +532,6 @@ export default {
     if (this.getProfile != undefined) {
       this.form = this.getProfile;
     }
-    this.$root.$on("bv::dropdown::show", (bvEvent) => {
-      console.log("Dropdown is about to be shown", bvEvent);
-    });
   },
   data() {
     return {
@@ -522,16 +552,21 @@ export default {
         birthdate: "",
         zipcode: "",
         streeth: "",
-        district: "",
+        state: "",
         city: "",
-        country: ""
+        country: "",
+        pick_up_method: ""
       },
-      selected: "Select one",
+      selected_gender: "Select one",
+      selected: "at home",
       show: true,
       isHovered: false
     };
   },
   watch: {
+    selected(newValue) {
+      this.form.pick_up_method = newValue;
+    },
     token(newValue) {
       if (newValue == "") {
         this.form = {
@@ -544,7 +579,7 @@ export default {
           birthdate: "",
           zipcode: "",
           streeth: "",
-          district: "",
+          state: "",
           city: "",
           country: ""
         };
@@ -703,6 +738,9 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+}
+.security {
+  width: 70vw;
 }
 .add_new-modal {
   width: 100%;

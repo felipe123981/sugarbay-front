@@ -35,7 +35,7 @@
               </router-link>
             </li>
 
-            <li class="">
+            <li class="" v-if="loged">
               <router-link to="/user">
                 <i class="bx bx-user icon"></i>
                 <span class="text nav-text">User</span>
@@ -130,7 +130,6 @@ import "boxicons";
 import { mapState, mapGetters, mapMutations } from "vuex";
 import { isValidToken } from "./modules/auth";
 import { readCookie } from "./modules/cookie";
-import router from "@/router";
 import axios from "axios";
 import Footer from "./components/Footer.vue";
 
@@ -158,17 +157,6 @@ export default {
         return resp.data;
       })
       .catch((err) => console.log(err));
-    router.beforeEach((to, from, next) => {
-      if (to.name === "login" && this.loged) {
-        this.$bvToast.toast("Already loged-in!", {
-          title: "Oops!",
-          variant: "warning",
-          solid: true
-        }),
-          next({ name: "home" });
-      } else next();
-    });
-
     const token = readCookie(document.cookie);
     if (isValidToken(token)) {
       this.restoreSession(token);
