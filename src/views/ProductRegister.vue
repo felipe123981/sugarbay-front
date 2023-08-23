@@ -161,6 +161,11 @@ export default {
           }
         })
         .then((resp) => {
+          this.$bvToast.toast("Your product is now for sale!", {
+            title: "Successfully registered",
+            variant: "success",
+            solid: true
+          });
           console.log(resp);
         })
         .catch(() => {

@@ -643,7 +643,7 @@ export default {
     return {
       api_url: axiosConfig.defaults.baseURL,
       currentPage: 1,
-      perPage: 5,
+      perPage: 15,
       my_products: [],
       paginated_products: [],
       lockform: false,

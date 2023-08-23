@@ -110,7 +110,7 @@ export default {
       maxLoadingTime: 3,
       products: [],
       value: ["all"],
-      perPage: 5,
+      perPage: 15,
       currentPage: 1,
       product: [],
       rate: 5,
