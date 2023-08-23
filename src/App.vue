@@ -24,7 +24,9 @@
         <div class="menu">
           <li class="search-box">
             <i class="bx bx-search icon"></i>
-            <input type="search" placeholder="Search..." v-model="search" />
+            <form autocomplete="off" method="post">
+              <input type="search" placeholder="Search..." v-model="search" />
+            </form>
           </li>
 
           <ul class="menu-links">

@@ -2,10 +2,13 @@
   <div>
     <b-input-group class="mb-3">
       <b-form-input
+        readonly
+        @click="enableInput"
         :disabled="lockform"
         id="example-input"
+        style="appearance: none; -webkit-appearance: none;"
         v-model="value"
-        type="text"
+        type="date"
         placeholder="YYYY-MM-DD"
         autocomplete="off"
       ></b-form-input>
@@ -55,6 +58,9 @@ export default {
       this.formatted = ctx.selectedFormatted;
       // The following will be an empty string until a valid date is entered
       this.selected = ctx.selectedYMD;
+    },
+    enableInput(event) {
+      event.target.removeAttribute("readonly");
     }
   }
 };

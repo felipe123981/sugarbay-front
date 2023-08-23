@@ -9,7 +9,9 @@
                 <b-col lg="4" class="pb-2">
                   <h3>Edit profile</h3>
                 </b-col>
-                <b-col lg="4" class="pb-2">
+                <!--
+
+                  <b-col lg="4" class="pb-2">
                   <div>
                     <b-dropdown variant="primary">
                       <template #button-content>
@@ -29,38 +31,12 @@
                         <span class="sr-only"
                           >(Click to unlock)</span
                         > </b-dropdown-item-button
-                      ><!--
-                      <b-dropdown-divider></b-dropdown-divider>
-                      <b-dropdown-group header="Choose options" class="small">
-                        <b-dropdown-item-button>
-                          <b-icon icon="blank" aria-hidden="true"></b-icon>
-                          Option A <span class="sr-only">(Not selected)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-item-button>
-                          <b-icon icon="check" aria-hidden="true"></b-icon>
-                          Option B <span class="sr-only">(Selected)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-item-button>
-                          <b-icon icon="blank" aria-hidden="true"></b-icon>
-                          Option C <span class="sr-only">(Not selected)</span>
-                        </b-dropdown-item-button>
-                      </b-dropdown-group>
-                      <b-dropdown-divider></b-dropdown-divider>
-                      <b-dropdown-item-button
-                        >Some action</b-dropdown-item-button
                       >
-                      <b-dropdown-item-button
-                        >Some other action</b-dropdown-item-button
-                      >
-                      <b-dropdown-divider></b-dropdown-divider>
-                      <b-dropdown-item-button variant="danger">
-                        <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                        Delete
-                      </b-dropdown-item-button>
-                      -->
                     </b-dropdown>
                   </div>
                 </b-col>
+
+                -->
               </b-row>
               <hr />
 
@@ -69,247 +45,374 @@
                 <AvatarInput @pick_image="setImage"></AvatarInput>
               </b-row>
               <br />
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Username:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.name"
-                      type="text"
-                      placeholder="ex: Michael123"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="First name:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.firstname"
-                      type="text"
-                      placeholder="ex: Michael"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Last name:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.lastname"
-                      type="text"
-                      placeholder="ex: Morris"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Gender:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <div>
-                      <b-dropdown
-                        id="dropdown-1"
-                        :text="selected_gender"
-                        class="gender-select"
-                        :disabled="lockform"
-                      >
-                        <b-dropdown-item
-                          v-for="gender in form.gender"
-                          :key="gender"
-                          @click="selected_gender = gender"
-                          >{{ gender }}</b-dropdown-item
-                        >
-                      </b-dropdown>
-                    </div>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Birthday:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <div>
-                      <DataPicker
-                        :disabled="lockform"
-                        @birthdate-changed="changeDate"
-                      />
-                    </div>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-
-              <hr />
-              <h5><i class="bx bxs-notepad"></i> Contact info:</h5>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Email address:"
-                    label-for="input-1"
-                    description="We'll never share your email with anyone else."
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.email"
-                      type="email"
-                      placeholder="Enter email"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Phone number:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb"
-                      id="input-1"
-                      v-model="form.phone"
-                      type="phone"
-                      placeholder="(555) 555-1234"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <hr />
-              <h5><i class="bx bxs-map-pin"></i> Shippment info:</h5>
-              <b-form-group
-                id="input-group-1"
-                label="Zipcode:"
-                label-for="input-1"
-                description=""
-              >
+              <b-form autocomplete="off" id="form" name="form" method="post">
                 <b-form-input
-                  class="form-sb-2"
-                  id="input-1"
-                  v-model="form.zipcode"
+                  autocomplete="false"
+                  name="hidden"
                   type="text"
-                  placeholder="ex: 437300"
-                  :disabled="lockform"
-                  required
+                  style="display: none"
                 ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                id="input-group-1"
-                label="Address:"
-                label-for="input-1"
-                description=""
-              >
-                <b-form-input
-                  style="min-width: 235px"
-                  id="input-1"
-                  v-model="form.address"
-                  type="text"
-                  placeholder="ex: Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                  :disabled="lockform"
-                  required
-                ></b-form-input>
-              </b-form-group>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="City:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb-2"
-                      id="input-1"
-                      v-model="form.city"
-                      type="text"
-                      placeholder="ex: New York"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group
-                    id="input-group-1"
-                    label="Country:"
-                    label-for="input-1"
-                    description=""
-                  >
-                    <b-form-input
-                      class="form-sb-2"
-                      id="input-1"
-                      v-model="form.country"
-                      type="text"
-                      placeholder="ex: United States"
-                      :disabled="lockform"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col>
-                  <b-form-group
-                    label="Pick up method"
-                    v-slot="{ ariaDescribedby }"
-                  >
-                    <b-form-radio-group
-                      id="radio-group-2"
-                      v-model="selected"
-                      :aria-describedby="ariaDescribedby"
-                      name="radio-sub-component"
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-1"
+                      label="Nickname:"
+                      label-for="input-1"
+                      description=""
                     >
-                      <b-form-radio :disabled="lockform" value="at home"
-                        >at home</b-form-radio
-                      >
-                      <br />
-                      <b-form-radio :disabled="lockform" value="post office"
-                        >post office</b-form-radio
-                      >
-                    </b-form-radio-group>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <br />
-              <!--<hr />
-              <h5><i class="bx bx-lock-open"></i> Security:</h5>
-              -->
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb"
+                        id="input-1"
+                        v-model="form.name"
+                        type="text"
+                        placeholder="ex: Michael123"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-2"
+                      label="First name:"
+                      label-for="input-2"
+                      description=""
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb"
+                        id="input-2"
+                        v-model="form.firstname"
+                        type="text"
+                        placeholder="ex: Michael"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-11"
+                      label="Last name:"
+                      label-for="input-11"
+                      description=""
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb"
+                        id="input-11"
+                        v-model="form.lastname"
+                        type="text"
+                        placeholder="ex: Morris"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-3"
+                      label="Gender:"
+                      label-for="input-3"
+                      description=""
+                    >
+                      <div>
+                        <b-dropdown
+                          id="dropdown-1"
+                          :text="selected_gender"
+                          class="gender-select"
+                          :disabled="lockform"
+                        >
+                          <b-dropdown-item
+                            v-for="gender in gender"
+                            :key="gender"
+                            @click="selectGender(gender)"
+                            >{{ gender }}</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </div>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-12"
+                      label="Birthday:"
+                      label-for="input-12"
+                      description=""
+                    >
+                      <div>
+                        <DataPicker
+                          :disabled="lockform"
+                          @birthdate-changed="changeDate"
+                        />
+                      </div>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
 
-              <b-button pill variant="primary">Save</b-button>
+                <hr />
+                <h5><i class="bx bxs-notepad"></i> Contact info:</h5>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-4"
+                      label="Email address:"
+                      label-for="input-4"
+                      description="We'll never share your email with anyone else."
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb"
+                        id="input-4"
+                        v-model="form.email"
+                        type="email"
+                        placeholder="Enter email"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-5"
+                      label="Phone number:"
+                      label-for="input-5"
+                      description=""
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb"
+                        id="input-5"
+                        v-model="form.phone"
+                        type="phone"
+                        placeholder="(555) 555-1234"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <hr />
+                <h5><i class="bx bxs-map-pin"></i> Shippment info:</h5>
+                <b-form-group
+                  id="input-group-6"
+                  label="Zipcode:"
+                  label-for="input-6"
+                  description=""
+                >
+                  <b-form-input
+                    autocomplete="off"
+                    readonly
+                    @focus="enableInput"
+                    class="form-sb-2"
+                    id="input-6"
+                    v-model="form.zipcode"
+                    type="text"
+                    placeholder="ex: 437300"
+                    :disabled="lockform"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+                <b-form-group
+                  id="input-group-7"
+                  label="Address:"
+                  label-for="input-7"
+                  description=""
+                >
+                  <b-form-input
+                    autocomplete="off"
+                    readonly
+                    @focus="enableInput"
+                    style="min-width: 235px"
+                    id="input-7"
+                    v-model="form.address"
+                    type="text"
+                    placeholder="ex: Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                    :disabled="lockform"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-8"
+                      label="City:"
+                      label-for="input-8"
+                      description=""
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb-2"
+                        id="input-8"
+                        v-model="form.city"
+                        type="text"
+                        placeholder="ex: New York"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-9"
+                      label="State:"
+                      label-for="input-9"
+                      description=""
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb-2"
+                        id="input-9"
+                        v-model="form.state"
+                        type="text"
+                        placeholder="ex: Missoury"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      id="input-group-10"
+                      label="Country:"
+                      label-for="input-10"
+                      description=""
+                    >
+                      <b-form-input
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        class="form-sb-2"
+                        id="country"
+                        name="country"
+                        v-model="form.country"
+                        type="text"
+                        placeholder="ex: United States"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                  <b-col>
+                    <b-form-group
+                      label="Pick up method"
+                      v-slot="{ ariaDescribedby }"
+                    >
+                      <b-form-radio-group
+                        id="radio-group-1"
+                        v-model="selected"
+                        :aria-describedby="ariaDescribedby"
+                        name="radio-sub-component"
+                      >
+                        <b-form-radio :disabled="lockform" value="at home"
+                          >at home</b-form-radio
+                        >
+                        <br />
+                        <b-form-radio :disabled="lockform" value="post office"
+                          >post office</b-form-radio
+                        >
+                      </b-form-radio-group>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <br />
+                <hr />
+                <h5><i class="bx bx-lock-open"></i> Security:</h5>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      autocomplete="off"
+                      readonly
+                      @focus="enableInput"
+                      id="input-group-13"
+                      label="New password:"
+                      label-for="password"
+                      description=""
+                    >
+                      <b-form-input
+                        class="form-sb-2"
+                        name="new-password"
+                        id="new-password"
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        type="password"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      aria-autocomplete="off"
+                      id="input-group-14"
+                      label="Confirm password:"
+                      label-for="confirm_password"
+                      description=""
+                    >
+                      <b-form-input
+                        class="form-sb-2"
+                        name="confirm-password"
+                        id="confirm-password"
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        type="password"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-form-group
+                      aria-autocomplete="off"
+                      id="input-group-15"
+                      label="Old password:"
+                      label-for="old_password"
+                      description=""
+                    >
+                      <b-form-input
+                        class="form-sb-2"
+                        name="old-password"
+                        id="old-password"
+                        autocomplete="off"
+                        readonly
+                        @focus="enableInput"
+                        type="password"
+                        :disabled="lockform"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+
+                <b-button pill variant="primary">Save</b-button>
+              </b-form>
             </b-card-text></b-tab
           >
           <b-tab title="My products"
@@ -540,7 +643,8 @@ export default {
       perPage: 5,
       my_products: [],
       paginated_products: [],
-      lockform: true,
+      lockform: false,
+      gender: ["Male", "Female", "Other"],
       form: {
         name: "",
         firstname: "",
@@ -548,14 +652,13 @@ export default {
         email: "",
         phone: "",
         avatar: "",
-        gender: ["Male", "Female", "Other"],
+        gender: "",
         birthdate: "",
         zipcode: "",
-        streeth: "",
         state: "",
         city: "",
         country: "",
-        pick_up_method: ""
+        pick_up_method: "at home"
       },
       selected_gender: "Select one",
       selected: "at home",
@@ -578,7 +681,6 @@ export default {
           avatar: "",
           birthdate: "",
           zipcode: "",
-          streeth: "",
           state: "",
           city: "",
           country: ""
@@ -613,6 +715,10 @@ export default {
     ...mapMutations("products", {
       removeFromProducts: "removeFromProducts"
     }),
+    selectGender(value) {
+      this.selected_gender = value;
+      this.form.gender = value;
+    },
     paginate(base, max) {
       var result = [[]];
       var group = 0;
@@ -659,6 +765,9 @@ export default {
     },
     setImage(value) {
       this.form.avatar = value;
+    },
+    enableInput(event) {
+      event.target.removeAttribute("readonly");
     }
   }
 };
