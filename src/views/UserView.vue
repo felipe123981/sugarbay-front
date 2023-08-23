@@ -356,6 +356,7 @@
                         id="new-password"
                         autocomplete="off"
                         readonly
+                        v-model="form.password"
                         @focus="enableInput"
                         type="password"
                         :disabled="lockform"
@@ -379,6 +380,7 @@
                         id="confirm-password"
                         autocomplete="off"
                         readonly
+                        v-model="form.password_confirmation"
                         @focus="enableInput"
                         type="password"
                         :disabled="lockform"
@@ -400,6 +402,7 @@
                         class="form-sb-2"
                         name="old-password"
                         id="old-password"
+                        v-model="form.old_password"
                         autocomplete="off"
                         readonly
                         @focus="enableInput"
@@ -658,7 +661,10 @@ export default {
         state: "",
         city: "",
         country: "",
-        pick_up_method: "at home"
+        pick_up_method: "at home",
+        password: "",
+        password_confirmation: "",
+        old_password: ""
       },
       selected_gender: "Select one",
       selected: "at home",
@@ -683,7 +689,10 @@ export default {
           zipcode: "",
           state: "",
           city: "",
-          country: ""
+          country: "",
+          password: "",
+          password_confirmation: "",
+          old_password: ""
         };
       }
     }
