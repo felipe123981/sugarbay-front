@@ -1,9 +1,10 @@
 <template>
-    <div class="product-display">
-      <b-card class="card-body" style="background-color: var(--sidebar-color);">
-        <b-media>
-          <template #aside>
-            <!--
+  <div class="product-display">
+    <b-card class="card-body" style="background-color: var(--sidebar-color)">
+      <div class="ribbon ribbon-top-right"><span>New</span></div>
+      <b-media>
+        <template #aside>
+          <!--
 
             <b-img
               blank
@@ -14,40 +15,41 @@
 
             -->
 
-              <div class="img-wrapper">
-                <button @click="addToFavorites(product)" class="btn btn-sm outline-primary btn-like">
-                  <i class='bx bxs-heart'></i>
-                </button>
-                
-                <b-img class="img-responsive"
-                
+          <div class="img-wrapper">
+            <button
+              @click="addToFavorites(product)"
+              class="btn btn-sm outline-primary btn-like"
+            >
+              <i class="bx bxs-heart"></i>
+            </button>
+
+            <b-img
+              class="img-responsive"
               :src="`${api_url}files/` + product.photos[0]"
               alt="placeholder"
-                >
-                <div class="img-overlay">
-                </div></b-img>
-              </div>
-
-            
-          </template>
-
-          <h5 class="mt-0">
-            {{ product.name }} - {{ currency }} {{ product.price }}
-          </h5>
-          <div class="star-rating">
-            <b-form-rating
-            style="background-color: var(--primary-color-light);"
-              v-model="rate"
-              variant="warning"
-              class="mb-2"
-              id="form-control"
-            ></b-form-rating>
+            >
+              <div class="img-overlay"></div
+            ></b-img>
           </div>
+        </template>
 
-          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
-          <b-row>
-            <b-col lg="4" class="pb-2">
-              <!--
+        <h5 class="mt-0">
+          {{ product.name }} - {{ currency }} {{ product.price }}
+        </h5>
+        <div class="star-rating">
+          <b-form-rating
+            style="background-color: var(--primary-color-light)"
+            v-model="rate"
+            variant="warning"
+            class="mb-2"
+            id="form-control"
+          ></b-form-rating>
+        </div>
+
+        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel ...</p>
+        <b-row>
+          <b-col lg="4" class="pb-2">
+            <!--
 
                 <router-link :to="`/product/` + product.id">
                 <b-button size="sm" class="sb-btn" pill
@@ -57,25 +59,30 @@
 
               -->
 
-              <a :href="`${url}:${port}/product/` + product.id">
-                <b-button
-                style="background-color: var(--button-color);"
-                size="sm" class="sb-btn" pill
-                ><i class='bx bxs-edit'></i> Detail</b-button
+            <a :href="`${url}:${port}/product/` + product.id">
+              <b-button
+                style="background-color: var(--button-color)"
+                size="sm"
+                class="sb-btn"
+                pill
+                ><i class="bx bxs-edit"></i> Detail</b-button
               >
-              </a>
-              </b-col
-            >
-            <b-col lg="4" class="pb-2"
-              ><b-button style="background-color: var(--button-color);" size="sm" class="sb-btn" pill @click="addToCart(product), makeToast('success')"
-                ><i class="bx bx-cart-alt"></i> Add to cart</b-button
-              ></b-col
-            >
-          </b-row>
-        </b-media>
-      </b-card>
-    </div>
-  
+            </a>
+          </b-col>
+          <b-col lg="4" class="pb-2"
+            ><b-button
+              style="background-color: var(--button-color)"
+              size="sm"
+              class="sb-btn"
+              pill
+              @click="addToCart(product), makeToast('success')"
+              ><i class="bx bx-cart-alt"></i> Add to cart</b-button
+            ></b-col
+          >
+        </b-row>
+      </b-media>
+    </b-card>
+  </div>
 </template>
 <script>
 import axiosConfig from "@/modules/axiosConfig";
@@ -88,7 +95,7 @@ export default {
   computed: {
     ...mapGetters("products", {
       getProductById: "getProductById"
-    }),
+    })
   },
   async mounted() {
     this.fetchProducts();
@@ -106,52 +113,52 @@ export default {
   },
   data() {
     return {
-      api_url:axiosConfig.defaults.baseURL,
+      api_url: axiosConfig.defaults.baseURL,
       url: axiosConfig.defaults.baseURL.replace(":3333/", ""),
       port: 80,
       products: [],
       product: [],
       rate: 5,
-      currency: "U$",
+      currency: "U$"
     };
   },
   methods: {
-    ...mapMutations('cart', {
-      addToCart: 'addToCart'
+    ...mapMutations("cart", {
+      addToCart: "addToCart"
     }),
-    ...mapMutations('favorites', {
-      addToFavorites: 'addToFavorites'
+    ...mapMutations("favorites", {
+      addToFavorites: "addToFavorites"
     }),
     ...mapMutations("products", {
       fetchProducts: "fetchProducts"
     }),
     makeToast(variant = null) {
       this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
-        title: 'Pushed!',
+        title: "Pushed!",
         variant: variant,
         solid: true
       });
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
-  .sb-btn {
-    border: 1px white solid;
-  }
-  .btn-like {
-    position: absolute;
-    padding-left: 3.05rem;
-    color: #ccc
-  }
- 
-  .btn-like:hover {
-    color: rgb(216, 25, 25);
-  }
-  .btn-like:active {
-    color: rgb(216, 25, 25);
-  }
+.sb-btn {
+  border: 1px white solid;
+}
+.btn-like {
+  position: absolute;
+  padding-left: 3.05rem;
+  color: #ccc;
+}
+
+.btn-like:hover {
+  color: rgb(216, 25, 25);
+}
+.btn-like:active {
+  color: rgb(216, 25, 25);
+}
 
 .img-wrapper {
   position: relative;
@@ -172,8 +179,8 @@ export default {
 }
 
 .img-overlay:before {
-  content: ' ';
-  display: block; 
+  content: " ";
+  display: block;
   height: 0;
 }
 
@@ -195,5 +202,56 @@ export default {
 }
 .card-body {
   padding: 0.6rem;
+  position: relative;
+}
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 5px solid #2980b9;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 8px;
+  background-color: red;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font: 700 18px/1 "Lato", sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+.ribbon-top-right {
+  top: -10px;
+  right: -10px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right::before {
+  top: 0;
+  left: 0;
+}
+.ribbon-top-right::after {
+  bottom: 0;
+  right: 0;
+}
+.ribbon-top-right span {
+  font-size: 14px;
+  left: 15px;
+  top: 11px;
+  transform: rotate(45deg);
 }
 </style>

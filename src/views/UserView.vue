@@ -5,11 +5,7 @@
         <b-tabs pills card vertical>
           <b-tab title="Account" active
             ><b-card-text>
-              <b-row>
-                <b-col lg="4" class="pb-2">
-                  <h3>Edit profile</h3>
-                </b-col>
-                <!--
+              <!--
 
                   <b-col lg="4" class="pb-2">
                   <div>
@@ -37,8 +33,6 @@
                 </b-col>
 
                 -->
-              </b-row>
-              <hr />
 
               <h5><i class="bx bxs-user-account"></i> User info:</h5>
               <b-row>
