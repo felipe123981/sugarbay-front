@@ -223,7 +223,7 @@ export default {
   display: block;
   width: 225px;
   padding: 8px;
-  background-color: red;
+  background-color: var(--ribbon-color);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
   font: 700 18px/1 "Lato", sans-serif;

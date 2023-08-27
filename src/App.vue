@@ -261,6 +261,7 @@ ul {
 
 :root {
   /* ===== Colors ===== */
+  --ribbon-color: red;
   --button-color: #007bff;
   --body-color: #e4e9f7;
   --sidebar-color: #fff;
@@ -294,6 +295,7 @@ body {
 }
 
 body.dark {
+  --ribbon-color:  #3a3b3c;
   --button-color: #242526;
   --body-color: #18191a;
   --sidebar-color: #242526;
