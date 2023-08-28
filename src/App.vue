@@ -278,15 +278,15 @@ ul {
 }
 
 body {
-  /*
-  background-image: url("@/assets/img/sugarbay-background.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
-  */
-  background-size: cover;
-  background-color: var(--body-color);
   min-height: 100vh;
   transition: var(--tran-05);
+  background-color: var(--body-color);
+
+  /*
+  background-image: url("./assets/img/background.jpg");
+  background-repeat: no-repeat;
+   */
 }
 
 ::selection {
