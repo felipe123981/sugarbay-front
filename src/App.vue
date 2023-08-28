@@ -40,24 +40,29 @@
             <li class="" v-if="loged">
               <router-link to="/user">
                 <i class="bx bx-user icon"></i>
-                <span class="text nav-text">User</span>
+                <span class="text nav-text">Profile</span>
               </router-link>
             </li>
 
             <li class="">
               <router-link to="/support">
                 <i class="bx bx-chat icon"></i>
-                <span class="text nav-text">Talk to us</span>
+                <span class="text nav-text">Messages</span>
               </router-link>
             </li>
-            <!--
-            <li class="">
+            <li class="" v-if="loged">
               <router-link to="/analytics">
                 <i class="bx bx-pie-chart-alt-2 icon"></i>
                 <span class="text nav-text">Analytics</span>
               </router-link>
             </li>
-            -->
+
+            <li class="" v-if="loged">
+              <router-link to="/">
+                <i class='bx bx-bell icon' ></i>
+                <span class="text nav-text">Notifications</span>
+              </router-link>
+            </li>
 
             <li class="">
               <router-link to="/order">
