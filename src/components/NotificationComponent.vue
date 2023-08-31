@@ -2,7 +2,7 @@
      <div class="notification">
           <div class="content">
             <div class="flag">
-              <i :class="flag"></i>
+              <i :class="flag + ' icon'"></i>
             </div>
             <div class="body">
               <div class="header">
@@ -48,7 +48,7 @@ export default {
 }
 .notification {
   display: flex;
-  width: 42vw;
+  width: 36vw;
   background-color: var(--sidebar-color);
   border-radius: 10px;
 }

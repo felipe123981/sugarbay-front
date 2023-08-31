@@ -21,72 +21,6 @@
         <br>
     </div>
     <br />
-    <b-card>
-      <b-media>
-        <template #aside>
-          <i class="bx bx-lock"></i>
-        </template>
-
-        <h5 class="mt-0">Recent Login</h5>
-        <p>there was a recent login to you account from this device</p>
-      </b-media>
-    </b-card>
-    <br />
-    <b-card>
-      <b-media>
-        <template #aside>
-          <i class="bx bx-sync"></i>
-        </template>
-
-        <h5 class="mt-0">Password Reset</h5>
-        <p>Your password has been restored successfully</p>
-      </b-media>
-    </b-card>
-    <br />
-    <b-card>
-      <b-media>
-        <template #aside>
-          <i class="bx bx-package"></i>
-        </template>
-
-        <h5 class="mt-0">Order Received</h5>
-        <p>Your password has been restored successfully</p>
-      </b-media>
-    </b-card>
-    <br />
-    <b-card>
-      <b-media>
-        <template #aside>
-          <i class="bx bx-money"></i>
-        </template>
-
-        <h5 class="mt-0">Payment Received</h5>
-        <p>Your password has been restored successfully</p>
-      </b-media>
-    </b-card>
-    <br />
-    <b-card>
-      <b-media>
-        <template #aside>
-          <i class="bx bx-money-withdraw"></i>
-        </template>
-
-        <h5 class="mt-0">Withdraw success</h5>
-        <p>Your password has been restored successfully</p>
-      </b-media>
-    </b-card>
-    <!---->
-    <br />
-    <b-card>
-      <b-media>
-        <template #aside>
-          <i class="bx bx-x-circle"></i>
-        </template>
-
-        <h5 class="mt-0">Order Canceled</h5>
-        <p>Your password has been restored successfully</p>
-      </b-media>
-    </b-card>
   </div>
 </template>
 <script>
@@ -125,7 +59,31 @@ export default {
           message: "Your password has been restored successfully",
           user_id: "anyone2",
           created_at: "any date2"
-        }
+        },
+        {
+          id: "anyway3",
+          flag: "bx bx-money",
+          title: "Payment Received",
+          message: "Your password has been restored successfully",
+          user_id: "anyone3",
+          created_at: "any date3"
+        },
+        {
+          id: "anyway4",
+          flag: "bx bx-money-withdraw",
+          title: "Payment Received",
+          message: "Your password has been restored successfully",
+          user_id: "anyone4",
+          created_at: "any date4"
+        },
+        {
+          id: "anyway5",
+          flag: "bx bx-x-circle",
+          title: "Order Canceled",
+          message: "Your password has been restored successfully",
+          user_id: "anyone5",
+          created_at: "any date5"
+        },
       ]
     };
   }
