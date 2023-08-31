@@ -7,7 +7,7 @@
       class="wrapper"
       :style="{
         background: 'url(' + getAvatar + ')',
-        'background-size': 'contain'
+        'background-size': 'cover'
       }"
     >
       <b-form-file

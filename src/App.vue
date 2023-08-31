@@ -58,7 +58,7 @@
             </li>
 
             <li class="" v-if="loged">
-              <router-link to="/">
+              <router-link to="/notifications">
                 <i class='bx bx-bell icon' ></i>
                 <span class="text nav-text">Notifications</span>
               </router-link>
@@ -83,7 +83,7 @@
                 <i class="bx bx-cog icon"></i>
                 <span class="text nav-text">Config</span>
               </router-link>
-            </li>
+            </li> 
 
             <li class="">
               <router-link to="/about">

@@ -1,6 +1,7 @@
 import HomeView from "../views/HomeView.vue";
 import UserView from "../views/UserView.vue";
 import ChatView from "../views/ChatView.vue";
+import NotificationsView from "../views/NotificationsView.vue";
 //import AnalyticsView from "../views/AnalyticsView.vue";
 import OrderView from "../views/OrderView.vue";
 import SavedView from "../views/SavedView.vue";
@@ -46,6 +47,11 @@ const router = new Router({
       component: AnalyticsView
     },
     */
+   {
+    path: '/notifications',
+    name: "notifications",
+    component: NotificationsView
+   },
     {
       path: "/order",
       name: "order",

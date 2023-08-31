@@ -1,6 +1,5 @@
 <template>
   <div>
-    <br />
     <HeaderNavbar headerTitle="Catalog:"></HeaderNavbar>
     <br />
 
