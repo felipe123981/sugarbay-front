@@ -1,6 +1,5 @@
 <template>
-    <div class="">
-            
+    <div id="app">   
             <div class="card ">
                 <div class="row mb-4 ">
                     
@@ -8,7 +7,6 @@
                         <div class="footer-text pull-left">
                              <div class="d-flex">
                                  <img src="@/assets/logo-alt.png" width="90px" alt="" >
-                                 <h1 style="color: black; font-weight: bold;" ></h1>
                              </div>
                              <br>
                              <p class="card-text">Do not face queues, buy and sell online without headaches!</p>
@@ -104,7 +102,9 @@
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap');
-        
+        #app {
+            position: relative;
+        }
         body{
             background-color:#f3f6fd ;
             font-size: 11.5px;

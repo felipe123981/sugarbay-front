@@ -132,10 +132,12 @@
                   </p>
                   <b-row>
                     <b-col lg="4" class="pb-2">
-                      <b-button size="sm" pill
-                        ><i class="bx bx-cart-alt"></i> Checkout</b-button
-                      ></b-col
-                    >
+                      <router-link to="/checkout">
+                        <b-button size="sm" pill
+                          ><i class="bx bx-cart-alt"></i> Checkout</b-button
+                        >
+                      </router-link>
+                    </b-col>
 
                     <b-col lg="4" class="pb-2">
                       <b-button
@@ -151,11 +153,14 @@
               </b-card>
               <br />
               Total: {{ this.getTotal.toFixed(2) }}
-              <div class="checkout-all">
-                <b-button class="float" variant="warning"
-                  ><i class="bx bx-cart-alt"></i> Checkout</b-button
-                >
-              </div>
+
+              <router-link to="/checkout">
+                <div class="checkout-all">
+                  <b-button class="float" variant="warning"
+                    ><i class="bx bx-cart-alt"></i> Checkout</b-button
+                  >
+                </div>
+              </router-link>
             </b-card-text>
           </b-tab>
           <b-tab title="Orders"

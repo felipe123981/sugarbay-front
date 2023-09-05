@@ -12,9 +12,7 @@ import SignIn from "@/views/SignIn.vue";
 import ShopView from "@/views/ShopView.vue";
 import AccountConfirmed from "@/views/AccountConfirmed.vue";
 import AboutView from "@/views/AboutView.vue";
-//
-import Checkout from "@/views/CheckoutView.vue";
-//
+import CheckoutView from "@/views/CheckoutView.vue";
 import Router from "vue-router";
 import Vue from "vue";
 import { readCookie } from "@/modules/cookie";
@@ -104,7 +102,7 @@ const router = new Router({
     {
       path: "/checkout",
       name: "checkout",
-      component: Checkout
+      component: CheckoutView
     }
     //
   ]

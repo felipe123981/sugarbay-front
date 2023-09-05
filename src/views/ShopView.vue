@@ -17,7 +17,7 @@
       <b-card class="sb-cart">
         <b-media class="sb-media float-left">
           <h5 class="mt-0 product-name">{{ product.name }}</h5>
-          <div class="img-wrapper" style="color: var(--text-color);">
+          <div class="img-wrapper" style="color: var(--text-color)">
             <input
               type="number"
               style="
@@ -43,7 +43,12 @@
                 :key="index"
                 :class="'image-' + (index + 1)"
               >
-                <img width="200" height="200" :alt="'image-' + (index + 1)" :src="`${api_url}files/` + image" />
+                <img
+                  width="200"
+                  height="200"
+                  :alt="'image-' + (index + 1)"
+                  :src="`${api_url}files/` + image"
+                />
               </div>
             </VueSlickCarousel>
           </div>
@@ -79,7 +84,9 @@
                           <p class="price-header">Price:</p>
                           <p class="price-content info-content">
                             U$ {{ (product.price * item_quantity).toFixed(2) }}
-                            <del style="color: var(--text-color)">U$ 400.00</del>
+                            <del style="color: var(--text-color)"
+                              >U$ 400.00</del
+                            >
                           </p>
                         </div>
                       </b-col>
@@ -339,12 +346,21 @@
       <br />
       <div id="shop-buttons">
         <p>
-          <b-button pill class="sb-btn" variant="primary">
-            <i class="bx bx-shopping-bag"></i> Buy
-          </b-button>
+          <router-link to="/checkout">
+            <b-button pill class="sb-btn" variant="primary">
+              <i class="bx bx-shopping-bag"></i> Buy
+            </b-button>
+          </router-link>
         </p>
         <p>
-          <b-button pill class="sb-btn" variant="primary" @click.prevent.stop="addToCart(product) ,makeToast('success'), product = fetch()">
+          <b-button
+            pill
+            class="sb-btn"
+            variant="primary"
+            @click.prevent.stop="
+              addToCart(product), makeToast('success'), (product = fetch())
+            "
+          >
             <i class="bx bx-cart-alt"></i> Add to cart
           </b-button>
         </p>
@@ -457,7 +473,7 @@ export default {
       getProducts: "getProducts"
     })
   },
-  
+
   async mounted() {
     this.fetchProducts();
     await axiosConfig
@@ -475,15 +491,15 @@ export default {
     //console.log(this.paginated_products);
   },
   methods: {
-    ...mapMutations('products', {
-      fetchProducts: 'fetchProducts'
+    ...mapMutations("products", {
+      fetchProducts: "fetchProducts"
     }),
-    ...mapMutations('cart', {
-      addToCart: 'addToCart'
+    ...mapMutations("cart", {
+      addToCart: "addToCart"
     }),
     makeToast(variant = null) {
       this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
-        title: 'Pushed!',
+        title: "Pushed!",
         variant: variant,
         solid: true
       });

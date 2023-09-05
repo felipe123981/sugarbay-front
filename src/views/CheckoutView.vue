@@ -1,385 +1,291 @@
 <template>
   <div id="app">
-    <h1>
-      <div class="checkout-panel">
-        <div class="panel-body">
-          <h1>Fuck u</h1>
-          <h2 class="title">Checkout</h2>
-          
-          <div class="progress-bar">
-        <b-col>
-            <div class="step active"></div>
-        </b-col>
-            <div class="step active"></div>
-            <div class="step"></div>
-            <div class="step"></div>
-          </div>
-          <b-row></b-row>
+    <b-row>
+      <b-col>
+        <div>
+          <div class="header"><h4>Select payment method:</h4></div>
 
-          <div class="payment-method">
-            <label for="card" class="method card">
-              <div class="card-logos">
-                <img src="@/assets/img/visa_logo.png" />
-                <img src="@/assets/img/mastercard_logo.png" />
+          <div class="checkout-body">
+            <div class="checkout-card">
+              <div class="checkout-radio-input">
+                <b-form-group label="" v-slot="{ ariaDescribedby }">
+                  <b-form-radio
+                    v-model="selected_method"
+                    :aria-describedby="ariaDescribedby"
+                    name="some-radios"
+                    value="Cryptocurrency"
+                    aria-selected="true"
+                    >Cryptocurrency
+                  </b-form-radio>
+                </b-form-group>
               </div>
-
-              <div class="radio-input">
-                <input id="card" type="radio" name="payment" />
-                Pay £340.00 with credit card
+              <div class="radio-input-icons">
+                <b-img
+                  :src="require('@/assets/img/btc1.webp')"
+                  class="icon"
+                ></b-img>
+                <b-img
+                  :src="require('@/assets/img/ltc1.webp')"
+                  class="icon"
+                ></b-img>
+                <b-img
+                  :src="require('@/assets/img/doge1.webp')"
+                  class="icon"
+                ></b-img>
+                <b-img
+                  :src="require('@/assets/img/bch1.webp')"
+                  class="icon"
+                ></b-img>
               </div>
-            </label>
+            </div>
 
-            <label for="paypal" class="method paypal">
-              <img src="@/assets/img/paypal_logo.png" />
-              <div class="radio-input">
-                <input id="paypal" type="radio" name="payment" />
-                Pay £340.00 with PayPal
-              </div>
-            </label>
-          </div>
+            <div class="coming_soon">
+              <h5>Coming soon:</h5>
 
-          <div class="input-fields">
-            <div class="column-1">
-              <label for="cardholder">Cardholder's Name</label>
-              <input type="text" id="cardholder" />
-
-              <div class="small-inputs">
-                <div>
-                  <label for="date">Valid thru</label>
-                  <input type="text" id="date" placeholder="MM / YY" />
+              <div class="checkout-card">
+                <div class="checkout-radio-input">
+                  <b-form-group label="" v-slot="{ ariaDescribedby }">
+                    <b-form-radio
+                      v-model="selected_method"
+                      :aria-describedby="ariaDescribedby"
+                      name="some-radios"
+                      value="Paypal"
+                      aria-selected="true"
+                      disabled="true"
+                      >Paypal
+                    </b-form-radio>
+                  </b-form-group>
                 </div>
+                <div class="radio-input-icons">
+                  <b-img
+                    :src="require('@/assets/img/paypal-logo.png')"
+                    height="35px"
+                  ></b-img>
+                </div>
+              </div>
+              <br />
+              <div class="checkout-card">
+                <div class="checkout-radio-input">
+                  <b-form-group label="" v-slot="{ ariaDescribedby }">
+                    <b-form-radio
+                      v-model="selected_method"
+                      :aria-describedby="ariaDescribedby"
+                      name="some-radios"
+                      value="CreditOrDebtCard"
+                      aria-selected="true"
+                      disabled="true"
+                      >Credit or debt card
+                    </b-form-radio>
+                  </b-form-group>
+                </div>
+                <div class="radio-input-icons">
+                  <b-img
+                    :src="require('@/assets/img/mastercard_logo.png')"
+                    height="35px"
+                  ></b-img>
+                  <b-img
+                    :src="require('@/assets/img/visa_logo.png')"
+                    height="25px"
+                  ></b-img>
+                </div>
+              </div>
 
-                <div>
-                  <label for="verification">CVV / CVC *</label>
-                  <input type="password" id="verification" />
+              <br />
+
+              <div class="checkout-card">
+                <div class="checkout-radio-input">
+                  <b-form-group label="" v-slot="{ ariaDescribedby }">
+                    <b-form-radio
+                      v-model="selected_method"
+                      :aria-describedby="ariaDescribedby"
+                      name="some-radios"
+                      value="Receipt"
+                      aria-selected="true"
+                      disabled="true"
+                      >Receipt
+                    </b-form-radio>
+                  </b-form-group>
+                </div>
+                <div class="radio-input-icons">
+                  <div class="receipt-content">
+                    <div class="barcode">
+                      <div class="receipt-content">
+                        <div class="barcode">
+                          <i class="bx bx-barcode-reader barcode-icon"></i>
+                        </div>
+                        <div class="receipt-text"><h5>Receipt</h5></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br />
+              <div class="checkout-card">
+                <div class="checkout-radio-input">
+                  <b-form-group label="" v-slot="{ ariaDescribedby }">
+                    <b-form-radio
+                      v-model="selected_method"
+                      :aria-describedby="ariaDescribedby"
+                      name="some-radios"
+                      value="Pix"
+                      aria-selected="true"
+                      disabled="true"
+                      >Pix
+                    </b-form-radio>
+                  </b-form-group>
+                </div>
+                <div class="radio-input-icons">
+                  <div class="receipt-content">
+                    <div class="barcode">
+                      <b-img
+                        :src="require('@/assets/img/pix-icon.png')"
+                        height="38vh"
+                      ></b-img>
+                    </div>
+                    <br /><br />
+                    <div class="receipt-text"><h5>Pix</h5></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="column-2">
-              <label for="cardnumber">Card Number</label>
-              <input type="password" id="cardnumber" />
-
-              <span class="info"
-                >* CVV or CVC is the card security code, unique three digits
-                number on the back of your card separate from its number.</span
-              >
-            </div>
           </div>
         </div>
-
-        <div class="panel-footer">
-          <button class="btn back-btn">Back</button>
-          <button class="btn next-btn">Next Step</button>
-        </div>
-      </div>
-    </h1>
+      </b-col>
+      <b-col
+        ><b-dropdown
+          :text="selected_currency"
+          variant="outline-primary"
+          class="m-2"
+        >
+          <b-dropdown-item
+            v-model="choosen_currency"
+            @click="selectCurrency(currencies[0])"
+            value="BTC"
+          >
+            <b-img :src="require(`@/assets/icon/bitcoin.svg`)"></b-img>
+          </b-dropdown-item>
+          <b-dropdown-item
+            v-model="choosen_currency"
+            @click="selectCurrency(currencies[1])"
+            value="LTC"
+          >
+            <b-img :src="require(`@/assets/icon/litecoin.svg`)"></b-img>
+          </b-dropdown-item>
+          <b-dropdown-item
+            v-model="choosen_currency"
+            @click="selectCurrency(currencies[2])"
+            value="BCH"
+          >
+            <b-img :src="require(`@/assets/icon/bitcoin-cash.svg`)"></b-img>
+          </b-dropdown-item>
+          <b-dropdown-item
+            v-model="choosen_currency"
+            @click="selectCurrency(currencies[3])"
+            value="DOGE"
+          >
+            <b-img :src="require(`@/assets/icon/dogecoin.svg`)"></b-img>
+          </b-dropdown-item> </b-dropdown
+      ></b-col>
+    </b-row>
   </div>
 </template>
 <script>
-import jquery from "jquery";
-
-var $ = jquery();
-
-
 export default {
   name: "CheckoutView",
-  mounted() {
-    $(document).ready(function () {
-  // Radio box border
-  $(".method").on("click", function () {
-    $(".method").removeClass("blue-border");
-    $(this).addClass("blue-border");
-  });
+  data() {
+    return {
+      selected_method: "Cryptocurrency",
+      currencies: [
+        "Bitcoin (BTC)",
+        "Litecoin (LTC)",
+        "BitcoinCash (BCH)",
+        "Dogecoin (DOGE)"
+      ],
+      selected_currency: "Bitcoin (BTC)",
+      choosen_currency: "BTC"
+    };
+  },
+  watch: {
+    selected_currency(newValue) {
+      this.choosen_currency = this.trunckCurrencyValue(newValue);
+    }
+  },
+  methods: {
+    trunckCurrencyValue(value) {
+      const indiceAbertura = value.indexOf("(");
+      const indiceFechamento = value.indexOf(")");
 
-  // Validation
-  var $cardInput = $(".input-fields input");
-
-  $(".next-btn").on("click", function () {
-    $cardInput.removeClass("warning");
-
-    $cardInput.each(function () {
-      var $this = $(this);
-
-      if (!$this.val()) {
-        $this.addClass("warning");
+      // Verifique se ambos os índices foram encontrados
+      if (indiceAbertura !== -1 && indiceFechamento !== -1) {
+        // Extraia o valor entre parênteses
+        const valorEntreParenteses = value.slice(
+          indiceAbertura + 1,
+          indiceFechamento
+        );
+        return valorEntreParenteses;
       }
-    });
-  });
-});
-    const link = document.createElement("link");
-    link.href = "https://fonts.googleapis.com/css?family=Montserrat:400,700";
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
+
+      // Se não foram encontrados parênteses, retorne uma string vazia ou outra indicação de que não há valor
+      return "";
+    },
+    selectCurrency(value) {
+      this.selected_currency = value;
+    }
   }
 };
 </script>
 <style scoped>
-/*
---- Basic Styling
-*/
-
+.icon {
+  height: 23px;
+}
+.checkout-body {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.checkout-card {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 2px;
+  border-radius: 5px;
+  background-color: var(--primary-color-light);
+  width: 50vw;
+  min-width: 278px;
+  max-width: 500px;
+}
+.checkout-radio-input {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+.radio-input-icons {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 7px;
+}
+.header {
+  width: auto;
+}
 * {
-  box-sizing: border-box;
+  color: var(--text-color);
 }
-
-html,
-body {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background: #f4f4f4;
-  justify-content: center;
-  align-items: center;
-}
-
-/*
---- Checkout Panel
-*/
-.checkout-panel {
-  display: flex;
-  flex-direction: column;
-  width: 940px;
-  height: 766px;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Panel Body */
-.panel-body {
-  padding: 45px 80px 0;
-  flex: 1;
-}
-
-.title {
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 40px;
-  color: #2e2e2e;
-}
-
-/* Progress Bar */
-.progress-bar {
-  display: flex;
-  margin-bottom: 50px;
-  justify-content: space-between;
-}
-
-.step {
-  box-sizing: border-box;
+.my-navbar {
   position: relative;
-  z-index: 1;
-  display: block;
-  width: 25px;
-  height: 25px;
-  margin-bottom: 30px;
-  border: 4px solid #fff;
-  border-radius: 50%;
-  background-color: #efefef;
-}
-
-.step:after {
-  position: absolute;
-  z-index: -1;
-  top: 5px;
-  left: 22px;
-  width: 225px;
-  height: 6px;
-  content: "";
-  background-color: #efefef;
-}
-
-.step:before {
-  color: #2e2e2e;
-  position: absolute;
-  top: 40px;
-}
-
-.step:last-child:after {
-  content: none;
-}
-
-.step.active {
-  background-color: #f62f5e;
-}
-.step.active:after {
-  background-color: #f62f5e;
-}
-.step.active:before {
-  color: #f62f5e;
-}
-
-.step.active + .step {
-  background-color: #f62f5e;
-}
-.step.active + .step:before {
-  color: #f62f5e;
-}
-
-.step:nth-child(1):before {
-  content: "Delivery";
-}
-.step:nth-child(2):before {
-  right: -40px;
-  content: "Confirmation";
-}
-.step:nth-child(3):before {
-  right: -30px;
-  content: "Payment";
-}
-.step:nth-child(4):before {
-  right: 0;
-  content: "Finish";
-}
-
-/* Payment Method */
-.payment-method {
-  display: flex;
-  margin-bottom: 60px;
-  justify-content: space-between;
-}
-
-.method {
-  display: flex;
-  flex-direction: column;
-  width: 382px;
-  height: 122px;
-  padding-top: 20px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  background-color: rgb(249, 249, 249);
-  justify-content: center;
-  align-items: center;
-}
-
-.blue-border {
-  border: 1px solid rgb(110, 178, 251);
-}
-
-.card-logos {
-  display: flex;
-  width: 150px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.radio-input {
-  margin-top: 20px;
-}
-
-input[type="radio"] {
-  display: inline-block;
-}
-
-/* Input Fields */
-.input-fields {
-  display: flex;
-  justify-content: space-between;
-}
-
-.input-fields label {
-  display: block;
-  margin-bottom: 10px;
-  color: #b4b4b4;
-}
-
-.warning {
-  border-color: #f62f5e !important;
-}
-
-.info {
-  font-size: 12px;
-  font-weight: 300;
-  display: block;
-  margin-top: 50px;
-  opacity: 0.5;
-  color: #2e2e2e;
-}
-
-div[class*="column"] {
-  width: 382px;
-}
-
-input[type="text"],
-input[type="password"] {
-  font-size: 16px;
-  width: 100%;
-  height: 50px;
-  padding-right: 40px;
-  padding-left: 16px;
-  color: rgba(46, 46, 46, 0.8);
-  border: 1px solid rgb(225, 225, 225);
-  border-radius: 4px;
-  outline: none;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-  border-color: rgb(119, 219, 119);
-}
-
-#date {
-  background: url(@/assets/img/icons_calendar_black.png) no-repeat 90%;
-}
-#cardholder {
-  background: url(@/assets/img/icons_person_black.png) no-repeat 95%;
-}
-#cardnumber {
-  background: url(@/assets/img/icons_card_black.png) no-repeat 95%;
-}
-#verification {
-  background: url(@/assets/img/icons_lock_black.png) no-repeat 90%;
-}
-
-.small-inputs {
-  display: flex;
-  margin-top: 20px;
-  justify-content: space-between;
-}
-
-.small-inputs div {
-  width: 182px;
-}
-
-/* Panel Footer */
-.panel-footer {
-  display: flex;
-  width: 100%;
-  height: 96px;
-  padding: 0 80px;
-  background-color: rgb(239, 239, 239);
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Buttons */
-.btn {
-  font-size: 16px;
-  width: 163px;
-  height: 48px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  letter-spacing: 1px;
-  border: none;
-  border-radius: 23px;
-}
-
-.back-btn {
-  color: #f62f5e;
-  background: #fff;
-}
-
-.next-btn {
+  background-color: var(--primary-color);
   color: #fff;
-  background: #f62f5e;
+  box-shadow: 2px 2px 3px #999;
 }
-
-.btn:focus {
-  outline: none;
+.receipt-content {
+  display: flex;
+  align-items: center;
 }
-
-.btn:hover {
-  transform: scale(1.1);
+.barcode-icon {
+  font-size: 8vh;
+}
+.receipt-text {
+  padding: 7px;
 }
 </style>

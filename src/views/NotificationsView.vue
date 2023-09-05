@@ -71,7 +71,7 @@ export default {
         {
           id: "anyway4",
           flag: "bx bx-money-withdraw",
-          title: "Payment Received",
+          title: "New Withdraw",
           message: "Your password has been restored successfully",
           user_id: "anyone4",
           created_at: "any date4"
