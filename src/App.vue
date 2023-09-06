@@ -234,7 +234,8 @@ h5 {
 }
 .logo {
   padding-left: 30px;
-  padding-top: 20px;
+  padding-top: 14px;
+  padding-bottom: 5px;
 }
 .close:hover {
   color: #000;
