@@ -38,6 +38,13 @@
             </li>
 
             <li class="" v-if="loged">
+              <router-link to="/wallet">
+                <i class='bx bx-wallet icon' ></i>
+                <span class="text nav-text">My wallet</span>
+              </router-link>
+            </li>
+
+            <li class="" v-if="loged">
               <router-link to="/user">
                 <i class="bx bx-user icon"></i>
                 <span class="text nav-text">Profile</span>
@@ -48,12 +55,6 @@
               <router-link to="/support">
                 <i class="bx bx-chat icon"></i>
                 <span class="text nav-text">Messages</span>
-              </router-link>
-            </li>
-            <li class="" v-if="loged">
-              <router-link to="/analytics">
-                <i class="bx bx-pie-chart-alt-2 icon"></i>
-                <span class="text nav-text">Analytics</span>
               </router-link>
             </li>
 
@@ -125,7 +126,6 @@
       <div class="logo">
         <img alt="Vue logo" src="./assets/logo.png" height="70vh" />
       </div>
-      <br />
       <router-view :searchQuery="search" class="router"></router-view>
 
       <Footer style="width: 100%" />

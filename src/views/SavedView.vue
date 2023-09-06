@@ -1,6 +1,5 @@
 <template>
   <div>
-    <br />
     <HeaderNavbar headerTitle="Saved products:"></HeaderNavbar>
     <br />
     <div v-if="items.length == 0">

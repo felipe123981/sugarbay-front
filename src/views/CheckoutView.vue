@@ -63,7 +63,7 @@
                   ></b-img>
                 </div>
               </div>
-              <br />
+
               <div class="checkout-card">
                 <div class="checkout-radio-input">
                   <b-form-group label="" v-slot="{ ariaDescribedby }">
@@ -89,8 +89,6 @@
                   ></b-img>
                 </div>
               </div>
-
-              <br />
 
               <div class="checkout-card">
                 <div class="checkout-radio-input">
@@ -120,7 +118,6 @@
                 </div>
               </div>
 
-              <br />
               <div class="checkout-card">
                 <div class="checkout-radio-input">
                   <b-form-group label="" v-slot="{ ariaDescribedby }">
@@ -143,7 +140,7 @@
                         height="38vh"
                       ></b-img>
                     </div>
-                    <br /><br />
+
                     <div class="receipt-text"><h5>Pix</h5></div>
                   </div>
                 </div>
@@ -152,47 +149,127 @@
           </div>
         </div>
       </b-col>
-      <b-col
-        ><b-dropdown
-          :text="selected_currency"
-          variant="outline-primary"
-          class="m-2"
-        >
-          <b-dropdown-item
-            v-model="choosen_currency"
-            @click="selectCurrency(currencies[0])"
-            value="BTC"
-          >
-            <b-img :src="require(`@/assets/icon/bitcoin.svg`)"></b-img>
-          </b-dropdown-item>
-          <b-dropdown-item
-            v-model="choosen_currency"
-            @click="selectCurrency(currencies[1])"
-            value="LTC"
-          >
-            <b-img :src="require(`@/assets/icon/litecoin.svg`)"></b-img>
-          </b-dropdown-item>
-          <b-dropdown-item
-            v-model="choosen_currency"
-            @click="selectCurrency(currencies[2])"
-            value="BCH"
-          >
-            <b-img :src="require(`@/assets/icon/bitcoin-cash.svg`)"></b-img>
-          </b-dropdown-item>
-          <b-dropdown-item
-            v-model="choosen_currency"
-            @click="selectCurrency(currencies[3])"
-            value="DOGE"
-          >
-            <b-img :src="require(`@/assets/icon/dogecoin.svg`)"></b-img>
-          </b-dropdown-item> </b-dropdown
-      ></b-col>
+      <b-col>
+        <div class="payment-form">
+          <div class="bitcoin-payment">
+            <div class="payment-body">
+              <div class="deposit-currency">
+                <div>Deposit currency</div>
+                <div>
+                  <div class="from">
+                    <div class="select-box">
+                      <img src="https://flagcdn.com/48x36/us.png" alt="flag" />
+                      <select>
+                         Options tag are inserted from JavaScript 
+                      </select>
+                    </div>
+                  </div>
+                  <!--
+                    <b-dropdown
+                    :text="selected_currency"
+                    variant="outline-primary"
+                    class="m-2"
+                  >
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[0])"
+                      value="BTC"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/bitcoin.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[1])"
+                      value="LTC"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/litecoin.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[2])"
+                      value="BCH"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/bitcoin-cash.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[3])"
+                      value="DOGE"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/dogecoin.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                  </b-dropdown>
+                  -->
+                  <!--
+                    
+                  -->
+                </div>
+              </div>
+
+              <div class="processing-fee">
+                <div>Processing fee</div>
+                <div>U$0.00</div>
+              </div>
+              <hr />
+              <div class="total">
+                <div>
+                  <h5>Total</h5>
+                </div>
+                <div>U$432.00</div>
+              </div>
+              <div class="payment-button">
+                <CryptoPaymentButton></CryptoPaymentButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-col>
     </b-row>
   </div>
 </template>
 <script>
+import CryptoPaymentButton from "@/components/CryptoPaymentButton.vue";
+import country_list from "@/modules/country_list";
 export default {
   name: "CheckoutView",
+  components: {
+    CryptoPaymentButton
+  },
+  mounted() {
+    const dropList = document.querySelectorAll("select"),
+      fromCurrency = document.querySelector(".from select");
+
+    this.fromCurrency = fromCurrency;
+
+    for (let i = 0; i < dropList.length; i++) {
+      for (let currency_code in country_list) {
+        // selecting USD by default as FROM currency and NPR as TO currency
+        let selected =
+          i == 0
+            ? currency_code == "USD"
+              ? "selected"
+              : ""
+            : currency_code == "NPR"
+            ? "selected"
+            : "";
+        // creating option tag with passing currency code as a text and value
+        let optionTag = `<option value="${currency_code}" ${selected}>${currency_code}</option>`;
+        // inserting options tag inside select tag
+        dropList[i].insertAdjacentHTML("beforeend", optionTag);
+      }
+      dropList[i].addEventListener("change", (e) => {
+        this.loadFlag(e.target); // calling loadFlag with passing target element as an argument
+      });
+    }
+  },
   data() {
     return {
       selected_method: "Cryptocurrency",
@@ -203,7 +280,8 @@ export default {
         "Dogecoin (DOGE)"
       ],
       selected_currency: "Bitcoin (BTC)",
-      choosen_currency: "BTC"
+      choosen_currency: "BTC",
+      fromCurrency: ""
     };
   },
   watch: {
@@ -212,6 +290,18 @@ export default {
     }
   },
   methods: {
+    loadFlag(element) {
+      for (let code in country_list) {
+        if (code == element.value) {
+          // if currency code of country list is equal to option value
+          let imgTag = element.parentElement.querySelector("img"); // selecting img tag of particular drop list
+          // passing country code of a selected currency code in a img url
+          imgTag.src = `https://flagcdn.com/48x36/${country_list[
+            code
+          ].toLowerCase()}.png`;
+        }
+      }
+    },
     trunckCurrencyValue(value) {
       const indiceAbertura = value.indexOf("(");
       const indiceFechamento = value.indexOf(")");
@@ -236,6 +326,43 @@ export default {
 };
 </script>
 <style scoped>
+.payment-form {
+  padding-top: 5.5vh;
+}
+.payment-body {
+  padding: 12px;
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: var(--primary-color-light);
+  border-radius: 5px;
+}
+.deposit-currency {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+}
+.deposit-amount {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+}
+.processing-fee {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 2px;
+}
+.total {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+}
 .icon {
   height: 23px;
 }
@@ -248,7 +375,6 @@ export default {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  border: 2px;
   border-radius: 5px;
   background-color: var(--primary-color-light);
   width: 50vw;
@@ -287,5 +413,51 @@ export default {
 }
 .receipt-text {
   padding: 7px;
+}
+select {
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+}
+.drop-list {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.drop-list .select-box {
+  display: flex;
+  width: 115px;
+  height: 45px;
+  align-items: center;
+  border-radius: 5px;
+  justify-content: center;
+  border: 1px solid #999;
+}
+.select-box img {
+  max-width: 21px;
+}
+.select-box select {
+  width: auto;
+  font-size: 16px;
+  background: none;
+  margin: 0 -5px 0 5px;
+}
+.select-box select::-webkit-scrollbar {
+  width: 8px;
+}
+.select-box select::-webkit-scrollbar-track {
+  background: #fff;
+}
+.select-box select::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+  border-right: 2px solid #ffffff;
+}
+.drop-list .icon {
+  cursor: pointer;
+  margin-top: 30px;
+  font-size: 22px;
 }
 </style>
