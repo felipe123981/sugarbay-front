@@ -214,13 +214,13 @@
                         <b-avatar variant="secondary"></b-avatar>
                       </div>
                       <div class="username" v-b-modal="'my-modal' + cid">
-                        @{{ username }}
+                        @{{  getCustomerById(product.customer_id).name  }}
                         <br />
                       </div>
                       <!-- The modal -->
                       <b-modal centered ok-only :id="'my-modal' + cid">
                         <div class="modal-container">
-                          <h1>{{ username }}</h1>
+                          <h1>{{ getCustomerById(product.customer_id).name  }}</h1>
                           <div class="modal-header">
                             <div class="customer-thumbnail">
                               <b-img
@@ -233,7 +233,7 @@
                             <div class="customer-header-description">
                               <div class="customer-name">
                                 <p>
-                                  {{ username }}
+                                  {{ getCustomerById(product.customer_id).name  }}
                                 </p>
                               </div>
                               <div class="customer-description">
@@ -386,7 +386,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
@@ -471,10 +471,14 @@ export default {
     }),
     ...mapGetters("products", {
       getProducts: "getProducts"
+    }),
+    ...mapGetters("customers", {
+      getCustomerById: "getCustomerById"
     })
   },
 
   async mounted() {
+    await this.fetchCustomers();
     this.fetchProducts();
     await axiosConfig
       .get("/products/" + this.$route.params.productId)
@@ -488,9 +492,12 @@ export default {
     this.vendor_products = this.getProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
     //console.log(this.vendor_products);
     this.paginated_products = this.paginate(this.vendor_products, this.perPage);
-    //console.log(this.paginated_products);
+    //console.log(this.getCustomerById(this.product.customer_id));
   },
   methods: {
+    ...mapActions("customers", {
+      fetchCustomers: "fetchCustomers"
+    }),
     ...mapMutations("products", {
       fetchProducts: "fetchProducts"
     }),

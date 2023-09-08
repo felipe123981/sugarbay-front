@@ -93,8 +93,8 @@ export default {
       );
     }
   },
-  mounted() {
-    this.fetchProducts();
+  async mounted() {
+    await this.fetchProducts();
 
     setTimeout(() => {
       this.products = this.getProducts;

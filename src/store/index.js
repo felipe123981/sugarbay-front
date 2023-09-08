@@ -5,7 +5,7 @@ import cart from "./modules/cart";
 import session from "./modules/session";
 import favorites from "./modules/favorites";
 import user from "./modules/user";
-import customer from "./modules/customer";
+import customers from "./modules/customers";
 import profile from "./modules/profile";
 
 Vue.use(Vuex);
@@ -27,7 +27,7 @@ const modules = {
   session,
   favorites,
   user,
-  customer,
+  customers,
   profile
 };
 

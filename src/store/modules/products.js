@@ -8,8 +8,8 @@ export default {
     products: []
   },
   mutations: {
-    fetchProducts(state) {
-      axiosConfig
+    async fetchProducts(state) {
+      await axiosConfig
         .get("/products")
         .then((resp) => {
           state.products = resp.data;
