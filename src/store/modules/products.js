@@ -14,8 +14,8 @@ export default {
         .then((resp) => {
           state.products = resp.data;
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          state.product = []
           return 0;
         });
     },
@@ -33,8 +33,8 @@ export default {
             state.products.splice(idx, 1);
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((/*err */) => {
+          //console.log(err);
         });
     }
   },

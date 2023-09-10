@@ -31,7 +31,6 @@ export default {
     NotificationComponent
   },
   mounted() {
-    console.log(this.notifications);
   },
   data() {
     return {

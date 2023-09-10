@@ -56,7 +56,7 @@
                       <h2 style="color: #707070">Invoice</h2>
                     </div>
                     <div>
-                      <p style="color: #707070" class="invoice-addr"></p>
+                      <p style="color: #707070" class="invoice"></p>
                     </div>
                   </div>
 
@@ -310,8 +310,8 @@ export default {
         this.apirone_response = await result;
         const link = document.createElement("a");
         document.getElementsByClassName(
-          "invoice-addr"
-        )[0].innerText = `(${result.address})`;
+          "invoice"
+        )[0].innerText = `(${result.invoice})`;
         document.getElementsByClassName("created")[0].innerText =
           result.created;
         document.getElementsByClassName(
@@ -446,7 +446,8 @@ export default {
 }
 .invoice_id {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row nowrap;
+  align-items: baseline;
 }
 .total-amount {
   border-radius: 5px;
@@ -456,5 +457,8 @@ export default {
   border-radius: 5px;
   padding-left: 3px;
   width: 345px;
+}
+.invoice {
+  padding-left: 8px;
 }
 </style>

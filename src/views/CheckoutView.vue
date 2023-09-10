@@ -156,7 +156,51 @@
               <div class="deposit-currency">
                 <div>Deposit currency</div>
                 <div>
-                  <div class="from">
+                  <b-dropdown
+                    :text="selected_currency"
+                    variant="outline-primary"
+                    class="m-2"
+                  >
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[0])"
+                      value="BTC"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/bitcoin.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[1])"
+                      value="LTC"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/litecoin.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[2])"
+                      value="BCH"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/bitcoin-cash.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      v-model="choosen_currency"
+                      @click="selectCurrency(currencies[3])"
+                      value="DOGE"
+                    >
+                      <b-img
+                        :src="require(`@/assets/icon/dogecoin.svg`)"
+                      ></b-img>
+                    </b-dropdown-item>
+                  </b-dropdown>
+                  <!--
+
+                    <div class="from">
                     <div class="select-box">
                       <img src="https://flagcdn.com/48x36/us.png" alt="flag" />
                       <select>
@@ -164,7 +208,7 @@
                       </select>
                     </div>
                   </div>
-                  <!--
+
                     <b-dropdown
                     :text="selected_currency"
                     variant="outline-primary"

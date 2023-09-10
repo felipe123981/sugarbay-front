@@ -16,9 +16,9 @@ export default {
         .then((resp) => {
           return resp.data;
         })
-        .catch((error) => {
+        .catch((/*error*/) => {
           state.customers = [];
-          console.log(error);
+          //console.log(error);
         });
     }
   },

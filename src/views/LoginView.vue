@@ -183,8 +183,8 @@ export default {
         .then(function (response) {
           return response.status;
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (/*error*/) {
+          //console.log(error);
         });
 
       if (status == 200) {

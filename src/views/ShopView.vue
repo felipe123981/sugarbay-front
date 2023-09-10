@@ -485,8 +485,8 @@ export default {
       .then((resp) => {
         this.product = resp.data;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((/*error*/) => {
+        //console.log(error);
         return 0;
       });
     this.vendor_products = this.getProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
@@ -644,7 +644,6 @@ export default {
   height: auto;
   margin-left: -6px;
   overflow: hidden;
-  vertical-align: baseline;
   width: 100%;
 }
 .modal-icon {

@@ -27,8 +27,8 @@ export default {
         .then((resp) => {
           return resp.data;
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((/*error*/) => {
+          //console.log(error);
           return [];
         });
     }

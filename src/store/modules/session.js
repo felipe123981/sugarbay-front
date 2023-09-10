@@ -50,8 +50,8 @@ export default {
             }
           ];
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((/*err*/) => {
+          //console.log(err);
           eraseCookie(document.cookie);
         });
     },

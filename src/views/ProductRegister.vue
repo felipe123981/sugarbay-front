@@ -107,8 +107,8 @@ export default {
       .then((resp) => {
         this.form = resp.data;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((/*error*/) => {
+        //console.log(error);
         return 0;
       });
   },
@@ -216,8 +216,8 @@ export default {
           .then((resp) => {
             this.form.id = resp.data.id;
           })
-          .catch((error) => {
-            console.log(error);
+          .catch((/*error */) => {
+            //console.log(error);
           });
 
         await this.sendPhotos(this.fileList);
@@ -262,8 +262,8 @@ export default {
         .then((resp) => {
           console.log(resp);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((/*error*/) => {
+          //console.log(error);
         });
     }
   }

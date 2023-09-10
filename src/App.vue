@@ -162,8 +162,7 @@ export default {
       .then((resp) => {
         //console.log(resp.data);
         return resp.data;
-      })
-      .catch((err) => console.log(err));
+      });
     const token = readCookie(document.cookie);
     if (isValidToken(token)) {
       this.restoreSession(token);
