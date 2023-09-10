@@ -7,17 +7,21 @@ export default {
   state: {
     products: []
   },
+  actions: {
+    async fetchProducts({commit}) {
+      try {
+        const response = await axiosConfig.get("/products"); 
+        commit("FETCH_PRODUCTS", response.data)
+      }
+      catch(error) {
+        console.log(error)
+      }
+      
+    }
+  },
   mutations: {
-    async fetchProducts(state) {
-      await axiosConfig
-        .get("/products")
-        .then((resp) => {
-          state.products = resp.data;
-        })
-        .catch(() => {
-          state.product = []
-          return 0;
-        });
+    async FETCH_PRODUCTS(state, payload) {
+      state.products = payload;
     },
     removeFromProducts(state, payload) {
       const token = readCookie(document.cookie);

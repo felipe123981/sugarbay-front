@@ -479,7 +479,7 @@ export default {
 
   async mounted() {
     await this.fetchCustomers();
-    this.fetchProducts();
+    await this.fetchProducts();
     await axiosConfig
       .get("/products/" + this.$route.params.productId)
       .then((resp) => {
@@ -498,7 +498,7 @@ export default {
     ...mapActions("customers", {
       fetchCustomers: "fetchCustomers"
     }),
-    ...mapMutations("products", {
+    ...mapActions("products", {
       fetchProducts: "fetchProducts"
     }),
     ...mapMutations("cart", {

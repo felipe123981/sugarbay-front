@@ -27,7 +27,7 @@ export default {
         };
         commit("login", { token: response.data.token, user: userData });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
   },

@@ -77,7 +77,7 @@
 </template>
 <script>
 import axiosConfig from "@/modules/axiosConfig";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   // eslint-disable-next-line
@@ -89,7 +89,7 @@ export default {
     })
   },
   async mounted() {
-    this.fetchProducts();
+    await this.fetchProducts();
     this.product = this.getProductById(this.pid);
     /*
      await axiosConfig
@@ -120,7 +120,7 @@ export default {
     ...mapMutations("favorites", {
       addToFavorites: "addToFavorites"
     }),
-    ...mapMutations("products", {
+    ...mapActions("products", {
       fetchProducts: "fetchProducts"
     }),
     makeToast(variant = null) {

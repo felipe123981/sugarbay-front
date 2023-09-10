@@ -26,7 +26,7 @@
             v-model="form.comment"
             placeholder="Send your review!"
           ></b-form-input>
-          <b-button class="post-button" variant="success"
+          <b-button class="post-button" @click="createReview(form)" variant="success"
             ><i class="bx bxs-send"></i
           ></b-button>
         </div>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Comment from "@/components/CommentComponent.vue";
 
 export default {
@@ -51,9 +52,18 @@ export default {
       }
     };
   },
+  async mounted() {
+    await this.fetchReviews();
+  },
   methods: {
+    ...mapActions("reviews", {
+      fetchReviews: "fetchReviews"
+    }),
+    ...mapActions("reviews", {
+      createReview: "createReview"
+    }),
     reply(username) {
-      if(this.form.comment === null) {
+      if (this.form.comment === null) {
         this.form.comment += "@";
       }
       this.form.comment += "@" + username;

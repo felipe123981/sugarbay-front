@@ -7,6 +7,7 @@ import favorites from "./modules/favorites";
 import user from "./modules/user";
 import customers from "./modules/customers";
 import profile from "./modules/profile";
+import reviews from "./modules/reviews";
 
 Vue.use(Vuex);
 const state = {
@@ -28,7 +29,8 @@ const modules = {
   favorites,
   user,
   customers,
-  profile
+  profile,
+  reviews,
 };
 
 export default new Vuex.Store({

@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderNavbar from "../components/HeaderNavbar.vue";
 import Pagination from "@/components/PaginationComponent.vue";
 //import ProductDisplay from "@/components/ProductDisplay.vue";
@@ -123,7 +123,7 @@ export default {
     ...mapMutations("favorites", {
       addToFavorites: "addToFavorites"
     }),
-    ...mapMutations("products", {
+    ...mapActions("products", {
       fetchProducts: "fetchProducts"
     }),
     makeToast(variant = null) {
