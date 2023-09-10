@@ -232,8 +232,6 @@
               <div class="advices">
                 <p>&#x2022; You agree your deposit is <strong>non-refundable</strong>!</p>
                 <br>
-                <p>&#x2022; Please <strong>enable pop-ups</strong> to show the payment page!</p>
-                <br>
                 <p>&#x2022; Deposits can be confirmed from <strong>10 minutes to a few hours</strong>!</p>
                    
                   
