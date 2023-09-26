@@ -531,63 +531,7 @@
                   v-for="product in paginated_products[currentPage - 1]"
                   :key="product.id"
                 >
-                  <div class="product-display">
-                    <b-card style="background-color: var(--sidebar-color)">
-                      <b-media>
-                        <template #aside>
-                          <div class="img-wrapper">
-                            <button
-                              @click="addToFavorites(product)"
-                              class="btn btn-sm outline-primary btn-like"
-                            >
-                              <i class="bx bxs-heart"></i>
-                            </button>
-                            <b-img
-                              class="img-responsive"
-                              :src="`${api_url}files/` + product.photos[0]"
-                              alt="placeholder"
-                            >
-                              <div class="img-overlay"></div
-                            ></b-img>
-                          </div>
-                        </template>
-
-                        <h5 class="mt-0">
-                          {{ product.name }} - U$ {{ product.price }}
-                        </h5>
-                        <p>
-                          Cras sit amet nibh libero, in gravida nulla. Nulla vel
-                          metus scelerisque ante sollicitudin.
-                        </p>
-                        <b-row>
-                          <b-col lg="4" class="pb-2">
-                            <router-link :to="'/register/' + product.id">
-                              <b-button
-                                size="sm"
-                                class="registered-products-button"
-                                pill
-                                variant="primary"
-                                ><i class="bx bx-edit-alt"></i> Edit</b-button
-                              >
-                            </router-link>
-                          </b-col>
-
-                          <b-col lg="4" class="pb-2">
-                            <b-button
-                              @click="
-                                removeElement(paginated_products, product)
-                              "
-                              size="sm"
-                              class="registered-products-button"
-                              pill
-                              variant="danger"
-                              ><i class="bx bx-trash"></i> Remove</b-button
-                            >
-                          </b-col>
-                        </b-row>
-                      </b-media>
-                    </b-card>
-                  </div>
+                  <ProductDisplay :pid="product.id"></ProductDisplay>
                   <br />
                 </div>
               </div>
@@ -610,6 +554,7 @@
 import { mapGetters, mapMutations, mapState, mapActions } from "vuex";
 import AvatarInput from "@/components/AvatarInput.vue";
 import DataPicker from "@/components/DataPicker.vue";
+import ProductDisplay from "@/components/ProductDisplay.vue";
 //import TypeSelector from "@/components/TypeSelector.vue";
 import axiosConfig from "@/modules/axiosConfig";
 export default {
@@ -618,12 +563,13 @@ export default {
     searchQuery: undefined
   },
   components: {
+    ProductDisplay,
     AvatarInput,
     DataPicker
     // Pagination
   },
   async mounted() {
-    this.fetchProducts();
+    await this.fetchProducts();
     await this.fetchProfile();
     setTimeout(() => {
       this.my_products = this.getProducts;
@@ -712,7 +658,7 @@ export default {
     ...mapMutations("favorites", {
       addToFavorites: "addToFavorites"
     }),
-    ...mapMutations("products", {
+    ...mapActions("products", {
       fetchProducts: "fetchProducts"
     }),
     ...mapMutations("products", {

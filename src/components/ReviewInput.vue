@@ -4,7 +4,6 @@
       <div v-for="i in 5" :key="i" :id="i">
         <Comment @reply-button="reply" :cid="i"></Comment>
       </div>
-      <slot></slot>
     </div>
     <div class="post-content">
       <div class="avatar">
@@ -36,7 +35,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Comment from "@/components/CommentComponent.vue";
 
 export default {
@@ -44,11 +43,19 @@ export default {
   components: {
     Comment
   },
+  
+  computed: {
+    ...mapGetters("customers", {
+      getCustomerByName: "getCustomerByName"
+    })
+  },
   data() {
     return {
       form: {
+        product_id: this.$route.params.productId,
         comment: null,
-        rating: 0
+        rating: 0,
+        replied_customers: ''
       }
     };
   },
@@ -67,6 +74,7 @@ export default {
         this.form.comment += "@";
       }
       this.form.comment += "@" + username;
+      this.form.replied_customers += "@" + username;
 
       // Splitting the comment by "@" and removing "null" elements
       this.form.comment = this.form.comment
@@ -74,7 +82,12 @@ export default {
         .filter((element) => element !== "null")
         .join("@");
 
-      //console.log(this.form.comment); // Logging the modified comment
+       const replied_customers = this.form.replied_customers.split("@");
+       for(let i = 1; i < replied_customers.length; i++) {
+        console.log("@" + this.getCustomerByName('Delicius_Metal').name)
+       }
+       console.log("=>", replied_customers) // Logging the modified comment
+
     }
   }
 };

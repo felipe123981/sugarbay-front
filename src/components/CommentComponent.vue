@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 1vh;">
+  <div style="padding: 1vh">
     <div class="comment-grid">
       <div class="container-alt">
         <div class="upvotes">
@@ -128,18 +128,16 @@
   </div>
 </template>
 <script>
-//import Vue from "vue";
-//import { LinearGaugePlugin } from "@syncfusion/ej2-vue-lineargauge";
-
-//Vue.use(LinearGaugePlugin);
+import { mapGetters } from 'vuex';
 export default {
   name: "CommentComponent",
   props: ["cid"],
   mounted() {
+    console.log(this.getEmail),
     this.btn_like = document.getElementsByClassName("bx-like")[this.cid - 1];
     this.btn_dislike =
       document.getElementsByClassName("bx-dislike")[this.cid - 1];
-      this.username += this.cid;
+    this.username += this.cid;
   },
   data() {
     return {
@@ -171,10 +169,16 @@ export default {
       }
     },
     reply() {
-        this.$emit("reply-button", this.username);
+      this.$emit("reply-button", this.username);
     }
   },
   computed: {
+    ...mapGetters("session", {
+      getEmail: "getEmail"
+    }),
+    ...mapGetters("customers", {
+      getCustomerById: "getCustomerById"
+    }),
     comment_lenght() {
       return this.comment.length;
     }

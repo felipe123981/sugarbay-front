@@ -23,7 +23,8 @@ export default {
           "/reviews",
           {
             rating: payload.rating,
-            content: payload.comment
+            content: payload.comment,
+            product_id: payload.product_id
           },
           {
             headers: {
@@ -50,5 +51,5 @@ export default {
     },
     UPDATE_REVIEW() {},
     DELETE_REVIEW() {}
-  }
+  },
 };

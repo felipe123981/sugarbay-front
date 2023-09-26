@@ -25,6 +25,12 @@ export default {
   getters: {
     getCustomerById: (state) => (id) => {
       return state.customers.find((customer) => customer.id === id);
+    },
+    getCustomerByEmail: (state) => (email) => {
+      return state.customers.find((customer) => customer.email === email);
+    },
+    getCustomerByName: (state) => (name) => {
+      return state.customers.find((customer) => customer.name === name);
     }
   },
   actions: {
