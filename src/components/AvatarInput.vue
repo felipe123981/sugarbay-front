@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions  } from "vuex";
 //import userIcon  from "@/assets/img/userIcon.png"
 export default {
   name: "AvatarInput",
@@ -39,14 +39,17 @@ export default {
   },
   data() {
     return {
-      file: require('@/assets/img/34-512.webp'),
+      file: require("@/assets/img/34-512.webp")
     };
   },
   watch: {
     file(newFile) {
       let reader = new FileReader();
       reader.onload = (e) => {
-        this.$emit('pick_image', this.file);
+        console.log("file: ", this.file);
+        console.log("newFile: [watch block] \n", this.file)
+        this.updateAvatar(this.file);
+        this.$emit("pick_image", this.file);
         this.file = e.target.result;
         //console.log(this.file)
       };
@@ -54,6 +57,11 @@ export default {
       this.$emit("input", newFile);
     }
   },
+  methods: {
+  ...mapActions("user", {
+      updateAvatar: "updateAvatar"
+    }),
+  }
 };
 </script>
 <style scoped>
