@@ -8,7 +8,6 @@ import SavedView from "../views/SavedView.vue";
 import ConfigView from "../views/ConfigView.vue";
 import LoginView from "../views/LoginView.vue";
 import ProductRegister from "@/views/ProductRegister.vue";
-import SignIn from "@/views/SignIn.vue";
 import ShopView from "@/views/ShopView.vue";
 import AccountConfirmed from "@/views/AccountConfirmed.vue";
 import AboutView from "@/views/AboutView.vue";
@@ -16,6 +15,7 @@ import CheckoutView from "@/views/CheckoutView.vue";
 import Router from "vue-router";
 import Vue from "vue";
 import { readCookie } from "@/modules/cookie";
+import Signup from "../views/Signup.vue";
 
 Vue.use(Router);
 
@@ -77,9 +77,9 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path: "/sign-in",
-      name: "sign-in",
-      component: SignIn,
+      path: "/sign-up",
+      name: "sign-up",
+      component: Signup,
       meta: { requiresAuth: false }
     },
     // param referente ao id do produto
@@ -111,7 +111,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const token = readCookie(document.cookie);
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  if (!requiresAuth && to.name == "sign-in" && token) {
+  if (!requiresAuth && to.name == "sign-up" && token) {
     if(from.name != null) {
       next(`/${from.name}`);
     }

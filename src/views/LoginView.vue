@@ -138,7 +138,7 @@ strong {
     </b-form>
     <br />
     <strong style="color: var(--text-color);">
-      Don't have an account? <router-link to="/sign-in">Sign-in</router-link>.
+      Don't have an account? <router-link to="/sign-up">Sign-up</router-link>.
     </strong>
     <br />
     <br />

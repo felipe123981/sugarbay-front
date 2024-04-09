@@ -10,22 +10,34 @@ export default {
     isCustomer: true
   },
   actions: {
+    async createUser(payload) {
+      try {
+        await axiosConfig.post("/users", {
+          name: payload.username,
+          email: payload.email,
+          password: payload.password
+        })
+      }
+      catch (error) {
+        console.log(error)
+      }
+    },
     async updateAvatar(avatarBlob) {
       try {
-    
+
         // Crie um objeto FormData para enviar a imagem como um arquivo
         const token = readCookie(document.cookie);
         const formData = new FormData();
         formData.append('avatar', avatarBlob);
-    
+
         // Faça a solicitação PATCH usando o Axios
-        const response = await axiosConfig.patch( '/users/avatar', formData, {
+        const response = await axiosConfig.patch('/users/avatar', formData, {
           headers: {
             'Content-Type': 'multipart/form-data', // Importante para enviar dados como FormData
             Authorization: "token " + token
           },
         });
-    
+
         // Lida com a resposta do servidor
         console.log('Resposta do servidor:', response.data);
       } catch (error) {
@@ -50,17 +62,6 @@ export default {
         });
     },
     //this method need to dispatch a customer module called createCustomer
-    async createUserAsCustomer(state, payload) {
-      state.user = await axiosConfig
-        .post("/users", payload)
-        .then((resp) => {
-          return resp.data;
-        })
-        .catch((/*error*/) => {
-          //console.log(error);
-          return [];
-        });
-    }
   },
   getters: {}
 };
