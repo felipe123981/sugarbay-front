@@ -10,13 +10,47 @@ export default {
     isCustomer: true
   },
   actions: {
-    async createUser(payload) {
+    async createUser({ commit }, payload) {
       try {
         await axiosConfig.post("/users", {
           name: payload.username,
           email: payload.email,
           password: payload.password
         })
+        const token = await axiosConfig.post("/sessions",
+          {
+            email: payload.email,
+            password: payload.password
+          }
+        )
+          .then((resp) => {
+            return resp.data.token;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        await axiosConfig.post("/customers", {
+          name: payload.username,
+          email: payload.email
+        },
+          {
+            headers: {
+              Authorization: "token " + token
+            }
+          }
+        )
+        const formData = new FormData();
+        formData.append('avatar', payload.avatar);
+
+        // Faça a solicitação PATCH usando o Axios
+        await axiosConfig.patch('/users/avatar', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data', // Importante para enviar dados como FormData
+            Authorization: "token " + token
+          },
+        });
+        
+        commit("CREATE_USER", payload)
       }
       catch (error) {
         console.log(error)
@@ -47,6 +81,9 @@ export default {
     }
   },
   mutations: {
+    CREATE_USER(state, payload) {
+      console.log("commit: ", payload);
+    },
     updateAvatar(state, payload) {
       console.log(payload);
     },
