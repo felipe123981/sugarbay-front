@@ -104,37 +104,17 @@ strong {
       <i class="bx bxs-user"></i> Login Panel:
     </h2>
     <b-form v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          class="form"
-          id="input-1"
-          v-model="email"
-          type="email"
-          autocomplete="current-email"
-          placeholder="Enter email"
-          required
-        ></b-form-input>
+      <b-form-group id="input-group-1" label="Email address:" label-for="input-1"
+        description="We'll never share your email with anyone else.">
+        <b-form-input class="form" id="input-1" v-model="email" type="email" autocomplete="current-email"
+          placeholder="Enter email" required></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          class="form"
-          type="password"
-          autocomplete="current-password"
-          v-model="password"
-          placeholder="Enter password"
-          required
-        ></b-form-input>
+        <b-form-input id="input-2" class="form" type="password" autocomplete="current-password" v-model="password"
+          placeholder="Enter password" required></b-form-input>
       </b-form-group>
-      <b-button type="submit" @click.prevent="submit" variant="primary"
-        >Submit</b-button
-      >
+      <b-button type="submit" @click.prevent="submit" variant="primary">Submit</b-button>
     </b-form>
     <br />
     <strong style="color: var(--text-color);">
@@ -143,9 +123,15 @@ strong {
     <br />
     <br />
     <p v-b-modal.modal-1 class="password">Forgot my password.</p>
-    <b-modal id="modal-1" title="BootstrapVue">
-      <p class="my-4">Hello from modal!</p>
+    <b-modal :header-bg-variant="headerBgVariant" :body-bg-variant="bodyBgVariant" id="modal-1" class="forgot_passwd"
+      ref="my-modal" hide-footer title="Enter your email:">
+      <div class="input_email">
+        <b-form-input id="email_imput" v-model="send_link_mail" class="form" type="email" />
+      </div>
+      <b-button class="mt-3" variant="primary" pill @click="sendResetLink">Send</b-button>
     </b-modal>
+
+
   </div>
 </template>
 
@@ -163,17 +149,41 @@ export default {
       getToken: "getToken"
     })
   },
+  mounted() {
+    // Adiciona um listener para o evento 'DOMSubtreeModified' no elemento 'body'
+    document.body.addEventListener('DOMSubtreeModified', this.updateBodyColor);
+  },
+  beforeDestroy() {
+    // Remove o listener quando o componente é destruído para evitar vazamentos de memória
+    document.body.removeEventListener('DOMSubtreeModified', this.updateBodyColor);
+  },
   data() {
     return {
+      headerBgVariant: "dark",
+      bodyBgVariant: "dark",
+      send_link_mail: "",
       email: "",
       password: "",
-      show: true
+      show: true,
     };
   },
   methods: {
     ...mapActions("session", {
       login: "login"
     }),
+    updateBodyColor() {
+      // Atualiza a propriedade 'bodyColor' com a classe atual do elemento 'body'
+      this.bodyColor = document.body.className;
+      //console.log(`A classe do elemento body foi alterada para: ${this.bodyColor}`);
+      if (this.bodyColor === "modal-open") {
+        this.headerBgVariant = "light";
+        this.bodyBgVariant = "light";
+      }
+      else {
+        this.headerBgVariant = "dark";
+        this.bodyBgVariant = "dark";
+      }
+    },
     async submit() {
       const status = await axiosConfig
         .post("/sessions", {
@@ -216,6 +226,25 @@ export default {
       this.password = "";
 
       writeCookie(cookie);
+    },
+    async sendResetLink() {
+      try {
+        await axiosConfig.post("/password/forgot", {
+          email: this.send_link_mail
+        })
+        this.$bvToast.toast("Reset link sended! Check you inbox or spam box.", {
+          title: `Success`,
+          variant: "success",
+          solid: true
+        });
+      }
+      catch (error) {
+        this.$bvToast.toast("Can't sent link to your email! Try again later!", {
+          title: `Error`,
+          variant: "danger",
+          solid: true
+        });
+      }
     }
   }
 };
@@ -224,12 +253,19 @@ export default {
 #input-group-1 {
   color: var(--text-color);
 }
+
 #input-group-2 {
   color: var(--text-color);
 }
+
+.forgot_passwd {
+  background-color: var(--background-color);
+}
+
 .form {
   width: 60vw;
 }
+
 .password {
   color: blue;
 }
