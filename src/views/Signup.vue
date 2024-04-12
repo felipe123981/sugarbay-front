@@ -7,7 +7,6 @@
         <AvatarInput
           class="w-32 h-32 rounded-full"
           v-model="form.avatar"
-          src="https://pbs.twimg.com/profile_images/1333896976602193922/MtWztkxt_400x400.jpg"
         />
       </b-col>
     </b-row>
