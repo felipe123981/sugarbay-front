@@ -41,10 +41,10 @@
         <br>
         <div class="actions">
             <div class="withdraw">
-                <CryptoWithdrawButton />
+                <CryptoWithdrawButton :crypto="choosen_currency" />
             </div>
             <div class="deposit">
-                <CryptoDepositButton />
+                <CryptoDepositButton :crypto="choosen_currency" />
             </div>
         </div>
         <br>

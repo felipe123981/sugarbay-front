@@ -5,7 +5,7 @@
       <span class="__apr-constructor-error"></span>
       <div class="__apr-constructor-container">
         <button stop type="button" class="__apr-constructor-button" v-b-modal.withdrawModal>
-          <svg clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality"
+          <svg v-if="currency == 'BTC'" clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality"
             shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 4091.27 4091.73">
             <g fill-rule="nonzero">
               <path
@@ -16,6 +16,13 @@
                 fill="#fff"></path>
             </g>
           </svg>
+
+          <svg v-if="currency == 'LTC'" viewBox="0 0 508.96 508.96"><circle cx="254.48" cy="254.48" fill="#fff" r="226.94"></circle><path d="m256.38 2c-140.54 0-254.48 114-254.48 254.52s113.94 254.48 254.48 254.48 254.49-113.93 254.49-254.48c.4-140.14-112.87-254.07-253-254.52zm4.32 263.11-26.5 89.34h141.72a7.15 7.15 0 0 1 7.4 6.89v2.34l-12.32 42.57a9.18 9.18 0 0 1 -9.24 6.78h-216.9l36.35-123.85-40.67 12.32 9.25-28.34 40.66-12.33 51.15-173.76a9.3 9.3 0 0 1 9.24-6.78h54.84a7.15 7.15 0 0 1 7.39 6.9v2.35l-43.13 146.65 40.67-12.33-8.61 29.58z" fill="#345d9d" transform="translate(-1.9 -2.04)"></path></svg>
+
+          <svg v-if="currency == 'BCH'" enable-background="new 0 0 788 788" viewBox="0 0 788 788"><circle cx="394" cy="394" fill="#0ac18e" r="394"></circle><path d="m516.9 261.7c-19.8-44.9-65.3-54.5-121-45.2l-17.9-69.4-42.2 10.9 17.6 69.2c-11.1 2.8-22.5 5.2-33.8 8.4l-17.6-68.8-42.2 10.9 17.9 69.4c-9.1 2.6-85.2 22.1-85.2 22.1l11.6 45.2s31-8.7 30.7-8c17.2-4.5 25.3 4.1 29.1 12.2l49.2 190.2c.6 5.5-.4 14.9-12.2 18.1.7.4-30.7 7.9-30.7 7.9l4.6 52.7s75.4-19.3 85.3-21.8l18.1 70.2 42.2-10.9-18.1-70.7c11.6-2.7 22.9-5.5 33.9-8.4l18 70.3 42.2-10.9-18.1-70.1c65-15.8 110.9-56.8 101.5-119.5-6-37.8-47.3-68.8-81.6-72.3 21.1-18.7 31.8-46 18.7-81.7zm-20.3 165.5c8.4 62.1-77.9 69.7-106.4 77.2l-24.8-92.9c28.6-7.5 117-39 131.2 15.7zm-52-126.5c8.9 55.2-64.9 61.6-88.7 67.7l-22.6-84.3c23.9-5.9 93.2-34.5 111.3 16.6z" fill="#fff"></path></svg>          
+
+          <svg v-if="currency == 'DOGE'" height="65" viewBox="0 0 64 65" width="64"><g fill="none"><circle cx="32.2" cy="32.4" fill="#f8bf1a" r="31.7"></circle><path d="m14.6 50.2v-8.4h4.9v-19.2h-4.9v-8.1h20.5c1.4 0 2.8.4 4.1.9 2.6 1 4.9 2.5 6.7 4.7 1.6 1.9 2.7 4.1 3.3 6.6 1 4.2 1 8.5-.2 12.7-1.6 5.5-5 9.2-10.8 10.5-1 .2-2.1.3-3.1.4h-19.7c-.3-.1-.5-.1-.8-.1zm14.9-8.4c1.1 0 2.2.1 3.3 0 1.4-.1 2.7-.6 3.6-1.8.8-1 1.5-2.1 1.9-3.3.8-2.7.5-5.4-.1-8.1-.3-1.6-1.1-3.1-2.1-4.3-.6-.7-1.4-1.5-2.3-1.6-1.4-.3-2.9-.1-4.3-.1z" fill="#fff"></path></g></svg>
+
           <span></span> Withdraw
         </button>
         <b-modal id="withdrawModal" title="" ok-only :header-bg-variant="headerBgVariant"
@@ -34,8 +41,17 @@
 <script>
 export default {
   name: 'CryptoWithdrawButton',
+  props: {
+    crypto: String
+  },
+  watch: {
+    crypto(newValue) {
+      this.currency = newValue;
+    }
+  },
   data() {
     return {
+      currency: "BTC",
       headerTextVariant: "danger",
       footerBgVariant: "warning",
       headerBgVariant: "warning",
