@@ -12,6 +12,7 @@ import ShopView from "@/views/ShopView.vue";
 import AccountConfirmed from "@/views/AccountConfirmed.vue";
 import AboutView from "@/views/AboutView.vue";
 import CheckoutView from "@/views/CheckoutView.vue";
+import WalletView from "@/views/WalletView.vue";
 import Router from "vue-router";
 import Vue from "vue";
 import { readCookie } from "@/modules/cookie";
@@ -103,6 +104,11 @@ const router = new Router({
       path: "/checkout",
       name: "checkout",
       component: CheckoutView
+    },
+    {
+      path: "/wallet",
+      name: "wallet",
+      component: WalletView
     }
     //
   ]

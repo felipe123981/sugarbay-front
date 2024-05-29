@@ -36,7 +36,9 @@
                 <span class="text nav-text">Home</span>
               </router-link>
             </li>
-
+            <!--
+              
+            -->
             <li class="" v-if="loged">
               <router-link to="/wallet">
                 <i class='bx bx-wallet icon' ></i>
