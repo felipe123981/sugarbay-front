@@ -4,7 +4,7 @@
     <div class="address">
       <div>
         <p class="container-sm1">
-          <i class="bx bx-map"></i> Your zipcode here...
+          <i class="bx bx-map"></i> Your postal code here...
           <i
             style="position: right"
             class="bx bxs-chevron-right chevron-right-sb"
@@ -12,7 +12,6 @@
         </p>
       </div>
     </div>
-    <br />
     <div>
       <b-card class="sb-cart">
         <b-media class="sb-media float-left">

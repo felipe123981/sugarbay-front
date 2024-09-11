@@ -1,5 +1,7 @@
 <template>
   <div>
+    <HeaderNavbar headerTitle="My account:"></HeaderNavbar>
+    <br>
     <div>
       <b-card no-body style="background-color: var(--primary-color-light)">
         <b-tabs pills card vertical>
@@ -101,15 +103,21 @@
                 </b-row>
                 <hr />
                 <h5><i class="bx bxs-map-pin"></i> Shippment info:</h5>
-                <b-form-group id="input-group-6" label="Zipcode:" label-for="input-6" description="">
+                <b-form-group id="input-group-6" label="Postal code:" label-for="input-6" description="">
                   <b-form-input autocomplete="off" readonly @focus="enableInput" class="form-sb-2" id="input-6"
-                    v-model="form.zipcode" type="text" placeholder="ex: 437300" :disabled="lockform"
+                    v-model="form.postalcode" type="text" placeholder="ex: 437300" :disabled="lockform"
                     required></b-form-input>
                 </b-form-group>
-                <b-form-group id="input-group-7" label="Address:" label-for="input-7" description="">
+                <b-form-group id="input-group-7" label="Street:" label-for="input-7" description="">
                   <b-form-input autocomplete="off" readonly @focus="enableInput" style="min-width: 235px" id="input-7"
-                    v-model="form.address" type="text"
-                    placeholder="ex: Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" :disabled="lockform"
+                    v-model="form.street" type="text"
+                    placeholder="ex: Bld Mihail Kogalniceanu, 509" :disabled="lockform"
+                    required></b-form-input>
+                </b-form-group>
+                <b-form-group id="input-group-11" label="District:" label-for="input-11" description="">
+                  <b-form-input autocomplete="off" readonly @focus="enableInput" class="form-sb-2"  id="input-11"
+                    v-model="form.district" type="text"
+                    placeholder="ex: Kogalniceanu Center" :disabled="lockform"
                     required></b-form-input>
                 </b-form-group>
                 <b-row>
@@ -121,18 +129,18 @@
                     </b-form-group>
                   </b-col>
                   <b-col>
-                    <b-form-group id="input-group-9" label="State:" label-for="input-9" description="">
+                    <b-form-group id="input-group-9" label="State or province code:" label-for="input-9" description="">
                       <b-form-input autocomplete="off" readonly @focus="enableInput" class="form-sb-2" id="input-9"
-                        v-model="form.state" type="text" placeholder="ex: Missoury" :disabled="lockform"
+                        v-model="form.state" type="text" placeholder="ex: CA" :disabled="lockform"
                         required></b-form-input>
                     </b-form-group>
                   </b-col>
                 </b-row>
                 <b-row>
                   <b-col>
-                    <b-form-group id="input-group-10" label="Country:" label-for="input-10" description="">
+                    <b-form-group id="input-group-10" label="Country code:" label-for="input-10" description="">
                       <b-form-input autocomplete="off" readonly @focus="enableInput" class="form-sb-2" id="country"
-                        name="country" v-model="form.country" type="text" placeholder="ex: United States"
+                        name="country" v-model="form.country" type="text" placeholder="ex: USA"
                         :disabled="lockform" required></b-form-input>
                     </b-form-group>
                   </b-col>
@@ -321,6 +329,7 @@
   </div>
 </template>
 <script>
+import HeaderNavbar from "@/components/HeaderNavbar.vue";
 //import { removeElement } from "@/modules/pagination"
 //import Pagination from "@/components/PaginationComponent.vue";
 import { mapGetters, mapMutations, mapState, mapActions } from "vuex";
@@ -338,7 +347,8 @@ export default {
   components: {
     // ProductDisplay,
     AvatarInput,
-    DataPicker
+    DataPicker,
+    HeaderNavbar
     // Pagination
   },
   async mounted() {
@@ -370,7 +380,9 @@ export default {
         avatar: "",
         gender: "",
         birthdate: "",
-        zipcode: "",
+        street: "",
+        district: "",
+        postalcode: "",
         state: "",
         city: "",
         country: "",
