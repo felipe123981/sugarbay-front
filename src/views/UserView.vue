@@ -354,8 +354,9 @@ export default {
   async mounted() {
     await this.fetchProducts();
     await this.fetchProfile();
+    await this.fetchMyProducts();
     setTimeout(() => {
-      this.my_products = this.getProducts;
+      this.my_products = this.getMyProducts;
       this.paginated_products = this.paginate(this.my_products, this.perPage);
     }, 500);
     if (this.getProfile != undefined) {
@@ -436,6 +437,9 @@ export default {
       getProducts: "getProducts"
     }),
     ...mapGetters("products", {
+      getMyProducts: "getMyProducts"
+    }),
+    ...mapGetters("products", {
       getProductById: "getProductById"
     }),
     ...mapGetters("profile", {
@@ -451,6 +455,9 @@ export default {
     }),
     ...mapActions("products", {
       fetchProducts: "fetchProducts"
+    }),
+    ...mapActions("products", {
+      fetchMyProducts: "fetchMyProducts"
     }),
     ...mapMutations("products", {
       removeFromProducts: "removeFromProducts"

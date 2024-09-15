@@ -466,10 +466,10 @@ export default {
       return this.vendor_products.length;
     },
     ...mapGetters("products", {
-      getProductById: "getProductById"
+      getVendorProducts: "getVendorProducts"
     }),
     ...mapGetters("products", {
-      getVendorProducts: "getVendorProducts"
+      getProductById: "getProductById"
     }),
     ...mapGetters("products", {
       getProducts: "getProducts"
@@ -491,7 +491,7 @@ export default {
         //console.log(error);
         return 0;
       });
-    await this.fetchProductsByVendor(this.product.customer_id);
+      await this.fetchProductsByVendor(this.product.customer_id);
     this.vendor_products = this.getVendorProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
     //console.log(this.vendor_products);
     this.paginated_products = this.paginate(this.vendor_products, this.perPage);
