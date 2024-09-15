@@ -5,19 +5,30 @@ export default {
   namespaced: true,
 
   state: {
-    products: []
+    products: [],
+    vendor_products: [],
   },
   actions: {
-    async fetchProducts({commit}) {
+    async fetchProductsByVendor({ commit }, payload) {
       try {
-        const response = await axiosConfig.get("/products"); 
-        commit("FETCH_PRODUCTS", response.data)
+        const response = await axiosConfig.get(
+          `/products/customerId/${payload}`
+        );
+        commit("FETCH_PRODUCTS_BY_CUSTOMER_ID", response.data)
+        //return response.data;
+        //console.log(response.data);
+      } catch (error) {
+        console.log(error);
       }
-      catch(error) {
-        console.log(error)
+    },
+    async fetchProducts({ commit }) {
+      try {
+        const response = await axiosConfig.get("/products");
+        commit("FETCH_PRODUCTS", response.data);
+      } catch (error) {
+        console.log(error);
       }
-      
-    }
+    },
   },
   mutations: {
     async FETCH_PRODUCTS(state, payload) {
@@ -28,8 +39,8 @@ export default {
       axiosConfig
         .delete("products/" + payload.id, {
           headers: {
-            Authorization: `token ${token}`
-          }
+            Authorization: `token ${token}`,
+          },
         })
         .then((resp) => {
           if (resp.status == 200) {
@@ -40,7 +51,10 @@ export default {
         .catch((/*err */) => {
           //console.log(err);
         });
-    }
+    },
+    FETCH_PRODUCTS_BY_CUSTOMER_ID(state, payload) {
+      state.vendor_products = payload;
+    },
   },
   getters: {
     getProductById: (state) => (id) => {
@@ -48,6 +62,9 @@ export default {
     },
     getProducts(state) {
       return state.products;
+    },
+    getVendorProducts(state) {
+      return state.vendor_products;
     }
-  }
+  },
 };

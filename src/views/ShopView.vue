@@ -469,6 +469,9 @@ export default {
       getProductById: "getProductById"
     }),
     ...mapGetters("products", {
+      getVendorProducts: "getVendorProducts"
+    }),
+    ...mapGetters("products", {
       getProducts: "getProducts"
     }),
     ...mapGetters("customers", {
@@ -488,7 +491,8 @@ export default {
         //console.log(error);
         return 0;
       });
-    this.vendor_products = this.getProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
+    await this.fetchProductsByVendor(this.product.customer_id);
+    this.vendor_products = this.getVendorProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
     //console.log(this.vendor_products);
     this.paginated_products = this.paginate(this.vendor_products, this.perPage);
     //console.log(this.getCustomerById(this.product.customer_id));
@@ -496,6 +500,9 @@ export default {
   methods: {
     ...mapActions("customers", {
       fetchCustomers: "fetchCustomers"
+    }),
+    ...mapActions("products", {
+      fetchProductsByVendor: "fetchProductsByVendor"
     }),
     ...mapActions("products", {
       fetchProducts: "fetchProducts"
