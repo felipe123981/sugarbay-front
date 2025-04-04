@@ -69,280 +69,10 @@
 
           -->
           <hr />
-          <div>
-            <b-card no-body>
-              <b-tabs card style="background-color: var(--primary-color-light)">
-                <b-tab active>
-                  <template #title>
-                    <i class="bx bx-info-circle"></i> Info
-                  </template>
-                  <b-card-text>
-                    <b-row>
-                      <b-col>
-                        <div class="price-label">
-                          <p class="price-header">Price:</p>
-                          <p class="price-content info-content">
-                            U$ {{ (product.price * item_quantity).toFixed(2) }}
-                            <del style="color: var(--text-color)"
-                              >U$ 400.00</del
-                            >
-                          </p>
-                        </div>
-                      </b-col>
-                      <b-col>
-                        <div class="color-label">
-                          <p class="color-header">Color:</p>
-                          <p class="color-content info-content">
-                            <b-form-group label="" v-slot="{ ariaDescribedby }">
-                              <b-form-radio-group
-                                :aria-describedby="ariaDescribedby"
-                                name="radio-inline"
-                              >
-                                <b-form-radio
-                                  style="color: var(--text-color)"
-                                  v-for="(color, index) in colors"
-                                  :key="index"
-                                  :value="'option' + (index + 1)"
-                                  :name="'option' + (index + 1)"
-                                  :class="'radio-' + (index + 1)"
-                                >
-                                  {{ color }}
-                                </b-form-radio>
-                              </b-form-radio-group>
-                            </b-form-group>
-                          </p>
-                        </div>
-                      </b-col>
-                    </b-row>
-                    <b-row>
-                      <b-col>
-                        <div class="quantity-label">
-                          <p class="quantity-header">Quantity:</p>
-                          <p class="quantity-content quantity-content">
-                            <b-form-group class="input-num">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <button
-                                    class="btn btn-outline-secondary"
-                                    type="button"
-                                    @click="decrement"
-                                  >
-                                    -
-                                  </button>
-                                </div>
-                                <b-form-input
-                                  type="number"
-                                  v-model="item_quantity"
-                                  min="0"
-                                  :max="product.quantity"
-                                  :disabled="disabled"
-                                ></b-form-input>
-                                <div class="input-group-append">
-                                  <button
-                                    class="btn btn-outline-secondary"
-                                    type="button"
-                                    @click="increment"
-                                  >
-                                    +
-                                  </button>
-                                </div>
-                              </div>
-                            </b-form-group>
-                          </p>
-                        </div>
-                      </b-col>
-                      <b-col>
-                        <div class="size-label">
-                          <p class="size-header">Size:</p>
-                          <p class="size-content info-content">
-                            <b-form-select
-                              class="size-select"
-                              v-model="selected"
-                              :options="options"
-                            ></b-form-select>
-                          </p>
-                        </div>
-                      </b-col>
-                    </b-row>
-                    <b-row>
-                      <b-col>
-                        <div class="stock-label">
-                          <p class="stock-header">Stock:</p>
-                          <p
-                            v-if="product.quantity - item_quantity > 0"
-                            class="stock-content info-content"
-                          >
-                            {{ product.quantity - item_quantity }}
-                          </p>
-                          <p v-else class="stock-content info-content">
-                            Empty!
-                          </p>
-                        </div>
-                        <br />
-                        <div class="total-label">
-                          <p class="total-header">Total with freight:</p>
-                          <p
-                            class="total-content info-content"
-                            v-if="item_quantity > 0"
-                          >
-                            U$
-                            {{
-                              (
-                                product.price * item_quantity +
-                                product.price * item_quantity * 0.1 +
-                                30
-                              ).toFixed(2)
-                            }}
-                          </p>
-                          <p class="total-content info-content" v-else>0</p>
-                        </div>
-                      </b-col>
-                    </b-row>
-                  </b-card-text>
-                </b-tab>
-                <b-tab>
-                  <template #title>
-                    <i class="bx bxs-purchase-tag"></i> Description
-                  </template>
-                  <b-card-text>
-                    <div class="info-content">
-                      <strong> Vendor: </strong>
-                    </div>
-                    <div class="header">
-                      <div class="avatar">
-                        <b-avatar variant="secondary"></b-avatar>
-                      </div>
-                      <div class="username" v-b-modal="'my-modal' + cid">
-                        @{{  getCustomerById(product.customer_id).name  }}
-                        <br />
-                      </div>
-                      <!-- The modal -->
-                      <b-modal centered ok-only :id="'my-modal' + cid">
-                        <div class="modal-container">
-                          <h1>{{ getCustomerById(product.customer_id).name  }}</h1>
-                          <div class="modal-header">
-                            <div class="customer-thumbnail">
-                              <b-img
-                                thumbnail
-                                fluid
-                                src="https://picsum.photos/70/70/?image=59"
-                                alt="Image 3"
-                              ></b-img>
-                            </div>
-                            <div class="customer-header-description">
-                              <div class="customer-name">
-                                <p>
-                                  {{ getCustomerById(product.customer_id).name  }}
-                                </p>
-                              </div>
-                              <div class="customer-description">
-                                Sugarbay official vendor
-                              </div>
-                            </div>
-                          </div>
-                          <div class="customer-reputation">
-                            <div class="customer-level market-leader">
-                              <h3>Market leader</h3>
-                            </div>
-                            <p>Is a excellent vendor!</p>
-                          </div>
-                          <div class="ui-gauge">
-                            <ul
-                              aria-hidden="true"
-                              class="ui-thermometer"
-                              value="5"
-                            >
-                              <li
-                                class="ui-thermometer__level ui-thermometer__level--1"
-                              ></li>
-                              <li
-                                class="ui-thermometer__level ui-thermometer__level--2"
-                              ></li>
-                              <li
-                                class="ui-thermometer__level ui-thermometer__level--3"
-                              ></li>
-                              <li
-                                class="ui-thermometer__level ui-thermometer__level--4"
-                              ></li>
-                              <li
-                                class="ui-thermometer__level ui-thermometer__level--5"
-                              ></li>
-                            </ul>
-                          </div>
-
-                          <div class="customer-qualities">
-                            <div class="customer-sales">
-                              <div class="sales-number">
-                                <h4>+{{ sales_number }}</h4>
-                              </div>
-                              <div class="sales-time">
-                                <p>sales in the last 60 days!</p>
-                              </div>
-                            </div>
-                            <div class="customer-service">
-                              <i class="bx bx-conversation modal-icon"></i>
-                              <p>provides good service.</p>
-                            </div>
-                            <div class="deliver-on-time">
-                              <i class="bx bx-timer modal-icon"></i>
-                              <p>deliver products on time.</p>
-                            </div>
-                          </div>
-                          <br />
-                          <BR></BR>
-                          <a href="#" class="about-vendor"
-                            >More about this vendor</a
-                          >
-                        </div>
-                      </b-modal>
-                    </div>
-                    <div v-if="brand" class="info-content">
-                      <strong> Brand: </strong>
-                    </div>
-                    <div v-if="brand" class="description-details">
-                      {{ brand }}
-                    </div>
-                    <div v-if="model" class="info-content">
-                      <strong> Model: </strong>
-                    </div>
-                    <div v-if="model" class="description-details">
-                      {{ model }}
-                    </div>
-                    <div v-if="publisher" class="info-content">
-                      <strong> Publisher: </strong>
-                    </div>
-                    <div v-if="publisher" class="description-details">
-                      {{ publisher }}
-                    </div>
-                    <div v-if="description" class="info-content">
-                      <strong> Description: </strong>
-                    </div>
-                    <div v-if="description" class="description-details">
-                      {{ description }}
-                    </div>
-                  </b-card-text>
-                </b-tab>
-                <b-tab>
-                  <template #title>
-                    <i class="bx bx-conversation"></i> Reviews
-                  </template>
-                  <b-card-text>
-                    <!--<div class="catalog">
-                      <div v-for="i in 3" :key="i" :id="i">
-                        <Comment :cid="i"></Comment>
-                        <br>
-                      </div>
-                    </div>
-                    -->
-                    <Reviews></Reviews>
-                  </b-card-text>
-                </b-tab>
-              </b-tabs>
-            </b-card>
-          </div>
         </b-media>
       </b-card>
       <br />
+
       <div id="shop-buttons">
         <p>
           <router-link to="/checkout">
@@ -364,7 +94,246 @@
           </b-button>
         </p>
       </div>
-
+      <!--
+      parte defeituosa do código
+      -->
+      <!--
+      <hr />
+      <div>
+        <b-card no-body>
+          <b-tabs card style="background-color: var(--primary-color-light)">
+            <b-tab active>
+              <template #title>
+                <i class="bx bx-info-circle"></i> Info
+              </template>
+              <b-card-text>
+                <b-row>
+                  <b-col>
+                    <div class="price-label">
+                      <p class="price-header">Price:</p>
+                      <p class="price-content info-content">
+                        U$ {{ (product.price * item_quantity).toFixed(2) }}
+                        <del style="color: var(--text-color)">U$ 400.00</del>
+                      </p>
+                    </div>
+                  </b-col>
+                  <b-col>
+                    <div class="color-label">
+                      <p class="color-header">Color:</p>
+                      <p class="color-content info-content">
+                        <b-form-group label="" v-slot="{ ariaDescribedby }">
+                          <b-form-radio-group
+                            :aria-describedby="ariaDescribedby"
+                            name="radio-inline"
+                          >
+                            <b-form-radio
+                              style="color: var(--text-color)"
+                              v-for="(color, index) in colors"
+                              :key="index"
+                              :value="'option' + (index + 1)"
+                              :name="'option' + (index + 1)"
+                              :class="'radio-' + (index + 1)"
+                            >
+                              {{ color }}
+                            </b-form-radio>
+                          </b-form-radio-group>
+                        </b-form-group>
+                      </p>
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <div class="quantity-label">
+                      <p class="quantity-header">Quantity:</p>
+                      <p class="quantity-content quantity-content">
+                        <b-form-group class="input-num">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                @click="decrement"
+                              >
+                                -
+                              </button>
+                            </div>
+                            <b-form-input
+                              type="number"
+                              v-model="item_quantity"
+                              min="0"
+                              :max="product.quantity"
+                              :disabled="disabled"
+                            ></b-form-input>
+                            <div class="input-group-append">
+                              <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                @click="increment"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        </b-form-group>
+                      </p>
+                    </div>
+                  </b-col>
+                  <b-col>
+                    <div class="size-label">
+                      <p class="size-header">Size:</p>
+                      <p class="size-content info-content">
+                        <b-form-select
+                          class="size-select"
+                          v-model="selected"
+                          :options="options"
+                        ></b-form-select>
+                      </p>
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <div class="stock-label">
+                      <p class="stock-header">Stock:</p>
+                      <p
+                        v-if="product.quantity - item_quantity > 0"
+                        class="stock-content info-content"
+                      >
+                        {{ product.quantity - item_quantity }}
+                      </p>
+                      <p v-else class="stock-content info-content">Empty!</p>
+                    </div>
+                    <br />
+                    <div class="total-label">
+                      <p class="total-header">Total with freight:</p>
+                      <p
+                        class="total-content info-content"
+                        v-if="item_quantity > 0"
+                      >
+                        U$
+                        {{
+                          (
+                            product.price * item_quantity +
+                            product.price * item_quantity * 0.1 +
+                            30
+                          ).toFixed(2)
+                        }}
+                      </p>
+                      <p class="total-content info-content" v-else>0</p>
+                    </div>
+                  </b-col>
+                </b-row>
+              </b-card-text>
+            </b-tab>
+            <b-tab>
+              <template #title>
+                <i class="bx bxs-purchase-tag"></i> Description
+              </template>
+              <b-card-text>
+                <div class="info-content">
+                  <strong> Vendor: </strong>
+                </div>
+                <div class="header">
+                  <div class="avatar">
+                    <b-avatar variant="secondary"></b-avatar>
+                  </div>
+                  <div class="username" v-b-modal="'my-modal' + cid">
+                    @{{ getCustomerById(product.customer_id).name }}
+                    <br />
+                  </div>
+                  <b-modal centered ok-only :id="'my-modal' + cid">
+                    <div class="modal-container">
+                      <h1>{{ getCustomerById(product.customer_id).name }}</h1>
+                      <div class="modal-header">
+                        <div class="customer-thumbnail">
+                          <b-img
+                            thumbnail
+                            fluid
+                            src="https://picsum.photos/70/70/?image=59"
+                            alt="Image 3"
+                          ></b-img>
+                        </div>
+                        <div class="customer-header-description">
+                          <div class="customer-name">
+                            <p>
+                              {{ getCustomerById(product.customer_id).name }}
+                            </p>
+                          </div>
+                          <div class="customer-description">
+                            Sugarbay official vendor
+                          </div>
+                        </div>
+                      </div>
+                      <div class="customer-reputation">
+                        <div class="customer-level market-leader">
+                          <h3>Market leader</h3>
+                        </div>
+                        <p>Is a excellent vendor!</p>
+                      </div>
+                      <div class="ui-gauge">
+                        <ul aria-hidden="true" class="ui-thermometer" value="5">
+                          <li
+                            class="ui-thermometer__level ui-thermometer__level--1"
+                          ></li>
+                          <li
+                            class="ui-thermometer__level ui-thermometer__level--2"
+                          ></li>
+                          <li
+                            class="ui-thermometer__level ui-thermometer__level--3"
+                          ></li>
+                          <li
+                            class="ui-thermometer__level ui-thermometer__level--4"
+                          ></li>
+                          <li
+                            class="ui-thermometer__level ui-thermometer__level--5"
+                          ></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </b-modal>
+                </div>
+                <div v-if="brand" class="info-content">
+                  <strong> Brand: </strong>
+                </div>
+                <div v-if="brand" class="description-details">
+                  {{ brand }}
+                </div>
+                <div v-if="model" class="info-content">
+                  <strong> Model: </strong>
+                </div>
+                <div v-if="model" class="description-details">
+                  {{ model }}
+                </div>
+                <div v-if="publisher" class="info-content">
+                  <strong> Publisher: </strong>
+                </div>
+                <div v-if="publisher" class="description-details">
+                  {{ publisher }}
+                </div>
+                <div v-if="description" class="info-content">
+                  <strong> Description: </strong>
+                </div>
+                <div v-if="description" class="description-details">
+                  {{ description }}
+                </div>
+              </b-card-text>
+            </b-tab>
+            <b-tab>
+              <template #title>
+                <i class="bx bx-conversation"></i> Reviews
+              </template>
+              <b-card-text>
+                <Reviews></Reviews>
+              </b-card-text>
+            </b-tab>
+          </b-tabs>
+        </b-card>
+      </div>
+      -->
+      <!--
+      parte defeituosa do código
+      -->
       <div id="sugestions">
         <p style="font-size: 18px">More from this vendor:</p>
         <Pagination :products="paginated_products[currentPage - 1]" />
@@ -393,11 +362,11 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import axiosConfig from "@/modules/axiosConfig";
 import Pagination from "@/components/PaginationComponent.vue";
 //import Comment from "@/components/CommentComponent.vue";
-import Reviews from "@/components/ReviewInput.vue";
+//import Reviews from "@/components/ReviewInput.vue";
 
 export default {
   name: "MyComponent",
-  components: { VueSlickCarousel, Pagination, /*Comment,*/ Reviews },
+  components: { VueSlickCarousel, Pagination /*Reviews,*/ },
   data() {
     return {
       api_url: axiosConfig.defaults.baseURL,
@@ -418,7 +387,7 @@ export default {
       options: [
         { value: 1, text: "P" },
         { value: 2, text: "M" },
-        { value: 3, text: "G" }
+        { value: 3, text: "G" },
       ],
       colors: ["white", "grey", "black"],
       product: [],
@@ -439,26 +408,26 @@ export default {
               slidesToShow: 3,
               slidesToScroll: 3,
               infinite: true,
-              dots: true
-            }
+              dots: true,
+            },
           },
           {
             breakpoint: 600,
             settings: {
               slidesToShow: 2,
               slidesToScroll: 2,
-              initialSlide: 2
-            }
+              initialSlide: 2,
+            },
           },
           {
             breakpoint: 480,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-      }
+              slidesToScroll: 1,
+            },
+          },
+        ],
+      },
     };
   },
   computed: {
@@ -466,17 +435,17 @@ export default {
       return this.vendor_products.length;
     },
     ...mapGetters("products", {
-      getVendorProducts: "getVendorProducts"
+      getVendorProducts: "getVendorProducts",
     }),
     ...mapGetters("products", {
-      getProductById: "getProductById"
+      getProductById: "getProductById",
     }),
     ...mapGetters("products", {
-      getProducts: "getProducts"
+      getProducts: "getProducts",
     }),
     ...mapGetters("customers", {
-      getCustomerById: "getCustomerById"
-    })
+      getCustomerById: "getCustomerById",
+    }),
   },
 
   async mounted() {
@@ -491,7 +460,7 @@ export default {
         //console.log(error);
         return 0;
       });
-      await this.fetchProductsByVendor(this.product.customer_id);
+    await this.fetchProductsByVendor(this.product.customer_id);
     this.vendor_products = this.getVendorProducts; // this method needs a filter like "getProductsByVendor(vendor: string): []"
     //console.log(this.vendor_products);
     this.paginated_products = this.paginate(this.vendor_products, this.perPage);
@@ -499,22 +468,22 @@ export default {
   },
   methods: {
     ...mapActions("customers", {
-      fetchCustomers: "fetchCustomers"
+      fetchCustomers: "fetchCustomers",
     }),
     ...mapActions("products", {
-      fetchProductsByVendor: "fetchProductsByVendor"
+      fetchProductsByVendor: "fetchProductsByVendor",
     }),
     ...mapActions("products", {
-      fetchProducts: "fetchProducts"
+      fetchProducts: "fetchProducts",
     }),
     ...mapMutations("cart", {
-      addToCart: "addToCart"
+      addToCart: "addToCart",
     }),
     makeToast(variant = null) {
       this.$bvToast.toast("🛒 Item sucessfuly added to cart!", {
         title: "Pushed!",
         variant: variant,
-        solid: true
+        solid: true,
       });
     },
     paginate(base, max) {
@@ -556,8 +525,8 @@ export default {
       if (this.item_quantity > 0) {
         this.item_quantity--;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
